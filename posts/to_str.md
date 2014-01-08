@@ -15,6 +15,10 @@ enum Weapons {
   Club,
   Gaze
 }
+
+println(Club.to_str);
+
+// => Club
 ```
 
 The alternative, workin in most cases, would be using `format!`
@@ -28,4 +32,6 @@ enum Monsters {
 fn main() {
   println(format!("{:?}", Orc));
 }
+
+// => Orc
 ```
