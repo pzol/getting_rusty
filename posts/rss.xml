@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>Gettin' Rusty</title>
+    <description>Gettin' Rusty</description>
+    <link/>
+    <pubDate>2014-01-08</pubDate>
+    <item>
+      <title>Mod aka crates</title>
+      <link>/getting_rusty/posts/crates</link>
+      <pubDate>2014-01-08</pubDate>
+      <description>&lt;p&gt;Putting stuff into a file does not require an explicit &lt;code&gt;mod {}&lt;/code&gt; at the top &lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>ToStr</title>
+      <link>/getting_rusty/posts/to_str</link>
+      <pubDate>2014-01-08</pubDate>
+      <description>How to get (almost) any type to support `to_str`</description>
+    </item>
+  </channel>
+</rss>
