@@ -22,8 +22,16 @@
       <link>/getting_rusty/categories</link>
       <description>
 &lt;ul class="tag_box inline"&gt;
+  &lt;li&gt;
+    &lt;a href="/getting_rusty/categories#rust-ref"&gt;rust &lt;span&gt;2&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
+  &lt;h3&gt;rust (2)&lt;/h3&gt;
+  &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/getting_rusty/posts/crates"&gt;Mod aka crates&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/getting_rusty/posts/to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
 </description>
     </item>
     <item>
