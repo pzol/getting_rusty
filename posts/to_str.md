@@ -3,7 +3,7 @@ title: ToStr
 date: 08.01.2014
 description: How to get (almost) any type to support `to_str`
 tags: ["deriving", "ToStr"]
-categories: []
+categories: ["rust"]
 ---
 In order to have a default implementaton of `to_str()` you need to add `#[deriving(ToStr, Rand)]`
 
