@@ -56,6 +56,10 @@ enum Weapons {
   Club,
   Gaze
 }
+
+println(Club.to_str);
+
+// =&amp;gt; Club
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The alternative, workin in most cases, would be using &lt;code&gt;format!&lt;/code&gt;&lt;/p&gt;
@@ -68,6 +72,8 @@ enum Weapons {
 fn main() {
   println(format!("{:?}", Orc));
 }
+
+// =&amp;gt; Orc
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
