@@ -12,7 +12,6 @@
   &lt;h2&gt;2014&lt;/h2&gt;
     &lt;h3&gt;January&lt;/h3&gt;
     &lt;ul&gt;
-      &lt;li&gt;&lt;span&gt;2014-01-08&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140108_crates"&gt;Mod aka crates&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;span&gt;2014-01-19&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140119_destructuring_enums"&gt;On destructuring enums&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;span&gt;2014-01-08&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140108_ruby"&gt;Ruby Stuff&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;span&gt;2014-01-19&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140119_ruby_p_in_rust"&gt;Ruby p aka puts driven development in Rust&lt;/a&gt;&lt;/li&gt;
@@ -26,13 +25,12 @@
       <description>
 &lt;ul class="tag_box inline"&gt;
   &lt;li&gt;
-    &lt;a href="/getting_rusty/categories#rust-ref"&gt;rust &lt;span&gt;5&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="/getting_rusty/categories#rust-ref"&gt;rust &lt;span&gt;4&lt;/span&gt;&lt;/a&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-  &lt;h3&gt;rust (5)&lt;/h3&gt;
+  &lt;h3&gt;rust (4)&lt;/h3&gt;
   &lt;ul&gt;
-      &lt;li&gt;&lt;a href="/getting_rusty/posts/20140108_crates"&gt;Mod aka crates&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href="/getting_rusty/posts/20140108_ruby"&gt;Ruby Stuff&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href="/getting_rusty/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href="/getting_rusty/posts/20140119_destructuring_enums"&gt;On destructuring enums&lt;/a&gt;&lt;/li&gt;
@@ -50,15 +48,6 @@
       <title>Learning Rust</title>
       <link>/getting_rusty</link>
       <description>&lt;div class="post"&gt;
-  &lt;h3 class="title"&gt;&lt;a href="/getting_rusty/posts/20140108_crates"&gt;Mod aka crates&lt;/a&gt; &lt;span class="date"&gt;2014-01-08&lt;/span&gt;&lt;/h3&gt;
-
-  &lt;div class="summary"&gt;&lt;p&gt;Putting stuff into a file does not require an explicit &lt;code&gt;mod {}&lt;/code&gt; at the top &lt;/p&gt;&lt;/div&gt;
-
-  &lt;div class="more"&gt;
-    &lt;a href="/getting_rusty/posts/20140108_crates" class="btn btn-small"&gt;read more..&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="post"&gt;
   &lt;h3 class="title"&gt;&lt;a href="/getting_rusty/posts/20140119_destructuring_enums"&gt;On destructuring enums&lt;/a&gt; &lt;span class="date"&gt;2014-01-19&lt;/span&gt;&lt;/h3&gt;
 
   &lt;div class="summary"&gt;&lt;/div&gt;

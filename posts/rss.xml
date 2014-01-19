@@ -6,13 +6,6 @@
     <link/>
     <pubDate>2014-01-19</pubDate>
     <item>
-      <title>Mod aka crates</title>
-      <link>/getting_rusty/posts/20140108_crates</link>
-      <pubDate>2014-01-08</pubDate>
-      <description>&lt;p&gt;Putting stuff into a file does not require an explicit &lt;code&gt;mod {}&lt;/code&gt; at the top &lt;/p&gt;
-</description>
-    </item>
-    <item>
       <title>On destructuring enums</title>
       <link>/getting_rusty/posts/20140119_destructuring_enums</link>
       <pubDate>2014-01-19</pubDate>
