@@ -40,6 +40,43 @@ combined = words.join(&amp;quot;:&amp;quot;) # =&amp;gt; &amp;quot;A:cat:in:the:
 </description>
     </item>
     <item>
+      <title>Ruby p in Rust aka puts driven development</title>
+      <link>/getting_rusty/posts/20140119_ruby_p_in_rust</link>
+      <pubDate>2014-01-19</pubDate>
+      <description>&lt;p&gt;Given the lack of a useful debuggers in Ruby, we often refer to &lt;code&gt;p obj&lt;/code&gt; to print an object to the console in order to inspect its value.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="ruby"&gt;Foo = Struct.new(:bar)
+foo = Foo.new(7)
+p foo # =&amp;gt; #&amp;lt;struct Foo bar=7&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Actually you can do pretty much the same in Rust, too:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;struct Foo {
+  bar: uint
+}
+
+fn main() {
+  let foo = Foo { bar: 7u };
+  p!(foo); // =&amp;gt; Foo{bar: 7u}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Actually Rust does not come from the factory with a &lt;code&gt;p!&lt;/code&gt; - a syntax extension or a macro, but we can write it ourselves:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;#[feature(macro_rules)] ;
+
+macro_rules! p(
+    ($ident:ident) =&amp;gt; (
+        println!(&amp;quot;{:?}&amp;quot;, $ident);
+    );
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For more on macros see the &lt;a href="http://static.rust-lang.org/doc/master/guide-macros.html"&gt;Macro tutorial&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
       <title>ToStr</title>
       <link>/getting_rusty/posts/20140108_to_str</link>
       <pubDate>2014-01-08</pubDate>

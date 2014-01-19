@@ -101,6 +101,37 @@ combined = words.join(":") # =&gt; "A:cat:in:the:hat"
   </div>
 </div>
 <div class="post">
+  <h3 class="title"><a href="/getting_rusty/posts/20140119_ruby_p_in_rust">Ruby p in Rust aka puts driven development</a> <span class="date">2014-01-19</span></h3>
+
+  <div class="summary ellipsis">
+<p>Given the lack of a useful debuggers in Ruby, we often refer to <code>p obj</code> to print an object to the console in order to inspect its value.</p>
+
+<pre><code class="ruby">Foo = Struct.new(:bar)
+foo = Foo.new(7)
+p foo # =&gt; #&lt;struct Foo bar=7&gt;
+</code></pre>
+
+<p>Actually you can do pretty much the same in Rust, too:</p>
+
+<pre><code class="rust">struct Foo {
+  bar: uint
+}
+
+fn main() {
+  let foo = Foo { bar: 7u };
+  p!(foo); // =&gt; Foo{bar: 7u}
+}
+</code></pre>
+
+<p>Actually Rust does not come from the factory with a <code>p!</code> - a syntax extension or a macro, but we can write it ourselves:</p>
+
+</div>
+
+  <div class="more">
+    <a href="/getting_rusty/posts/20140119_ruby_p_in_rust" class="btn btn-small">read more..</a>
+  </div>
+</div>
+<div class="post">
   <h3 class="title"><a href="/getting_rusty/posts/20140108_to_str">ToStr</a> <span class="date">2014-01-08</span></h3>
 
   <div class="summary">
