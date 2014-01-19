@@ -5,7 +5,7 @@ categories: ["rust"]
 tags: ["rust:macros", "rust:ruby"]
 ---
 
-Given the lack of a useful debuggers in Ruby, we often refer to `p obj` to print an object to the console in order to inspect its value.
+Given the lack of a useful debugger in Ruby, we often refer to `p obj` to print an object to the console in order to inspect its value.
 
 ```ruby
 Foo = Struct.new(:bar)
