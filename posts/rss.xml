@@ -4,17 +4,44 @@
     <title>Gettin' Rusty</title>
     <description>Gettin' Rusty</description>
     <link/>
-    <pubDate>2014-01-08</pubDate>
+    <pubDate>2014-01-19</pubDate>
     <item>
       <title>Mod aka crates</title>
-      <link>/getting_rusty/posts/crates</link>
+      <link>/getting_rusty/posts/20140108_crates</link>
       <pubDate>2014-01-08</pubDate>
       <description>&lt;p&gt;Putting stuff into a file does not require an explicit &lt;code&gt;mod {}&lt;/code&gt; at the top &lt;/p&gt;
 </description>
     </item>
     <item>
+      <title>On destructuring enums</title>
+      <link>/getting_rusty/posts/20140119_destructuring_enums</link>
+      <pubDate>2014-01-19</pubDate>
+      <description/>
+    </item>
+    <item>
+      <title>Ruby Stuff</title>
+      <link>/getting_rusty/posts/20140108_ruby</link>
+      <pubDate>2014-01-08</pubDate>
+      <description>&lt;p&gt;Here are a few things you probably do in Ruby quite often:&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;Array&lt;/h2&gt;
+
+&lt;h3 id="toc_1"&gt;Array#join&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class="ruby"&gt;s        = &amp;quot;A cat in the hat&amp;quot;
+words    = s.split(&amp;quot; &amp;quot;)
+combined = words.join(&amp;quot;:&amp;quot;) # =&amp;gt; &amp;quot;A:cat:in:the:hat&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;  let s              = ~&amp;quot;A cat in the hat&amp;quot;;
+  let words: ~[&amp;amp;str] = s.words().collect();
+  let combined       = words.connect(&amp;quot;:&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    <item>
       <title>ToStr</title>
-      <link>/getting_rusty/posts/to_str</link>
+      <link>/getting_rusty/posts/20140108_to_str</link>
       <pubDate>2014-01-08</pubDate>
       <description>How to get (almost) any type to support `to_str`</description>
     </item>

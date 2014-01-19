@@ -4,7 +4,7 @@
     <title>Gettin' Rusty</title>
     <description>Gettin' Rusty</description>
     <link/>
-    <pubDate>2014-01-08</pubDate>
+    <pubDate>2014-01-19</pubDate>
     <item>
       <title>Archive</title>
       <link>/getting_rusty/archive</link>
@@ -12,8 +12,10 @@
   &lt;h2&gt;2014&lt;/h2&gt;
     &lt;h3&gt;January&lt;/h3&gt;
     &lt;ul&gt;
-      &lt;li&gt;&lt;span&gt;2014-01-08&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/crates"&gt;Mod aka crates&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;span&gt;2014-01-08&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;span&gt;2014-01-08&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140108_crates"&gt;Mod aka crates&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;span&gt;2014-01-19&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140119_destructuring_enums"&gt;On destructuring enums&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;span&gt;2014-01-08&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140108_ruby"&gt;Ruby Stuff&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;span&gt;2014-01-08&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
 </description>
     </item>
@@ -23,14 +25,16 @@
       <description>
 &lt;ul class="tag_box inline"&gt;
   &lt;li&gt;
-    &lt;a href="/getting_rusty/categories#rust-ref"&gt;rust &lt;span&gt;2&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="/getting_rusty/categories#rust-ref"&gt;rust &lt;span&gt;4&lt;/span&gt;&lt;/a&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-  &lt;h3&gt;rust (2)&lt;/h3&gt;
+  &lt;h3&gt;rust (4)&lt;/h3&gt;
   &lt;ul&gt;
-      &lt;li&gt;&lt;a href="/getting_rusty/posts/crates"&gt;Mod aka crates&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href="/getting_rusty/posts/to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/getting_rusty/posts/20140108_crates"&gt;Mod aka crates&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/getting_rusty/posts/20140108_ruby"&gt;Ruby Stuff&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/getting_rusty/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/getting_rusty/posts/20140119_destructuring_enums"&gt;On destructuring enums&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 </description>
     </item>
@@ -44,16 +48,50 @@
       <title>Learning Rust</title>
       <link>/getting_rusty</link>
       <description>&lt;div class="post"&gt;
-  &lt;h3 class="title"&gt;&lt;a href="/getting_rusty/posts/crates"&gt;Mod aka crates&lt;/a&gt; &lt;span class="date"&gt;2014-01-08&lt;/span&gt;&lt;/h3&gt;
+  &lt;h3 class="title"&gt;&lt;a href="/getting_rusty/posts/20140108_crates"&gt;Mod aka crates&lt;/a&gt; &lt;span class="date"&gt;2014-01-08&lt;/span&gt;&lt;/h3&gt;
 
   &lt;div class="summary"&gt;&lt;p&gt;Putting stuff into a file does not require an explicit &lt;code&gt;mod {}&lt;/code&gt; at the top &lt;/p&gt;&lt;/div&gt;
 
   &lt;div class="more"&gt;
-    &lt;a href="/getting_rusty/posts/crates" class="btn btn-small"&gt;read more..&lt;/a&gt;
+    &lt;a href="/getting_rusty/posts/20140108_crates" class="btn btn-small"&gt;read more..&lt;/a&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="post"&gt;
-  &lt;h3 class="title"&gt;&lt;a href="/getting_rusty/posts/to_str"&gt;ToStr&lt;/a&gt; &lt;span class="date"&gt;2014-01-08&lt;/span&gt;&lt;/h3&gt;
+  &lt;h3 class="title"&gt;&lt;a href="/getting_rusty/posts/20140119_destructuring_enums"&gt;On destructuring enums&lt;/a&gt; &lt;span class="date"&gt;2014-01-19&lt;/span&gt;&lt;/h3&gt;
+
+  &lt;div class="summary"&gt;&lt;/div&gt;
+
+  &lt;div class="more"&gt;
+    &lt;a href="/getting_rusty/posts/20140119_destructuring_enums" class="btn btn-small"&gt;read more..&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="post"&gt;
+  &lt;h3 class="title"&gt;&lt;a href="/getting_rusty/posts/20140108_ruby"&gt;Ruby Stuff&lt;/a&gt; &lt;span class="date"&gt;2014-01-08&lt;/span&gt;&lt;/h3&gt;
+
+  &lt;div class="summary"&gt;
+&lt;p&gt;Here are a few things you probably do in Ruby quite often:&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;Array&lt;/h2&gt;
+
+&lt;h3 id="toc_1"&gt;Array#join&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class="ruby"&gt;s        = "A cat in the hat"
+words    = s.split(" ")
+combined = words.join(":") # =&amp;gt; "A:cat:in:the:hat"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;  let s              = ~"A cat in the hat";
+  let words: ~[&amp;amp;str] = s.words().collect();
+  let combined       = words.connect(":");
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+  &lt;div class="more"&gt;
+    &lt;a href="/getting_rusty/posts/20140108_ruby" class="btn btn-small"&gt;read more..&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="post"&gt;
+  &lt;h3 class="title"&gt;&lt;a href="/getting_rusty/posts/20140108_to_str"&gt;ToStr&lt;/a&gt; &lt;span class="date"&gt;2014-01-08&lt;/span&gt;&lt;/h3&gt;
 
   &lt;div class="summary"&gt;
 &lt;p&gt;In order to have a default implementaton of &lt;code&gt;to_str()&lt;/code&gt; you need to add &lt;code&gt;#[deriving(ToStr, Rand)]&lt;/code&gt;&lt;/p&gt;
@@ -70,7 +108,7 @@ println(Club.to_str);
 // =&amp;gt; Club
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The alternative, workin in most cases, would be using &lt;code&gt;format!&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The alternative, workin' in most cases, would be using &lt;code&gt;format!&lt;/code&gt;. The formatting string &lt;code&gt;{:?}&lt;/code&gt; means it will use reflection to display the struct name and values. This is similar to Ruby's &lt;code&gt;#inspect&lt;/code&gt;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="rust"&gt;enum Monsters {
   Goblin,
@@ -86,7 +124,7 @@ fn main() {
 &lt;/div&gt;
 
   &lt;div class="more"&gt;
-    &lt;a href="/getting_rusty/posts/to_str" class="btn btn-small"&gt;read more..&lt;/a&gt;
+    &lt;a href="/getting_rusty/posts/20140108_to_str" class="btn btn-small"&gt;read more..&lt;/a&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
@@ -134,12 +172,22 @@ fn main() {
   &lt;li&gt;
     &lt;a href="/getting_rusty/tags#ToStr-ref"&gt;ToStr &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
   &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/getting_rusty/tags#rust:enum-ref"&gt;rust:enum &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/getting_rusty/tags#rust:destructuring-ref"&gt;rust:destructuring &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;h3 id="deriving-ref"&gt;deriving&lt;/h3&gt;
-    &lt;li&gt;&lt;a href="/getting_rusty/posts/to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/getting_rusty/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
   &lt;h3 id="ToStr-ref"&gt;ToStr&lt;/h3&gt;
-    &lt;li&gt;&lt;a href="/getting_rusty/posts/to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/getting_rusty/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="rust:enum-ref"&gt;rust:enum&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/getting_rusty/posts/20140119_destructuring_enums"&gt;On destructuring enums&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="rust:destructuring-ref"&gt;rust:destructuring&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/getting_rusty/posts/20140119_destructuring_enums"&gt;On destructuring enums&lt;/a&gt;&lt;/li&gt;
  
 </description>
     </item>

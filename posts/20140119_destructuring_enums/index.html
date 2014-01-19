@@ -2,9 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>ToStr</title>
+    <title>On destructuring enums</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="How to get (almost) any type to support `to_str`">
     <meta name="author" content="Piotr Zolnierek">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -54,67 +53,40 @@
       <div class="content">
         
 <div class="page-header">
-  <h1>ToStr </h1>
+  <h1>On destructuring enums </h1>
 </div>
 
 <div class="row-fluid post-full">
   <div class="span12">
     <div class="date">
-      <span>2014-01-08</strong>
+      <span>2014-01-19</strong>
     </div>
     <div class="content">
-      <p>In order to have a default implementaton of <code>to_str()</code> you need to add <code>#[deriving(ToStr, Rand)]</code></p>
-
-<pre><code class="rust">#[deriving(ToStr, Rand)]
-enum Weapons {
-  Sword,
-  Club,
-  Gaze
-}
-
-println(Club.to_str);
-
-// =&gt; Club
-</code></pre>
-
-<p>The alternative, workin in most cases, would be using <code>format!</code></p>
-
-<pre><code class="rust">enum Monsters {
-  Goblin,
-  Orc
-}
-
-fn main() {
-  println(format!(&quot;{:?}&quot;, Orc));
-}
-
-// =&gt; Orc
-</code></pre>
-
+      
     </div>
     <ul class="tag_box inline">
       <li><i class="icon-folder-open"></i></li>
       <li>
-        <a href="/getting_rusty/categories#rust-ref">rust <span>2</span></a>
+        <a href="/getting_rusty/categories#rust-ref">rust <span>4</span></a>
       </li>
     </ul>
     <ul class="tag_box inline">
       <li><i class="icon-tags"></i></li>
       <li>
-        <a href="/getting_rusty/tags#deriving-ref">deriving <span>1</span></a>
+        <a href="/getting_rusty/tags#rust:enum-ref">rust:enum <span>1</span></a>
       </li>
       <li>
-        <a href="/getting_rusty/tags#ToStr-ref">ToStr <span>1</span></a>
+        <a href="/getting_rusty/tags#rust:destructuring-ref">rust:destructuring <span>1</span></a>
       </li>
     </ul>
     <hr>
     <div class="pagination">
       <ul>
-          <li class="prev disabled"><a>&larr; Previous</a></li>
+          <li class="prev"><a href="/getting_rusty/posts/20140108_ruby" title="Ruby Stuff">&larr; Previous</a></li>
 
           <li><a href="/getting_rusty/archive">Archive</a></li>
 
-          <li class="next"><a href="/getting_rusty/posts/crates" title="Mod aka crates">Next &rarr;</a></li>
+          <li class="next"><a href="/getting_rusty/posts/20140108_crates" title="Mod aka crates">Next &rarr;</a></li>
       </ul>
     </div>
     <hr>
