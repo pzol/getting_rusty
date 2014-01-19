@@ -85,7 +85,7 @@ combined = words.join(":") # =&amp;gt; "A:cat:in:the:hat"
   &lt;h3 class="title"&gt;&lt;a href="/getting_rusty/posts/20140119_ruby_p_in_rust"&gt;Ruby p aka puts driven development in Rust&lt;/a&gt; &lt;span class="date"&gt;2014-01-19&lt;/span&gt;&lt;/h3&gt;
 
   &lt;div class="summary ellipsis"&gt;
-&lt;p&gt;Given the lack of a useful debuggers in Ruby, we often refer to &lt;code&gt;p obj&lt;/code&gt; to print an object to the console in order to inspect its value.&lt;/p&gt;
+&lt;p&gt;Given the lack of a useful debugger in Ruby, we often refer to &lt;code&gt;p obj&lt;/code&gt; to print an object to the console in order to inspect its value.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="ruby"&gt;Foo = Struct.new(:bar)
 foo = Foo.new(7)

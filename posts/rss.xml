@@ -36,7 +36,7 @@ combined = words.join(&amp;quot;:&amp;quot;) # =&amp;gt; &amp;quot;A:cat:in:the:
       <title>Ruby p aka puts driven development in Rust</title>
       <link>/getting_rusty/posts/20140119_ruby_p_in_rust</link>
       <pubDate>2014-01-19</pubDate>
-      <description>&lt;p&gt;Given the lack of a useful debuggers in Ruby, we often refer to &lt;code&gt;p obj&lt;/code&gt; to print an object to the console in order to inspect its value.&lt;/p&gt;
+      <description>&lt;p&gt;Given the lack of a useful debugger in Ruby, we often refer to &lt;code&gt;p obj&lt;/code&gt; to print an object to the console in order to inspect its value.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="ruby"&gt;Foo = Struct.new(:bar)
 foo = Foo.new(7)
