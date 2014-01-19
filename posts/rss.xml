@@ -64,7 +64,7 @@ fn main() {
 
 &lt;p&gt;Actually Rust does not come from the factory with a &lt;code&gt;p!&lt;/code&gt; - a syntax extension or a macro, but we can write it ourselves:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class="rust"&gt;#[feature(macro_rules)] ;
+&lt;pre&gt;&lt;code class="rust"&gt;#[feature(macro_rules)];
 
 macro_rules! p(
     ($ident:ident) =&amp;gt; (
@@ -72,6 +72,8 @@ macro_rules! p(
     );
 )
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notable here is the first line in the crate &lt;code&gt;#[feature(macro_rules)];&lt;/code&gt; is required to enable macro rules, as those are as of today considered to be unstable. Do not forget the semicolon at the end, otherwise it won&amp;#39;t work!&lt;/p&gt;
 
 &lt;p&gt;For more on macros see the &lt;a href="http://static.rust-lang.org/doc/master/guide-macros.html"&gt;Macro tutorial&lt;/a&gt;&lt;/p&gt;
 </description>

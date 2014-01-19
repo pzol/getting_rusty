@@ -83,7 +83,7 @@ fn main() {
 
 <p>Actually Rust does not come from the factory with a <code>p!</code> - a syntax extension or a macro, but we can write it ourselves:</p>
 
-<pre><code class="rust">#[feature(macro_rules)] ;
+<pre><code class="rust">#[feature(macro_rules)];
 
 macro_rules! p(
     ($ident:ident) =&gt; (
@@ -91,6 +91,8 @@ macro_rules! p(
     );
 )
 </code></pre>
+
+<p>Notable here is the first line in the crate <code>#[feature(macro_rules)];</code> is required to enable macro rules, as those are as of today considered to be unstable. Do not forget the semicolon at the end, otherwise it won&#39;t work!</p>
 
 <p>For more on macros see the <a href="http://static.rust-lang.org/doc/master/guide-macros.html">Macro tutorial</a></p>
 
