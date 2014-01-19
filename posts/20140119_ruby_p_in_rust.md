@@ -1,5 +1,5 @@
 ---
-title: Ruby p in Rust aka puts driven development
+title: Ruby p aka puts driven development in Rust
 date: 19.01.2014
 categories: ["rust"]
 tags: ["rust:macros", "rust:ruby"]
