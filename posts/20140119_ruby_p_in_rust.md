@@ -29,7 +29,7 @@ fn main() {
 Actually Rust does not come from the factory with a `p!` - a syntax extension or a macro, but we can write it ourselves:
 
 ```rust
-#[feature(macro_rules)] ;
+#[feature(macro_rules)];
 
 macro_rules! p(
     ($ident:ident) => (
@@ -37,5 +37,7 @@ macro_rules! p(
     );
 )
 ```
+
+Notable here is the first line in the crate `#[feature(macro_rules)];` is required to enable macro rules, as those are as of today considered to be unstable. Do not forget the semicolon at the end, otherwise it won't work!
 
 For more on macros see the [Macro tutorial](http://static.rust-lang.org/doc/master/guide-macros.html)
