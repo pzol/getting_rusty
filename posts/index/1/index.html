@@ -54,12 +54,34 @@
         <div class="row-fluid">
   <div class="span12">
       <div class="posts">
-        <h3 class="title"><a href="/getting_rusty/posts/20140119_destructuring_enums">On destructuring enums</a> <span class="date">2014-01-19</span></h3>
+        <h3 class="title"><a href="/getting_rusty/posts/20140122_destructuring_in_rust">Destructuring in Rust</a> <span class="date">2014-01-22</span></h3>
 
-        <div class="summary"></div>
+        <div class="summary ellipsis">
+<p>Here's another piece I came along, while learning <a href="http://rust-lang.org">Rust</a>.
+Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in <a href="http://rust-lang.org">Rust</a>.</p>
+
+<p>It works in a lot of different scenarios, the most basic in a <code>let</code></p>
+
+<pre><code class="rust">let tuple = (1, 2);
+let (a, b) = tuple; // =&gt; a =  1; b = 2
+</code></pre>
+
+<p>Also it works in a function</p>
+
+<pre><code class="rust">fn my_function((a, b) : (uint, uint)) -&gt; uint {
+  a + b
+}
+
+fn main() {
+  let pair = (1, 2);
+  my_function(pair); // =&gt; 3
+}
+</code></pre>
+
+</div>
 
         <div class="more">
-          <a href="/getting_rusty/posts/20140119_destructuring_enums" class="btn btn-small">read more..</a>
+          <a href="/getting_rusty/posts/20140122_destructuring_in_rust" class="btn btn-small">read more..</a>
         </div>
       </div>
       <div class="posts">

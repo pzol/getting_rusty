@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>On destructuring enums</title>
+    <title>Destructuring in Rust</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Piotr Zolnierek">
 
@@ -53,16 +53,64 @@
       <div class="content">
         
 <div class="page-header">
-  <h1>On destructuring enums </h1>
+  <h1>Destructuring in Rust </h1>
 </div>
 
 <div class="row-fluid post-full">
   <div class="span12">
     <div class="date">
-      <span>2014-01-19</strong>
+      <span>2014-01-22</strong>
     </div>
     <div class="content">
-      
+      <p>Here&#39;s another piece I came along, while learning <a href="http://rust-lang.org">Rust</a>.
+Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in <a href="http://rust-lang.org">Rust</a>.</p>
+
+<p>It works in a lot of different scenarios, the most basic in a <code>let</code></p>
+
+<pre><code class="rust">let tuple = (1, 2);
+let (a, b) = tuple; // =&gt; a =  1; b = 2
+</code></pre>
+
+<p>Also it works in a function</p>
+
+<pre><code class="rust">fn my_function((a, b) : (uint, uint)) -&gt; uint {
+  a + b
+}
+
+fn main() {
+  let pair = (1, 2);
+  my_function(pair); // =&gt; 3
+}
+</code></pre>
+
+<p>It also can be used to destructure struct variants:</p>
+
+<pre><code class="rust">#[feature(struct_variant)];
+
+enum Fagazi {
+  Fob { a: int },
+  Foo { b: int, c: int }
+}
+
+#[test]
+fn test_enum() {
+  let foo = Foo { b: 1, c: 2 };
+
+  match foo {
+    Foo { b, c } =&gt; assert!((b,c) == (1, 2)),
+    _            =&gt; fail!(&quot;This will never happen, but the compiler doesn&#39;t know&quot;)
+  };
+}
+</code></pre>
+
+<p>You <strong>cannot</strong> just destructure an enum with multiple variants using <code>let</code>:</p>
+
+<pre><code class="rust">let Foo { b, c } = foo; // ! Compiler error !
+</code></pre>
+
+<p>You need to use a match instead of a simple let, because let can never fail (refutable pattern in local binding)
+using the second condition in match, the compiler knows, all possible paths have been exhausted.</p>
+
     </div>
     <ul class="tag_box inline">
       <li><i class="icon-folder-open"></i></li>

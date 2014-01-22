@@ -4,7 +4,7 @@
     <title>Gettin' Rusty</title>
     <description>Gettin' Rusty</description>
     <link/>
-    <pubDate>2014-01-19</pubDate>
+    <pubDate>2014-01-22</pubDate>
     <item>
       <title>Archive</title>
       <link>/getting_rusty/archive</link>
@@ -12,7 +12,7 @@
   &lt;h2&gt;2014&lt;/h2&gt;
     &lt;h3&gt;January&lt;/h3&gt;
     &lt;ul&gt;
-      &lt;li&gt;&lt;span&gt;2014-01-19&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140119_destructuring_enums"&gt;On destructuring enums&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;span&gt;2014-01-22&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140122_destructuring_in_rust"&gt;Destructuring in Rust&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;span&gt;2014-01-08&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140108_ruby"&gt;Ruby Stuff&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;span&gt;2014-01-19&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140119_ruby_p_in_rust"&gt;Ruby p aka puts driven development in Rust&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;span&gt;2014-01-08&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
@@ -33,8 +33,8 @@
   &lt;ul&gt;
       &lt;li&gt;&lt;a href="/getting_rusty/posts/20140108_ruby"&gt;Ruby Stuff&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href="/getting_rusty/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href="/getting_rusty/posts/20140119_destructuring_enums"&gt;On destructuring enums&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href="/getting_rusty/posts/20140119_ruby_p_in_rust"&gt;Ruby p aka puts driven development in Rust&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/getting_rusty/posts/20140122_destructuring_in_rust"&gt;Destructuring in Rust&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 </description>
     </item>
@@ -48,12 +48,34 @@
       <title>Learning Rust</title>
       <link>/getting_rusty</link>
       <description>&lt;div class="post"&gt;
-  &lt;h3 class="title"&gt;&lt;a href="/getting_rusty/posts/20140119_destructuring_enums"&gt;On destructuring enums&lt;/a&gt; &lt;span class="date"&gt;2014-01-19&lt;/span&gt;&lt;/h3&gt;
+  &lt;h3 class="title"&gt;&lt;a href="/getting_rusty/posts/20140122_destructuring_in_rust"&gt;Destructuring in Rust&lt;/a&gt; &lt;span class="date"&gt;2014-01-22&lt;/span&gt;&lt;/h3&gt;
 
-  &lt;div class="summary"&gt;&lt;/div&gt;
+  &lt;div class="summary ellipsis"&gt;
+&lt;p&gt;Here's another piece I came along, while learning &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.
+Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It works in a lot of different scenarios, the most basic in a &lt;code&gt;let&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let tuple = (1, 2);
+let (a, b) = tuple; // =&amp;gt; a =  1; b = 2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Also it works in a function&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;fn my_function((a, b) : (uint, uint)) -&amp;gt; uint {
+  a + b
+}
+
+fn main() {
+  let pair = (1, 2);
+  my_function(pair); // =&amp;gt; 3
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
   &lt;div class="more"&gt;
-    &lt;a href="/getting_rusty/posts/20140119_destructuring_enums" class="btn btn-small"&gt;read more..&lt;/a&gt;
+    &lt;a href="/getting_rusty/posts/20140122_destructuring_in_rust" class="btn btn-small"&gt;read more..&lt;/a&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="post"&gt;
@@ -195,16 +217,16 @@ fn main() {
     &lt;a href="/getting_rusty/tags#ToStr-ref"&gt;ToStr &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;a href="/getting_rusty/tags#rust:enum-ref"&gt;rust:enum &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;a href="/getting_rusty/tags#rust:destructuring-ref"&gt;rust:destructuring &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
     &lt;a href="/getting_rusty/tags#rust:macros-ref"&gt;rust:macros &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;a href="/getting_rusty/tags#rust:ruby-ref"&gt;rust:ruby &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/getting_rusty/tags#rust:enum-ref"&gt;rust:enum &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/getting_rusty/tags#rust:destructuring-ref"&gt;rust:destructuring &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -212,14 +234,14 @@ fn main() {
     &lt;li&gt;&lt;a href="/getting_rusty/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
   &lt;h3 id="ToStr-ref"&gt;ToStr&lt;/h3&gt;
     &lt;li&gt;&lt;a href="/getting_rusty/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
-  &lt;h3 id="rust:enum-ref"&gt;rust:enum&lt;/h3&gt;
-    &lt;li&gt;&lt;a href="/getting_rusty/posts/20140119_destructuring_enums"&gt;On destructuring enums&lt;/a&gt;&lt;/li&gt;
-  &lt;h3 id="rust:destructuring-ref"&gt;rust:destructuring&lt;/h3&gt;
-    &lt;li&gt;&lt;a href="/getting_rusty/posts/20140119_destructuring_enums"&gt;On destructuring enums&lt;/a&gt;&lt;/li&gt;
   &lt;h3 id="rust:macros-ref"&gt;rust:macros&lt;/h3&gt;
     &lt;li&gt;&lt;a href="/getting_rusty/posts/20140119_ruby_p_in_rust"&gt;Ruby p aka puts driven development in Rust&lt;/a&gt;&lt;/li&gt;
   &lt;h3 id="rust:ruby-ref"&gt;rust:ruby&lt;/h3&gt;
     &lt;li&gt;&lt;a href="/getting_rusty/posts/20140119_ruby_p_in_rust"&gt;Ruby p aka puts driven development in Rust&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="rust:enum-ref"&gt;rust:enum&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/getting_rusty/posts/20140122_destructuring_in_rust"&gt;Destructuring in Rust&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="rust:destructuring-ref"&gt;rust:destructuring&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/getting_rusty/posts/20140122_destructuring_in_rust"&gt;Destructuring in Rust&lt;/a&gt;&lt;/li&gt;
  
 </description>
     </item>

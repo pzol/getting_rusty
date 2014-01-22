@@ -4,12 +4,60 @@
     <title>Gettin' Rusty</title>
     <description>Gettin' Rusty</description>
     <link/>
-    <pubDate>2014-01-19</pubDate>
+    <pubDate>2014-01-22</pubDate>
     <item>
-      <title>On destructuring enums</title>
-      <link>/getting_rusty/posts/20140119_destructuring_enums</link>
-      <pubDate>2014-01-19</pubDate>
-      <description/>
+      <title>Destructuring in Rust</title>
+      <link>/getting_rusty/posts/20140122_destructuring_in_rust</link>
+      <pubDate>2014-01-22</pubDate>
+      <description>&lt;p&gt;Here&amp;#39;s another piece I came along, while learning &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.
+Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It works in a lot of different scenarios, the most basic in a &lt;code&gt;let&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let tuple = (1, 2);
+let (a, b) = tuple; // =&amp;gt; a =  1; b = 2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Also it works in a function&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;fn my_function((a, b) : (uint, uint)) -&amp;gt; uint {
+  a + b
+}
+
+fn main() {
+  let pair = (1, 2);
+  my_function(pair); // =&amp;gt; 3
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It also can be used to destructure struct variants:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;#[feature(struct_variant)];
+
+enum Fagazi {
+  Fob { a: int },
+  Foo { b: int, c: int }
+}
+
+#[test]
+fn test_enum() {
+  let foo = Foo { b: 1, c: 2 };
+
+  match foo {
+    Foo { b, c } =&amp;gt; assert!((b,c) == (1, 2)),
+    _            =&amp;gt; fail!(&amp;quot;This will never happen, but the compiler doesn&amp;#39;t know&amp;quot;)
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You &lt;strong&gt;cannot&lt;/strong&gt; just destructure an enum with multiple variants using &lt;code&gt;let&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let Foo { b, c } = foo; // ! Compiler error !
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You need to use a match instead of a simple let, because let can never fail (refutable pattern in local binding)
+using the second condition in match, the compiler knows, all possible paths have been exhausted.&lt;/p&gt;
+</description>
     </item>
     <item>
       <title>Ruby Stuff</title>
