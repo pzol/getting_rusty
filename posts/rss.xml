@@ -88,7 +88,7 @@ using the second condition in match, the compiler knows, all possible paths have
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;You can also use destructuing in for loops:&lt;/p&gt;
+&lt;p&gt;You can also use destructuring in &lt;code&gt;for&lt;/code&gt; loops:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="rust"&gt;struct Pair { x: int, y: int }
 
