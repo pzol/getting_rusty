@@ -100,6 +100,7 @@ let Point { y: y2, x: x2} = p; // =&gt; y2 == 2, x2 == 1
 <p>and you can also ignore some variables:</p>
 
 <pre><code class="rust">  let Point { y: y3, .. } = p; // =&gt; y3 == 2
+  let Point { y } = p;         
 </code></pre>
 
 <p>It also can be used to destructure struct variants:</p>
@@ -154,7 +155,7 @@ using the second condition in match, the compiler knows, all possible paths have
 match v {
     []                       =&gt; println!(&quot;empty&quot;),
     [elem]                   =&gt; println!(&quot;{}&quot;, elem),   // =&gt; 1
-    [first, second, ..rest]  =&gt; println!(&quot;{:?}&quot;, rest)  // =&gt; [3, 4, 5]
+    [first, second, ..rest]  =&gt; println!(&quot;{:?}&quot;, rest)  // =&gt; &amp;[3, 4, 5]
   }
 </code></pre>
 
