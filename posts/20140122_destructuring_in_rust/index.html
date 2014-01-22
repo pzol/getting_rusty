@@ -141,6 +141,17 @@ using the second condition in match, the compiler knows, all possible paths have
 }
 </code></pre>
 
+<p>You can also use destructuing in for loops:</p>
+
+<pre><code class="rust">struct Pair { x: int, y: int }
+
+let pairs = ~[Pair {x: 10, y: 20}, Pair {x: 30, y: 0}]; 
+
+for &amp;Pair {x, y} in pairs.iter() {
+  assert_eq!(x + y, 30);
+}
+</code></pre>
+
 <p>For comments head over to <a href="http://www.reddit.com/r/rust/comments/1vu6v5/examples_of_destructuring_in_rust/">Reddit</a></p>
 
     </div>
