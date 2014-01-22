@@ -91,7 +91,7 @@ You can destructure vectors, too:
 }
 ```
 
-You can also use destructuing in for loops:
+You can also use destructuring in `for` loops:
 
 ```rust
 struct Pair { x: int, y: int }
