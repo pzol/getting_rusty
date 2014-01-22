@@ -14,7 +14,7 @@ let tuple = (1, 2);
 let (a, b) = tuple; // => a =  1; b = 2
 ```
 
-Also it works in a function
+It works in a function's arguments:
 
 ```rust
 fn my_function((a, b) : (uint, uint)) -> uint {
@@ -81,13 +81,22 @@ Take also notice of the `unreachable!()` expression. As mentioned before all `ma
 You can destructure vectors, too:
 
 ```rust
-#[test]
-  let v = ~[1, 2, 3, 4, 5];
-  match v {
-    []             => println!("empty"),
-    [head]         => println!("{}", head),   // => 1
-    [a, b, ..tail] => println!("{:?}", tail)  // => [3, 4, 5]
+let v = ~[1, 2, 3, 4, 5];
+match v {
+    []                       => println!("empty"),
+    [elem]                   => println!("{}", elem),   // => 1
+    [first, second, ..rest]  => println!("{:?}", rest)  // => [3, 4, 5]
   }
+```
+
+If you only care about the first or last values you can do this:
+
+```rust
+let v = ~[1, 2, 3];
+match v {
+  [first, ..] => assert_eq!(first, 1),
+  [.., last]  => assert_eq!(last, 3),
+  _           => unreachable!()
 }
 ```
 
