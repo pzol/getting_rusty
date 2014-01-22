@@ -18,7 +18,7 @@ Pattern matching is one of the features I like most about modern / functional st
 let (a, b) = tuple; // =&amp;gt; a =  1; b = 2
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Also it works in a function&lt;/p&gt;
+&lt;p&gt;It works in a function&amp;#39;s arguments:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="rust"&gt;fn my_function((a, b) : (uint, uint)) -&amp;gt; uint {
   a + b
@@ -78,13 +78,21 @@ using the second condition in match, the compiler knows, all possible paths have
 
 &lt;p&gt;You can destructure vectors, too:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class="rust"&gt;#[test]
-  let v = ~[1, 2, 3, 4, 5];
-  match v {
-    []             =&amp;gt; println!(&amp;quot;empty&amp;quot;),
-    [head]         =&amp;gt; println!(&amp;quot;{}&amp;quot;, head),   // =&amp;gt; 1
-    [a, b, ..tail] =&amp;gt; println!(&amp;quot;{:?}&amp;quot;, tail)  // =&amp;gt; [3, 4, 5]
+&lt;pre&gt;&lt;code class="rust"&gt;let v = ~[1, 2, 3, 4, 5];
+match v {
+    []                       =&amp;gt; println!(&amp;quot;empty&amp;quot;),
+    [elem]                   =&amp;gt; println!(&amp;quot;{}&amp;quot;, elem),   // =&amp;gt; 1
+    [first, second, ..rest]  =&amp;gt; println!(&amp;quot;{:?}&amp;quot;, rest)  // =&amp;gt; [3, 4, 5]
   }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you only care about the first or last values you can do this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let v = ~[1, 2, 3];
+match v {
+  [first, ..] =&amp;gt; assert_eq!(first, 1),
+  [.., last]  =&amp;gt; assert_eq!(last, 3),
+  _           =&amp;gt; unreachable!()
 }
 &lt;/code&gt;&lt;/pre&gt;
 

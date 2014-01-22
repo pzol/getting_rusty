@@ -71,7 +71,7 @@ Pattern matching is one of the features I like most about modern / functional st
 let (a, b) = tuple; // =&gt; a =  1; b = 2
 </code></pre>
 
-<p>Also it works in a function</p>
+<p>It works in a function&#39;s arguments:</p>
 
 <pre><code class="rust">fn my_function((a, b) : (uint, uint)) -&gt; uint {
   a + b
@@ -131,13 +131,21 @@ using the second condition in match, the compiler knows, all possible paths have
 
 <p>You can destructure vectors, too:</p>
 
-<pre><code class="rust">#[test]
-  let v = ~[1, 2, 3, 4, 5];
-  match v {
-    []             =&gt; println!(&quot;empty&quot;),
-    [head]         =&gt; println!(&quot;{}&quot;, head),   // =&gt; 1
-    [a, b, ..tail] =&gt; println!(&quot;{:?}&quot;, tail)  // =&gt; [3, 4, 5]
+<pre><code class="rust">let v = ~[1, 2, 3, 4, 5];
+match v {
+    []                       =&gt; println!(&quot;empty&quot;),
+    [elem]                   =&gt; println!(&quot;{}&quot;, elem),   // =&gt; 1
+    [first, second, ..rest]  =&gt; println!(&quot;{:?}&quot;, rest)  // =&gt; [3, 4, 5]
   }
+</code></pre>
+
+<p>If you only care about the first or last values you can do this:</p>
+
+<pre><code class="rust">let v = ~[1, 2, 3];
+match v {
+  [first, ..] =&gt; assert_eq!(first, 1),
+  [.., last]  =&gt; assert_eq!(last, 3),
+  _           =&gt; unreachable!()
 }
 </code></pre>
 
