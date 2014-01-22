@@ -47,6 +47,7 @@ and you can also ignore some variables:
 
 ```rust
   let Point { y: y3, .. } = p; // => y3 == 2
+  let Point { y } = p;         
 ```
 
 
@@ -108,7 +109,7 @@ let v = ~[1, 2, 3, 4, 5];
 match v {
     []                       => println!("empty"),
     [elem]                   => println!("{}", elem),   // => 1
-    [first, second, ..rest]  => println!("{:?}", rest)  // => [3, 4, 5]
+    [first, second, ..rest]  => println!("{:?}", rest)  // => &[3, 4, 5]
   }
 ```
 
