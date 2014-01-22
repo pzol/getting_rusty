@@ -61,19 +61,20 @@ using the second condition in match, the compiler knows, all possible paths have
 
 &lt;p&gt;One more cool feature of &lt;code&gt;match&lt;/code&gt; are guard clauses:&lt;/p&gt;
 
-&lt;p&gt;fn test_enum() {
-  let foo = Foo { b: 3, c: 2 };&lt;/p&gt;
+&lt;pre&gt;&lt;code class="rust"&gt;fn test_enum() {
+  let foo = Foo { b: 3, c: 2 };
 
-&lt;p&gt;// need to use a match instead of a simple let, because let can never fail (refutable pattern in local binding)
+  // need to use a match instead of a simple let, because let can never fail (refutable pattern in local binding)
   // using the second condition in match, the compiler knows, all possible paths have been exhausted
   match foo {
     Foo { b, c } if b &amp;lt;= 2 =&amp;gt; assert!(b &amp;lt;= 2 &amp;amp;&amp;amp; c == 2),
     Foo { b, c }          =&amp;gt; assert!((b, c) == (3, 2)),
     _                     =&amp;gt; fail!(&amp;quot;This will never happen&amp;quot;)
   };
-}&lt;/p&gt;
+}
 
-&lt;p&gt;See the &lt;code&gt;if b &amp;lt;= 2&lt;/code&gt; in the first line?&lt;/p&gt;
+See the `if b &amp;lt;= 2` in the first line?
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     <item>
