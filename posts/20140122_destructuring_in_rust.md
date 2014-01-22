@@ -91,4 +91,16 @@ You can destructure vectors, too:
 }
 ```
 
+You can also use destructuing in for loops:
+
+```rust
+struct Pair { x: int, y: int }
+
+let pairs = ~[Pair {x: 10, y: 20}, Pair {x: 30, y: 0}]; 
+  
+for &Pair {x, y} in pairs.iter() {
+  assert_eq!(x + y, 30);
+}
+```
+
 For comments head over to [Reddit](http://www.reddit.com/r/rust/comments/1vu6v5/examples_of_destructuring_in_rust/)
