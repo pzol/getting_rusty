@@ -74,7 +74,19 @@ using the second condition in match, the compiler knows, all possible paths have
 See the `if b &amp;lt;= 2` in the first line?
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;For comments head over to &lt;a href="http://www.reddit.com/r/rust/comments/1vu6v5/examples_of_destructuring_in_rust/"&gt;Reddit&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can destructure vectors, too:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;#[test]
+  let v = ~[1, 2, 3, 4, 5];
+  match v {
+    []             =&amp;gt; println!(&amp;quot;empty&amp;quot;),
+    [head]         =&amp;gt; println!(&amp;quot;{}&amp;quot;, head),   // =&amp;gt; 1
+    [a, b, ..tail] =&amp;gt; println!(&amp;quot;{:?}&amp;quot;, tail)  // =&amp;gt; [3, 4, 5]
+  }
+}
+
+For comments head over to [Reddit](http://www.reddit.com/r/rust/comments/1vu6v5/examples_of_destructuring_in_rust/)
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     <item>
