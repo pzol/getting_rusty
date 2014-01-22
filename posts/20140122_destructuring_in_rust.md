@@ -42,6 +42,7 @@ fn test_enum() {
   let foo = Foo { b: 1, c: 2 };
 
   match foo {
+    Foo { b, c } if b > 2 => assert!((b,c) == (1, 2)),
     Foo { b, c } => assert!((b,c) == (1, 2)),
     _            => fail!("This will never happen, but the compiler doesn't know")
   };
@@ -56,3 +57,20 @@ let Foo { b, c } = foo; // ! Compiler error !
 
 You need to use a match instead of a simple let, because let can never fail (refutable pattern in local binding)
 using the second condition in match, the compiler knows, all possible paths have been exhausted.
+
+
+One more cool feature of `match` are guard clauses:
+
+fn test_enum() {
+  let foo = Foo { b: 3, c: 2 };
+
+  // need to use a match instead of a simple let, because let can never fail (refutable pattern in local binding)
+  // using the second condition in match, the compiler knows, all possible paths have been exhausted
+  match foo {
+    Foo { b, c } if b <= 2 => assert!(b <= 2 && c == 2),
+    Foo { b, c }          => assert!((b, c) == (3, 2)),
+    _                     => fail!("This will never happen")
+  };
+}
+
+See the `if b <= 2` in the first line?
