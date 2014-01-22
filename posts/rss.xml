@@ -64,8 +64,6 @@ using the second condition in match, the compiler knows, all possible paths have
 &lt;pre&gt;&lt;code class="rust"&gt;fn test_enum() {
   let foo = Foo { b: 3, c: 2 };
 
-  // need to use a match instead of a simple let, because let can never fail (refutable pattern in local binding)
-  // using the second condition in match, the compiler knows, all possible paths have been exhausted
   match foo {
     Foo { b, c } if b &amp;lt;= 2 =&amp;gt; assert!(b &amp;lt;= 2 &amp;amp;&amp;amp; c == 2),
     Foo { b, c }          =&amp;gt; assert!((b, c) == (3, 2)),
