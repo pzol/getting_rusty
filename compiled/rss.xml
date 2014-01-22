@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>Gettin' Rusty</title>
+    <description>Gettin' Rusty</description>
+    <link/>
+    <pubDate>2014-01-22</pubDate>
+    <item>
+      <title>Archive</title>
+      <link>/archive</link>
+      <description>
+  &lt;h2&gt;2014&lt;/h2&gt;
+    &lt;h3&gt;January&lt;/h3&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;span&gt;2014-01-22&lt;/span&gt; &amp;raquo; &lt;a href="/posts/20140122_destructuring_in_rust"&gt;Destructuring in Rust&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;span&gt;2014-01-08&lt;/span&gt; &amp;raquo; &lt;a href="/posts/20140108_ruby"&gt;Ruby Stuff&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;span&gt;2014-01-19&lt;/span&gt; &amp;raquo; &lt;a href="/posts/20140119_ruby_p_in_rust"&gt;Ruby p aka puts driven development in Rust&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;span&gt;2014-01-08&lt;/span&gt; &amp;raquo; &lt;a href="/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+</description>
+    </item>
+    <item>
+      <title>Categories</title>
+      <link>/categories</link>
+      <description>
+&lt;ul class="tag_box inline"&gt;
+  &lt;li&gt;
+    &lt;a href="/categories#rust-ref"&gt;rust &lt;span&gt;4&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;h3&gt;rust (4)&lt;/h3&gt;
+  &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/posts/20140108_ruby"&gt;Ruby Stuff&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/posts/20140119_ruby_p_in_rust"&gt;Ruby p aka puts driven development in Rust&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/posts/20140122_destructuring_in_rust"&gt;Destructuring in Rust&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+</description>
+    </item>
+    <item>
+      <title>Index</title>
+      <link>/</link>
+      <description>&lt;!-- nothing to see here --&gt;
+</description>
+    </item>
+    <item>
+      <title>Pages</title>
+      <link>/pages</link>
+      <description>
+&lt;ul&gt;
+  
+    &lt;li&gt;&lt;a href="/archive"&gt;Archive&lt;/a&gt;&lt;/li&gt;
+  
+  
+    &lt;li&gt;&lt;a href="/categories"&gt;Categories&lt;/a&gt;&lt;/li&gt;
+  
+  
+    &lt;li&gt;&lt;a href="/"&gt;Index&lt;/a&gt;&lt;/li&gt;
+  
+    &lt;li class="active"&gt;&lt;a href="/pages" class="active"&gt;Pages&lt;/a&gt;&lt;/li&gt;
+  
+  
+  
+    &lt;li&gt;&lt;a href="/"&gt;Rust by Example&lt;/a&gt;&lt;/li&gt;
+  
+  
+    &lt;li&gt;&lt;a href="/tags"&gt;Tags&lt;/a&gt;&lt;/li&gt;
+  
+&lt;/ul&gt;
+</description>
+    </item>
+    <item>
+      <title>Rust by Example</title>
+      <link>/</link>
+      <description>Rust is a curly-brace, block-structured expression language. It visually resembles the C language family, but differs significantly in syntactic and semantic details. Its design is oriented toward concerns of &#x201C;programming in the large&#x201D;, that is, of creating and maintaining boundaries &#x2013; both abstract and operational &#x2013; that preserve large-system integrity, availability and concurrency.</description>
+    </item>
+    <item>
+      <title>Tags</title>
+      <link>/tags</link>
+      <description>
+&lt;ul class="tag_box inline"&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#deriving-ref"&gt;deriving &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#ToStr-ref"&gt;ToStr &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#rust:macros-ref"&gt;rust:macros &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#rust:ruby-ref"&gt;rust:ruby &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#rust:enum-ref"&gt;rust:enum &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#rust:destructuring-ref"&gt;rust:destructuring &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;h3 id="deriving-ref"&gt;deriving&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="ToStr-ref"&gt;ToStr&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="rust:macros-ref"&gt;rust:macros&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/20140119_ruby_p_in_rust"&gt;Ruby p aka puts driven development in Rust&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="rust:ruby-ref"&gt;rust:ruby&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/20140119_ruby_p_in_rust"&gt;Ruby p aka puts driven development in Rust&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="rust:enum-ref"&gt;rust:enum&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/20140122_destructuring_in_rust"&gt;Destructuring in Rust&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="rust:destructuring-ref"&gt;rust:destructuring&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/20140122_destructuring_in_rust"&gt;Destructuring in Rust&lt;/a&gt;&lt;/li&gt;
+ 
+</description>
+    </item>
+  </channel>
+</rss>

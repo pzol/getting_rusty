@@ -7,7 +7,7 @@
     <pubDate>2014-01-22</pubDate>
     <item>
       <title>Destructuring in Rust</title>
-      <link>/getting_rusty/posts/20140122_destructuring_in_rust</link>
+      <link>/posts/20140122_destructuring_in_rust</link>
       <pubDate>2014-01-22</pubDate>
       <description>&lt;p&gt;Here&amp;#39;s another piece I came along, while learning &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.
 Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.&lt;/p&gt;
@@ -70,11 +70,9 @@ using the second condition in match, the compiler knows, all possible paths have
     _                      =&amp;gt; unreachable!()
   };
 }
+
+See the `if b &amp;lt;= 2` in the first line?
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;See the &lt;code&gt;if b &amp;lt;= 2&lt;/code&gt; in the first line? This is called a guard, it will match only if the pattern matches and the guard clause is true.&lt;/p&gt;
-
-&lt;p&gt;Take also notice of the &lt;code&gt;unreachable!()&lt;/code&gt; expression. As mentioned before all &lt;code&gt;match&lt;/code&gt; clauses need to be exhaustive. &lt;code&gt;unreachable!()&lt;/code&gt; expands to &lt;code&gt;fail!(&amp;quot;internal error: entered unreachable code&amp;quot;)&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;You can destructure vectors, too:&lt;/p&gt;
 
@@ -93,7 +91,7 @@ using the second condition in match, the compiler knows, all possible paths have
     </item>
     <item>
       <title>Ruby Stuff</title>
-      <link>/getting_rusty/posts/20140108_ruby</link>
+      <link>/posts/20140108_ruby</link>
       <pubDate>2014-01-08</pubDate>
       <description>&lt;p&gt;Here are a few things you probably do in Ruby quite often:&lt;/p&gt;
 
@@ -114,7 +112,7 @@ combined = words.join(&amp;quot;:&amp;quot;) # =&amp;gt; &amp;quot;A:cat:in:the:
     </item>
     <item>
       <title>Ruby p aka puts driven development in Rust</title>
-      <link>/getting_rusty/posts/20140119_ruby_p_in_rust</link>
+      <link>/posts/20140119_ruby_p_in_rust</link>
       <pubDate>2014-01-19</pubDate>
       <description>&lt;p&gt;Given the lack of a useful debugger in Ruby, we often refer to &lt;code&gt;p obj&lt;/code&gt; to print an object to the console in order to inspect its value.&lt;/p&gt;
 
@@ -153,7 +151,7 @@ macro_rules! p(
     </item>
     <item>
       <title>ToStr</title>
-      <link>/getting_rusty/posts/20140108_to_str</link>
+      <link>/posts/20140108_to_str</link>
       <pubDate>2014-01-08</pubDate>
       <description>How to get (almost) any type to support `to_str`</description>
     </item>

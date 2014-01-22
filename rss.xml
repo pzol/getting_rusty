@@ -45,141 +45,6 @@
 </description>
     </item>
     <item>
-      <title>Learning Rust</title>
-      <link>/getting_rusty</link>
-      <description>&lt;div class="post"&gt;
-  &lt;h3 class="title"&gt;&lt;a href="/getting_rusty/posts/20140122_destructuring_in_rust"&gt;Destructuring in Rust&lt;/a&gt; &lt;span class="date"&gt;2014-01-22&lt;/span&gt;&lt;/h3&gt;
-
-  &lt;div class="summary ellipsis"&gt;
-&lt;p&gt;Here's another piece I came along, while learning &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.
-Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;It works in a lot of different scenarios, the most basic in a &lt;code&gt;let&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;let tuple = (1, 2);
-let (a, b) = tuple; // =&amp;gt; a =  1; b = 2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Also it works in a function&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;fn my_function((a, b) : (uint, uint)) -&amp;gt; uint {
-  a + b
-}
-
-fn main() {
-  let pair = (1, 2);
-  my_function(pair); // =&amp;gt; 3
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-  &lt;div class="more"&gt;
-    &lt;a href="/getting_rusty/posts/20140122_destructuring_in_rust" class="btn btn-small"&gt;read more..&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="post"&gt;
-  &lt;h3 class="title"&gt;&lt;a href="/getting_rusty/posts/20140108_ruby"&gt;Ruby Stuff&lt;/a&gt; &lt;span class="date"&gt;2014-01-08&lt;/span&gt;&lt;/h3&gt;
-
-  &lt;div class="summary"&gt;
-&lt;p&gt;Here are a few things you probably do in Ruby quite often:&lt;/p&gt;
-
-&lt;h2 id="toc_0"&gt;Array&lt;/h2&gt;
-
-&lt;h3 id="toc_1"&gt;Array#join&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class="ruby"&gt;s        = "A cat in the hat"
-words    = s.split(" ")
-combined = words.join(":") # =&amp;gt; "A:cat:in:the:hat"
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;  let s              = ~"A cat in the hat";
-  let words: ~[&amp;amp;str] = s.words().collect();
-  let combined       = words.connect(":");
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-  &lt;div class="more"&gt;
-    &lt;a href="/getting_rusty/posts/20140108_ruby" class="btn btn-small"&gt;read more..&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="post"&gt;
-  &lt;h3 class="title"&gt;&lt;a href="/getting_rusty/posts/20140119_ruby_p_in_rust"&gt;Ruby p aka puts driven development in Rust&lt;/a&gt; &lt;span class="date"&gt;2014-01-19&lt;/span&gt;&lt;/h3&gt;
-
-  &lt;div class="summary ellipsis"&gt;
-&lt;p&gt;Given the lack of a useful debugger in Ruby, we often refer to &lt;code&gt;p obj&lt;/code&gt; to print an object to the console in order to inspect its value.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="ruby"&gt;Foo = Struct.new(:bar)
-foo = Foo.new(7)
-p foo # =&amp;gt; #&amp;lt;struct Foo bar=7&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Actually you can do pretty much the same in Rust, too:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;struct Foo {
-  bar: uint
-}
-
-fn main() {
-  let foo = Foo { bar: 7u };
-  p!(foo); // =&amp;gt; Foo{bar: 7u}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Actually Rust does not come from the factory with a &lt;code&gt;p!&lt;/code&gt; - a syntax extension or a macro, but we can write it ourselves:&lt;/p&gt;
-
-&lt;/div&gt;
-
-  &lt;div class="more"&gt;
-    &lt;a href="/getting_rusty/posts/20140119_ruby_p_in_rust" class="btn btn-small"&gt;read more..&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="post"&gt;
-  &lt;h3 class="title"&gt;&lt;a href="/getting_rusty/posts/20140108_to_str"&gt;ToStr&lt;/a&gt; &lt;span class="date"&gt;2014-01-08&lt;/span&gt;&lt;/h3&gt;
-
-  &lt;div class="summary"&gt;
-&lt;p&gt;In order to have a default implementaton of &lt;code&gt;to_str()&lt;/code&gt; you need to add &lt;code&gt;#[deriving(ToStr, Rand)]&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;#[deriving(ToStr, Rand)]
-enum Weapons {
-  Sword,
-  Club,
-  Gaze
-}
-
-println(Club.to_str);
-
-// =&amp;gt; Club
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The alternative, workin' in most cases, would be using &lt;code&gt;format!&lt;/code&gt;. The formatting string &lt;code&gt;{:?}&lt;/code&gt; means it will use reflection to display the struct name and values. This is similar to Ruby's &lt;code&gt;#inspect&lt;/code&gt;.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;enum Monsters {
-  Goblin,
-  Orc
-}
-
-fn main() {
-  println(format!("{:?}", Orc));
-}
-
-// =&amp;gt; Orc
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-  &lt;div class="more"&gt;
-    &lt;a href="/getting_rusty/posts/20140108_to_str" class="btn btn-small"&gt;read more..&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="pagination"&gt;
-  &lt;ul&gt;
-      &lt;li class="active"&gt;&lt;a href="/getting_rusty/posts/index/1"&gt;1&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    <item>
       <title>Pages</title>
       <link>/getting_rusty/pages</link>
       <description>
@@ -193,17 +58,22 @@ fn main() {
   
     &lt;li&gt;&lt;a href="/getting_rusty"&gt;Index&lt;/a&gt;&lt;/li&gt;
   
-  
-    &lt;li&gt;&lt;a href="/getting_rusty"&gt;Learning Rust&lt;/a&gt;&lt;/li&gt;
-  
     &lt;li class="active"&gt;&lt;a href="/getting_rusty/pages" class="active"&gt;Pages&lt;/a&gt;&lt;/li&gt;
   
+  
+  
+    &lt;li&gt;&lt;a href="/getting_rusty"&gt;Rust by Example&lt;/a&gt;&lt;/li&gt;
   
   
     &lt;li&gt;&lt;a href="/getting_rusty/tags"&gt;Tags&lt;/a&gt;&lt;/li&gt;
   
 &lt;/ul&gt;
 </description>
+    </item>
+    <item>
+      <title>Rust by Example</title>
+      <link>/getting_rusty</link>
+      <description>Rust is a curly-brace, block-structured expression language. It visually resembles the C language family, but differs significantly in syntactic and semantic details. Its design is oriented toward concerns of &#x201C;programming in the large&#x201D;, that is, of creating and maintaining boundaries &#x2013; both abstract and operational &#x2013; that preserve large-system integrity, availability and concurrency.</description>
     </item>
     <item>
       <title>Tags</title>
