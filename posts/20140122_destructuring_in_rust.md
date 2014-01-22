@@ -61,6 +61,7 @@ using the second condition in match, the compiler knows, all possible paths have
 
 One more cool feature of `match` are guard clauses:
 
+```rust
 fn test_enum() {
   let foo = Foo { b: 3, c: 2 };
 
@@ -74,3 +75,4 @@ fn test_enum() {
 }
 
 See the `if b <= 2` in the first line?
+```
