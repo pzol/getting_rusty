@@ -27,6 +27,29 @@ fn main() {
 }
 ```
 
+You can destructure structs and rename the variables:
+
+```rust
+let  p = Point { x: 1, y: 2 };
+let  Point { x: new_x, y: new_y } = p; // => new_x == 1, new_y == 2
+assert_eq!(new_x, 1);
+assert_eq!(new_y, 2);
+```
+
+The order is not important:
+
+```rust
+let Point { y, x } = p;        // => y  == 2, x  == 1
+let Point { y: y2, x: x2} = p; // => y2 == 2, x2 == 1
+```
+
+and you can also ignore some variables:
+
+```rust
+  let Point { y: y3, .. } = p; // => y3 == 2
+```
+
+
 It also can be used to destructure struct variants:
 
 ```rust
