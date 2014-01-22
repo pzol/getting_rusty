@@ -75,4 +75,17 @@ fn test_enum() {
 See the `if b <= 2` in the first line?
 ```
 
+
+You can destructure vectors, too:
+
+```rust
+#[test]
+  let v = ~[1, 2, 3, 4, 5];
+  match v {
+    []             => println!("empty"),
+    [head]         => println!("{}", head),   // => 1
+    [a, b, ..tail] => println!("{:?}", tail)  // => [3, 4, 5]
+  }
+}
+
 For comments head over to [Reddit](http://www.reddit.com/r/rust/comments/1vu6v5/examples_of_destructuring_in_rust/)
