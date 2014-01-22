@@ -87,5 +87,6 @@ You can destructure vectors, too:
     [a, b, ..tail] => println!("{:?}", tail)  // => [3, 4, 5]
   }
 }
+```
 
 For comments head over to [Reddit](http://www.reddit.com/r/rust/comments/1vu6v5/examples_of_destructuring_in_rust/)
