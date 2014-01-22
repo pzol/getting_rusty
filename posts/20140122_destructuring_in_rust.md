@@ -74,3 +74,5 @@ fn test_enum() {
 
 See the `if b <= 2` in the first line?
 ```
+
+For comments head over to [Reddit](http://www.reddit.com/r/rust/comments/1vu6v5/examples_of_destructuring_in_rust/)
