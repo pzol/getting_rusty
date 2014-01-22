@@ -67,13 +67,15 @@ fn test_enum() {
 
   match foo {
     Foo { b, c } if b <= 2 => assert!(b <= 2 && c == 2),
-    Foo { b, c }          => assert!((b, c) == (3, 2)),
-    _                     => fail!("This will never happen")
+    Foo { b, c }           => assert!((b, c) == (3, 2)),
+    _                      => unreachable!()
   };
 }
-
-See the `if b <= 2` in the first line?
 ```
+
+See the `if b <= 2` in the first line? This is called a guard, it will match only if the pattern matches and the guard clause is true.
+
+Take also notice of the `unreachable!()` expression. As mentioned before all `match` clauses need to be exhaustive. `unreachable!()` expands to `fail!("internal error: entered unreachable code")`.
 
 
 You can destructure vectors, too:
