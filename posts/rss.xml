@@ -73,6 +73,8 @@ using the second condition in match, the compiler knows, all possible paths have
 
 See the `if b &amp;lt;= 2` in the first line?
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For comments head over to &lt;a href="http://www.reddit.com/r/rust/comments/1vu6v5/examples_of_destructuring_in_rust/"&gt;Reddit&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     <item>
