@@ -18,10 +18,10 @@ let (a, b) = tuple; // => a =  1; b = 2
 Should you have the need to capture a nested tuple or something, you can do that with the Haskell @ syntax:
 
 ```rust
-struct NestedFoo { x: (uint, uint), y: uint }
+struct Foo { x: (uint, uint), y: uint }
 
-let foo = NestedFoo { x: (1, 2), y: 3 };
-let NestedFoo { x: tuple @ (a, b), .. } = foo; // => a == 1; b == 2; tuple == (1, 2)
+let foo = Foo { x: (1, 2), y: 3 };
+let Foo { x: tuple @ (a, b), .. } = foo; // => a == 1; b == 2; tuple == (1, 2)
 ```
 
 You can destructure structs and rename the variables:
@@ -82,15 +82,13 @@ You need to use a match instead of a simple let, because let can never fail usin
 One more cool feature of `match` are guard clauses:
 
 ```rust
-fn test_enum() {
-  let foo = Foo { b: 3, c: 2 };
+let foo = Foo { b: 3, c: 2 };
 
-  match foo {
-    Foo { b, c } if b <= 2 => assert!(b <= 2 && c == 2),
-    Foo { b, c }           => assert!((b, c) == (3, 2)),
-    _                      => unreachable!()
-  };
-}
+match foo {
+  Foo { b, c } if b <= 2 => assert!(b <= 2 && c == 2),
+  Foo { b, c }           => assert!((b, c) == (3, 2)),
+  _                      => unreachable!()
+};
 ```
 
 See the `if b <= 2` in the first line? This is called a guard, it will match only if the pattern matches and the guard clause is true.
@@ -142,6 +140,7 @@ or if you want the first, last, but also the middle:
 
 ```rust
 let v = ~[1, 2, 3, 4, 5];
+
 match v {
   [first, .. middle, last] => println!("{:?} {:?} {:?}", first, middle, last),
   _                        => unreachable!()
