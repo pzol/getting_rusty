@@ -74,10 +74,10 @@ let (a, b) = tuple; // =&gt; a =  1; b = 2
 
 <p>Should you have the need to capture a nested tuple or something, you can do that with the Haskell @ syntax:</p>
 
-<pre><code class="rust">struct NestedFoo { x: (uint, uint), y: uint }
+<pre><code class="rust">struct Foo { x: (uint, uint), y: uint }
 
-let foo = NestedFoo { x: (1, 2), y: 3 };
-let NestedFoo { x: tuple @ (a, b), .. } = foo; // =&gt; a == 1; b == 2; tuple == (1, 2)
+let foo = Foo { x: (1, 2), y: 3 };
+let Foo { x: tuple @ (a, b), .. } = foo; // =&gt; a == 1; b == 2; tuple == (1, 2)
 </code></pre>
 
 <p>You can destructure structs and rename the variables:</p>
@@ -132,15 +132,13 @@ fn test_enum() {
 
 <p>One more cool feature of <code>match</code> are guard clauses:</p>
 
-<pre><code class="rust">fn test_enum() {
-  let foo = Foo { b: 3, c: 2 };
+<pre><code class="rust">let foo = Foo { b: 3, c: 2 };
 
-  match foo {
-    Foo { b, c } if b &lt;= 2 =&gt; assert!(b &lt;= 2 &amp;&amp; c == 2),
-    Foo { b, c }           =&gt; assert!((b, c) == (3, 2)),
-    _                      =&gt; unreachable!()
-  };
-}
+match foo {
+  Foo { b, c } if b &lt;= 2 =&gt; assert!(b &lt;= 2 &amp;&amp; c == 2),
+  Foo { b, c }           =&gt; assert!((b, c) == (3, 2)),
+  _                      =&gt; unreachable!()
+};
 </code></pre>
 
 <p>See the <code>if b &lt;= 2</code> in the first line? This is called a guard, it will match only if the pattern matches and the guard clause is true.</p>
@@ -188,6 +186,7 @@ match v {
 <p>or if you want the first, last, but also the middle:</p>
 
 <pre><code class="rust">let v = ~[1, 2, 3, 4, 5];
+
 match v {
   [first, .. middle, last] =&gt; println!(&quot;{:?} {:?} {:?}&quot;, first, middle, last),
   _                        =&gt; unreachable!()

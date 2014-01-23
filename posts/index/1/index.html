@@ -69,10 +69,10 @@ let (a, b) = tuple; // =&gt; a =  1; b = 2
 
 <p>Should you have the need to capture a nested tuple or something, you can do that with the Haskell @ syntax:</p>
 
-<pre><code class="rust">struct NestedFoo { x: (uint, uint), y: uint }
+<pre><code class="rust">struct Foo { x: (uint, uint), y: uint }
 
-let foo = NestedFoo { x: (1, 2), y: 3 };
-let NestedFoo { x: tuple @ (a, b), .. } = foo; // =&gt; a == 1; b == 2; tuple == (1, 2)
+let foo = Foo { x: (1, 2), y: 3 };
+let Foo { x: tuple @ (a, b), .. } = foo; // =&gt; a == 1; b == 2; tuple == (1, 2)
 </code></pre>
 
 <p>You can destructure structs and rename the variables:</p>
