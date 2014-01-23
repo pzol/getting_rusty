@@ -185,6 +185,15 @@ match v {
 }
 </code></pre>
 
+<p>or if you want the first, last, but also the middle:</p>
+
+<pre><code class="rust">let v = ~[1, 2, 3, 4, 5];
+match v {
+  [first, .. middle, last] =&gt; println!(&quot;{:?} {:?} {:?}&quot;, first, middle, last),
+  _                        =&gt; unreachable!()
+}
+</code></pre>
+
 <h2 id="toc_3">Function Arguments</h2>
 
 <p>It works in a function&#39;s arguments:</p>
