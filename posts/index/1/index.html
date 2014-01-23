@@ -57,14 +57,15 @@
         <h3 class="title"><a href="/getting_rusty/posts/20140122_destructuring_in_rust">Destructuring in Rust</a> <span class="date">2014-01-22</span></h3>
 
         <div class="summary ellipsis">
-<p>Here's another piece I came along, while learning <a href="http://rust-lang.org">Rust</a>.
-Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in <a href="http://rust-lang.org">Rust</a>.</p>
+<p>Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in <a href="http://rust-lang.org">Rust</a>.</p>
 
-<p>It works in a lot of different scenarios, the most basic in a <code>let</code></p>
+<p>It works in a lot of different scenarios, the most basic is in a local scope using <code>let</code>.</p>
 
 <pre><code class="rust">let tuple = (1, 2);
 let (a, b) = tuple; // =&gt; a =  1; b = 2
 </code></pre>
+
+<h2 id="toc_0">Structs</h2>
 
 <p>Should you have the need to capture a nested tuple or something, you can do that with the Haskell @ syntax:</p>
 
@@ -72,11 +73,10 @@ let (a, b) = tuple; // =&gt; a =  1; b = 2
 
 
 let foo = NestedFoo { x: (1, 2), y: 3 };
-let NestedFoo { x: tuple @ (a, b), .. } = foo;
-assert_eq!(a, 1);
-assert_eq!(b, 2);
-assert_eq!(tuple, (1, 2));
+let NestedFoo { x: tuple @ (a, b), .. } = foo; // =&gt; a == 1; b == 2; tuple == (1, 2)
 </code></pre>
+
+<p>You can destructure structs and rename the variables:</p>
 
 </div>
 

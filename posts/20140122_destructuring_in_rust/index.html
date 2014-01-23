@@ -62,14 +62,15 @@
       <span>2014-01-22</strong>
     </div>
     <div class="content">
-      <p>Here&#39;s another piece I came along, while learning <a href="http://rust-lang.org">Rust</a>.
-Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in <a href="http://rust-lang.org">Rust</a>.</p>
+      <p>Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in <a href="http://rust-lang.org">Rust</a>.</p>
 
-<p>It works in a lot of different scenarios, the most basic in a <code>let</code></p>
+<p>It works in a lot of different scenarios, the most basic is in a local scope using <code>let</code>.</p>
 
 <pre><code class="rust">let tuple = (1, 2);
 let (a, b) = tuple; // =&gt; a =  1; b = 2
 </code></pre>
+
+<h2 id="toc_0">Structs</h2>
 
 <p>Should you have the need to capture a nested tuple or something, you can do that with the Haskell @ syntax:</p>
 
@@ -77,18 +78,15 @@ let (a, b) = tuple; // =&gt; a =  1; b = 2
 
 
 let foo = NestedFoo { x: (1, 2), y: 3 };
-let NestedFoo { x: tuple @ (a, b), .. } = foo;
-assert_eq!(a, 1);
-assert_eq!(b, 2);
-assert_eq!(tuple, (1, 2));
+let NestedFoo { x: tuple @ (a, b), .. } = foo; // =&gt; a == 1; b == 2; tuple == (1, 2)
 </code></pre>
 
 <p>You can destructure structs and rename the variables:</p>
 
-<pre><code class="rust">let  p = Point { x: 1, y: 2 };
+<pre><code class="rust">struct Point { x: uint, y: uint }
+
+let  p = Point { x: 1, y: 2 };
 let  Point { x: new_x, y: new_y } = p; // =&gt; new_x == 1, new_y == 2
-assert_eq!(new_x, 1);
-assert_eq!(new_y, 2);
 </code></pre>
 
 <p>The order is not important:</p>
@@ -100,8 +98,10 @@ let Point { y: y2, x: x2} = p; // =&gt; y2 == 2, x2 == 1
 <p>and you can also ignore some variables:</p>
 
 <pre><code class="rust">  let Point { y: y3, .. } = p; // =&gt; y3 == 2
-  let Point { y } = p;         
+  let Point { y } = p;         // -&gt; error: pattern does not mention field `x`
 </code></pre>
+
+<h2 id="toc_1">Struct Variants</h2>
 
 <p>It also can be used to destructure struct variants:</p>
 
@@ -126,11 +126,10 @@ fn test_enum() {
 
 <p>You <strong>cannot</strong> just destructure an enum with multiple variants using <code>let</code>:</p>
 
-<pre><code class="rust">let Foo { b, c } = foo; // ! Compiler error !
+<pre><code class="rust">let Foo { b, c } = foo; // -&gt; error: refutable pattern in local binding
 </code></pre>
 
-<p>You need to use a match instead of a simple let, because let can never fail (refutable pattern in local binding)
-using the second condition in match, the compiler knows, all possible paths have been exhausted.</p>
+<p>You need to use a match instead of a simple let, because let can never fail using the second condition in match, the compiler knows, all possible paths have been exhausted.</p>
 
 <p>One more cool feature of <code>match</code> are guard clauses:</p>
 
@@ -148,6 +147,22 @@ using the second condition in match, the compiler knows, all possible paths have
 <p>See the <code>if b &lt;= 2</code> in the first line? This is called a guard, it will match only if the pattern matches and the guard clause is true.</p>
 
 <p>Take also notice of the <code>unreachable!()</code> expression. As mentioned before all <code>match</code> clauses need to be exhaustive. <code>unreachable!()</code> expands to <code>fail!(&quot;internal error: entered unreachable code&quot;)</code>.</p>
+
+<p><code>match</code> allows to match on concrete values:</p>
+
+<pre><code class="rust">let foo = Some(1);
+
+match foo {
+  Some(3) =&gt; println!(&quot;three&quot;),
+  Some(2) =&gt; println!(&quot;two&quot;),
+  Some(v) =&gt; println!(&quot;not two, {}&quot;, v),
+  None    =&gt; unreachable!()
+}
+</code></pre>
+
+<p>Remember, that a <code>match</code> must contain all possibilities, otherwise you&#39;ll get an error, saying that you haven&#39;t covered all patterns. In this case if you&#39;d leave out the last <code>None</code>, the compiler would tell you:  <code>non-exhaustive patterns: None not covered</code>.</p>
+
+<h2 id="toc_2">Vectors</h2>
 
 <p>You can destructure vectors, too:</p>
 
@@ -169,6 +184,8 @@ match v {
 }
 </code></pre>
 
+<h2 id="toc_3">Function Arguments</h2>
+
 <p>It works in a function&#39;s arguments:</p>
 
 <pre><code class="rust">fn my_function((a, b) : (uint, uint)) -&gt; uint {
@@ -180,6 +197,8 @@ fn main() {
   my_function(pair); // =&gt; 3
 }
 </code></pre>
+
+<h2 id="toc_4">Loops</h2>
 
 <p>You can also use destructuring in <code>for</code> loops:</p>
 

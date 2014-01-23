@@ -9,14 +9,15 @@
       <title>Destructuring in Rust</title>
       <link>/getting_rusty/posts/20140122_destructuring_in_rust</link>
       <pubDate>2014-01-22</pubDate>
-      <description>&lt;p&gt;Here&amp;#39;s another piece I came along, while learning &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.
-Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.&lt;/p&gt;
+      <description>&lt;p&gt;Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;It works in a lot of different scenarios, the most basic in a &lt;code&gt;let&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;It works in a lot of different scenarios, the most basic is in a local scope using &lt;code&gt;let&lt;/code&gt;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="rust"&gt;let tuple = (1, 2);
 let (a, b) = tuple; // =&amp;gt; a =  1; b = 2
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="toc_0"&gt;Structs&lt;/h2&gt;
 
 &lt;p&gt;Should you have the need to capture a nested tuple or something, you can do that with the Haskell @ syntax:&lt;/p&gt;
 
@@ -24,18 +25,15 @@ let (a, b) = tuple; // =&amp;gt; a =  1; b = 2
 
 
 let foo = NestedFoo { x: (1, 2), y: 3 };
-let NestedFoo { x: tuple @ (a, b), .. } = foo;
-assert_eq!(a, 1);
-assert_eq!(b, 2);
-assert_eq!(tuple, (1, 2));
+let NestedFoo { x: tuple @ (a, b), .. } = foo; // =&amp;gt; a == 1; b == 2; tuple == (1, 2)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You can destructure structs and rename the variables:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class="rust"&gt;let  p = Point { x: 1, y: 2 };
+&lt;pre&gt;&lt;code class="rust"&gt;struct Point { x: uint, y: uint }
+
+let  p = Point { x: 1, y: 2 };
 let  Point { x: new_x, y: new_y } = p; // =&amp;gt; new_x == 1, new_y == 2
-assert_eq!(new_x, 1);
-assert_eq!(new_y, 2);
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The order is not important:&lt;/p&gt;
@@ -47,8 +45,10 @@ let Point { y: y2, x: x2} = p; // =&amp;gt; y2 == 2, x2 == 1
 &lt;p&gt;and you can also ignore some variables:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="rust"&gt;  let Point { y: y3, .. } = p; // =&amp;gt; y3 == 2
-  let Point { y } = p;         
+  let Point { y } = p;         // -&amp;gt; error: pattern does not mention field `x`
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="toc_1"&gt;Struct Variants&lt;/h2&gt;
 
 &lt;p&gt;It also can be used to destructure struct variants:&lt;/p&gt;
 
@@ -73,11 +73,10 @@ fn test_enum() {
 
 &lt;p&gt;You &lt;strong&gt;cannot&lt;/strong&gt; just destructure an enum with multiple variants using &lt;code&gt;let&lt;/code&gt;:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class="rust"&gt;let Foo { b, c } = foo; // ! Compiler error !
+&lt;pre&gt;&lt;code class="rust"&gt;let Foo { b, c } = foo; // -&amp;gt; error: refutable pattern in local binding
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;You need to use a match instead of a simple let, because let can never fail (refutable pattern in local binding)
-using the second condition in match, the compiler knows, all possible paths have been exhausted.&lt;/p&gt;
+&lt;p&gt;You need to use a match instead of a simple let, because let can never fail using the second condition in match, the compiler knows, all possible paths have been exhausted.&lt;/p&gt;
 
 &lt;p&gt;One more cool feature of &lt;code&gt;match&lt;/code&gt; are guard clauses:&lt;/p&gt;
 
@@ -95,6 +94,22 @@ using the second condition in match, the compiler knows, all possible paths have
 &lt;p&gt;See the &lt;code&gt;if b &amp;lt;= 2&lt;/code&gt; in the first line? This is called a guard, it will match only if the pattern matches and the guard clause is true.&lt;/p&gt;
 
 &lt;p&gt;Take also notice of the &lt;code&gt;unreachable!()&lt;/code&gt; expression. As mentioned before all &lt;code&gt;match&lt;/code&gt; clauses need to be exhaustive. &lt;code&gt;unreachable!()&lt;/code&gt; expands to &lt;code&gt;fail!(&amp;quot;internal error: entered unreachable code&amp;quot;)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;match&lt;/code&gt; allows to match on concrete values:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let foo = Some(1);
+
+match foo {
+  Some(3) =&amp;gt; println!(&amp;quot;three&amp;quot;),
+  Some(2) =&amp;gt; println!(&amp;quot;two&amp;quot;),
+  Some(v) =&amp;gt; println!(&amp;quot;not two, {}&amp;quot;, v),
+  None    =&amp;gt; unreachable!()
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Remember, that a &lt;code&gt;match&lt;/code&gt; must contain all possibilities, otherwise you&amp;#39;ll get an error, saying that you haven&amp;#39;t covered all patterns. In this case if you&amp;#39;d leave out the last &lt;code&gt;None&lt;/code&gt;, the compiler would tell you:  &lt;code&gt;non-exhaustive patterns: None not covered&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id="toc_2"&gt;Vectors&lt;/h2&gt;
 
 &lt;p&gt;You can destructure vectors, too:&lt;/p&gt;
 
@@ -116,6 +131,8 @@ match v {
 }
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;h2 id="toc_3"&gt;Function Arguments&lt;/h2&gt;
+
 &lt;p&gt;It works in a function&amp;#39;s arguments:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="rust"&gt;fn my_function((a, b) : (uint, uint)) -&amp;gt; uint {
@@ -127,6 +144,8 @@ fn main() {
   my_function(pair); // =&amp;gt; 3
 }
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="toc_4"&gt;Loops&lt;/h2&gt;
 
 &lt;p&gt;You can also use destructuring in &lt;code&gt;for&lt;/code&gt; loops:&lt;/p&gt;
 
