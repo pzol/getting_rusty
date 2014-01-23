@@ -1,7 +1,7 @@
 /* Tomorrow Theme */
 /* Original theme - https://github.com/chriskempson/tomorrow-theme */
 .prettyprint {
-  background: white;
+  background: #F5F5F5;
   font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
   font-size: 12px;
   line-height: 1.5;
@@ -10,7 +10,7 @@
 }
 
 .pln {
-  color: #4d4d4c;
+  color: #8959a8;
 }
 
 @media screen {
