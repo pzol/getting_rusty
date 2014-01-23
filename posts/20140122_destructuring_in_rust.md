@@ -14,18 +14,43 @@ let tuple = (1, 2);
 let (a, b) = tuple; // => a =  1; b = 2
 ```
 
-It works in a function's arguments:
+
+Should you have the need to capture a nested tuple or something, you can do that with the Haskell @ syntax:
 
 ```rust
-fn my_function((a, b) : (uint, uint)) -> uint {
-  a + b
-}
+struct NestedFoo { x: (uint, uint), y: uint }
 
-fn main() {
-  let pair = (1, 2);
-  my_function(pair); // => 3
-}
+
+let foo = NestedFoo { x: (1, 2), y: 3 };
+let NestedFoo { x: tuple @ (a, b), .. } = foo;
+assert_eq!(a, 1);
+assert_eq!(b, 2);
+assert_eq!(tuple, (1, 2));
 ```
+
+You can destructure structs and rename the variables:
+
+```rust
+let  p = Point { x: 1, y: 2 };
+let  Point { x: new_x, y: new_y } = p; // => new_x == 1, new_y == 2
+assert_eq!(new_x, 1);
+assert_eq!(new_y, 2);
+```
+
+The order is not important:
+
+```rust
+let Point { y, x } = p;        // => y  == 2, x  == 1
+let Point { y: y2, x: x2} = p; // => y2 == 2, x2 == 1
+```
+
+and you can also ignore some variables:
+
+```rust
+  let Point { y: y3, .. } = p; // => y3 == 2
+  let Point { y } = p;         
+```
+
 
 It also can be used to destructure struct variants:
 
@@ -58,7 +83,6 @@ let Foo { b, c } = foo; // ! Compiler error !
 You need to use a match instead of a simple let, because let can never fail (refutable pattern in local binding)
 using the second condition in match, the compiler knows, all possible paths have been exhausted.
 
-
 One more cool feature of `match` are guard clauses:
 
 ```rust
@@ -85,7 +109,7 @@ let v = ~[1, 2, 3, 4, 5];
 match v {
     []                       => println!("empty"),
     [elem]                   => println!("{}", elem),   // => 1
-    [first, second, ..rest]  => println!("{:?}", rest)  // => [3, 4, 5]
+    [first, second, ..rest]  => println!("{:?}", rest)  // => &[3, 4, 5]
   }
 ```
 
@@ -97,6 +121,19 @@ match v {
   [first, ..] => assert_eq!(first, 1),
   [.., last]  => assert_eq!(last, 3),
   _           => unreachable!()
+}
+```
+
+It works in a function's arguments:
+
+```rust
+fn my_function((a, b) : (uint, uint)) -> uint {
+  a + b
+}
+
+fn main() {
+  let pair = (1, 2);
+  my_function(pair); // => 3
 }
 ```
 
