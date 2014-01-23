@@ -4,17 +4,17 @@ date: 22.01.2014
 categories: ["rust"]
 tags: ["rust:enum", "rust:destructuring"]
 ---
-Here's another piece I came along, while learning [Rust](http://rust-lang.org).
+
 Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in [Rust](http://rust-lang.org).
 
-It works in a lot of different scenarios, the most basic in a `let`
+It works in a lot of different scenarios, the most basic is in a local scope using `let`.
 
 ```rust
 let tuple = (1, 2);
 let (a, b) = tuple; // => a =  1; b = 2
 ```
 
-
+## Structs
 Should you have the need to capture a nested tuple or something, you can do that with the Haskell @ syntax:
 
 ```rust
@@ -22,19 +22,16 @@ struct NestedFoo { x: (uint, uint), y: uint }
 
 
 let foo = NestedFoo { x: (1, 2), y: 3 };
-let NestedFoo { x: tuple @ (a, b), .. } = foo;
-assert_eq!(a, 1);
-assert_eq!(b, 2);
-assert_eq!(tuple, (1, 2));
+let NestedFoo { x: tuple @ (a, b), .. } = foo; // => a == 1; b == 2; tuple == (1, 2)
 ```
 
 You can destructure structs and rename the variables:
 
 ```rust
+struct Point { x: uint, y: uint }
+
 let  p = Point { x: 1, y: 2 };
 let  Point { x: new_x, y: new_y } = p; // => new_x == 1, new_y == 2
-assert_eq!(new_x, 1);
-assert_eq!(new_y, 2);
 ```
 
 The order is not important:
@@ -48,10 +45,11 @@ and you can also ignore some variables:
 
 ```rust
   let Point { y: y3, .. } = p; // => y3 == 2
-  let Point { y } = p;         
+  let Point { y } = p;         // -> error: pattern does not mention field `x`
 ```
 
 
+## Struct Variants
 It also can be used to destructure struct variants:
 
 ```rust
@@ -77,11 +75,10 @@ fn test_enum() {
 You __cannot__ just destructure an enum with multiple variants using `let`:
 
 ```rust
-let Foo { b, c } = foo; // ! Compiler error !
+let Foo { b, c } = foo; // -> error: refutable pattern in local binding
 ```
 
-You need to use a match instead of a simple let, because let can never fail (refutable pattern in local binding)
-using the second condition in match, the compiler knows, all possible paths have been exhausted.
+You need to use a match instead of a simple let, because let can never fail using the second condition in match, the compiler knows, all possible paths have been exhausted.
 
 One more cool feature of `match` are guard clauses:
 
@@ -102,6 +99,22 @@ See the `if b <= 2` in the first line? This is called a guard, it will match onl
 Take also notice of the `unreachable!()` expression. As mentioned before all `match` clauses need to be exhaustive. `unreachable!()` expands to `fail!("internal error: entered unreachable code")`.
 
 
+`match` allows to match on concrete values:
+
+```rust
+let foo = Some(1);
+
+match foo {
+  Some(3) => println!("three"),
+  Some(2) => println!("two"),
+  Some(v) => println!("not two, {}", v),
+  None    => unreachable!()
+}
+```
+
+Remember, that a `match` must contain all possibilities, otherwise you'll get an error, saying that you haven't covered all patterns. In this case if you'd leave out the last `None`, the compiler would tell you:  `non-exhaustive patterns: None not covered`.
+
+## Vectors
 You can destructure vectors, too:
 
 ```rust
@@ -124,6 +137,7 @@ match v {
 }
 ```
 
+## Function Arguments
 It works in a function's arguments:
 
 ```rust
@@ -137,6 +151,7 @@ fn main() {
 }
 ```
 
+## Loops
 You can also use destructuring in `for` loops:
 
 ```rust
