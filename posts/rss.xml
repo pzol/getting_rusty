@@ -23,7 +23,6 @@ let (a, b) = tuple; // =&amp;gt; a =  1; b = 2
 
 &lt;pre&gt;&lt;code class="rust"&gt;struct NestedFoo { x: (uint, uint), y: uint }
 
-
 let foo = NestedFoo { x: (1, 2), y: 3 };
 let NestedFoo { x: tuple @ (a, b), .. } = foo; // =&amp;gt; a == 1; b == 2; tuple == (1, 2)
 &lt;/code&gt;&lt;/pre&gt;
@@ -44,8 +43,8 @@ let Point { y: y2, x: x2} = p; // =&amp;gt; y2 == 2, x2 == 1
 
 &lt;p&gt;and you can also ignore some variables:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class="rust"&gt;  let Point { y: y3, .. } = p; // =&amp;gt; y3 == 2
-  let Point { y } = p;         // -&amp;gt; error: pattern does not mention field `x`
+&lt;pre&gt;&lt;code class="rust"&gt;let Point { y: y3, .. } = p; // =&amp;gt; y3 == 2
+let Point { y } = p;         // -&amp;gt; error: pattern does not mention field `x`
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id="toc_1"&gt;Struct Variants&lt;/h2&gt;
@@ -114,6 +113,7 @@ match foo {
 &lt;p&gt;You can destructure vectors, too:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="rust"&gt;let v = ~[1, 2, 3, 4, 5];
+
 match v {
     []                       =&amp;gt; println!(&amp;quot;empty&amp;quot;),
     [elem]                   =&amp;gt; println!(&amp;quot;{}&amp;quot;, elem),   // =&amp;gt; 1
@@ -124,6 +124,7 @@ match v {
 &lt;p&gt;If you only care about the first or last values you can do this:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="rust"&gt;let v = ~[1, 2, 3];
+
 match v {
   [first, ..] =&amp;gt; assert_eq!(first, 1),
   [.., last]  =&amp;gt; assert_eq!(last, 3),
