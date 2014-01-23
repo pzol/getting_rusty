@@ -1,8 +1,11 @@
-"theme-bootstrap-2" :
-  "use" : "theme"
+theme-bootstrap-2:
+  use: theme
 
 widgets:
   comments:
     use: disqus
     short_name: rust-by-example
+  analytics:
+    use: google
+    tracking_id: UA-4944917-11
 
