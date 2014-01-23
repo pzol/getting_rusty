@@ -7,7 +7,7 @@
     <pubDate>2014-01-23</pubDate>
     <item>
       <title>Destructuring in Rust</title>
-      <link>/getting_rusty/posts/20140122_destructuring_in_rust</link>
+      <link>/posts/20140122_destructuring_in_rust</link>
       <pubDate>2014-01-22</pubDate>
       <description>&lt;p&gt;Here&amp;#39;s another piece I came along, while learning &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.
 Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.&lt;/p&gt;
@@ -144,7 +144,7 @@ for &amp;amp;Pair {x, y} in pairs.iter() {
     </item>
     <item>
       <title>Ruby Stuff</title>
-      <link>/getting_rusty/posts/20140108_ruby</link>
+      <link>/posts/20140108_ruby</link>
       <pubDate>2014-01-08</pubDate>
       <description>&lt;p&gt;Here are a few things you probably do in Ruby quite often:&lt;/p&gt;
 
@@ -165,7 +165,7 @@ combined = words.join(&amp;quot;:&amp;quot;) # =&amp;gt; &amp;quot;A:cat:in:the:
     </item>
     <item>
       <title>Ruby p aka puts driven development in Rust</title>
-      <link>/getting_rusty/posts/20140119_ruby_p_in_rust</link>
+      <link>/posts/20140119_ruby_p_in_rust</link>
       <pubDate>2014-01-19</pubDate>
       <description>&lt;p&gt;Given the lack of a useful debugger in Ruby, we often refer to &lt;code&gt;p obj&lt;/code&gt; to print an object to the console in order to inspect its value.&lt;/p&gt;
 
@@ -204,7 +204,7 @@ macro_rules! p(
     </item>
     <item>
       <title>ToStr</title>
-      <link>/getting_rusty/posts/20140108_to_str</link>
+      <link>/posts/20140108_to_str</link>
       <pubDate>2014-01-08</pubDate>
       <description>How to get (almost) any type to support `to_str`</description>
     </item>

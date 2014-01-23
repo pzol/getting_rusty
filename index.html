@@ -14,8 +14,9 @@
 
     <!-- Le styles -->
 <link href='/getting_rusty/assets/stylesheets/bootstrap.min-88238289010db19359d2181e634e95cd.css' type='text/css' rel='stylesheet' media='all'>
-<link href='/getting_rusty/assets/stylesheets/style-e81fa375b231bedf6cb2dbc6653570cc.css' type='text/css' rel='stylesheet' media='all'>
-<link href='/getting_rusty/assets/stylesheets/google_prettify/sons-of-obsidian-afb0925bfa2d994f17dab93e13fbf999.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/getting_rusty/assets/stylesheets/style-ff504bfb4a9f32aa53637780a0ef8a6b.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/getting_rusty/assets/stylesheets/<!--google_prettify/sons-of-obsidian.css-->' type='text/css' rel='stylesheet' media='all'>
+<link href='/getting_rusty/assets/stylesheets/google_prettify/tomorrow-fb7f7cb72f712f19a3289f2a36c0feb6.css' type='text/css' rel='stylesheet' media='all'>
     <!-- Le fav and touch icons -->
   <!-- Update these with your own images
     <link rel="shortcut icon" href="images/favicon.ico">
@@ -30,7 +31,7 @@
     <div class="navbar">
       <div class="navbar-inner">
         <div class="container-narrow">
-          <a class="brand" href="/getting_rusty/">Gettin&#39; Rusty</a>
+          <a class="brand" href="/getting_rusty/">Rust by Example</a>
           <ul class="nav">
               
                 <li><a href="/getting_rusty/archive">Archive</a></li>
@@ -71,16 +72,16 @@ Pattern matching is one of the features I like most about modern / functional st
 let (a, b) = tuple; // =&gt; a =  1; b = 2
 </code></pre>
 
-<p>It works in a function's arguments:</p>
+<p>Should you have the need to capture a nested tuple or something, you can do that with the Haskell @ syntax:</p>
 
-<pre><code class="rust">fn my_function((a, b) : (uint, uint)) -&gt; uint {
-  a + b
-}
+<pre><code class="rust">struct NestedFoo { x: (uint, uint), y: uint }
 
-fn main() {
-  let pair = (1, 2);
-  my_function(pair); // =&gt; 3
-}
+
+let foo = NestedFoo { x: (1, 2), y: 3 };
+let NestedFoo { x: tuple @ (a, b), .. } = foo;
+assert_eq!(a, 1);
+assert_eq!(b, 2);
+assert_eq!(tuple, (1, 2));
 </code></pre>
 
 </div>
@@ -209,7 +210,7 @@ fn main() {
 <script>
   var pres = document.getElementsByTagName("pre");
   for (var i=0; i < pres.length; ++i) {
-    pres[i].className = "prettyprint linenums";
+    pres[i].className = "prettyprint ";
   }
   prettyPrint();
 </script>
