@@ -138,6 +138,16 @@ match v {
 }
 ```
 
+or if you want the first, last, but also the middle:
+
+```rust
+let v = ~[1, 2, 3, 4, 5];
+match v {
+  [first, .. middle, last] => println!("{:?} {:?} {:?}", first, middle, last),
+  _                        => unreachable!()
+}
+```
+
 ## Function Arguments
 It works in a function's arguments:
 
