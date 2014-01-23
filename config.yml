@@ -9,3 +9,4 @@ widgets:
     use: google
     tracking_id: UA-4944917-11
 
+production_url: 'http://rustbyexample.nobacon.it'
