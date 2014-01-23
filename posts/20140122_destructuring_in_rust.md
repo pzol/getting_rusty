@@ -20,7 +20,6 @@ Should you have the need to capture a nested tuple or something, you can do that
 ```rust
 struct NestedFoo { x: (uint, uint), y: uint }
 
-
 let foo = NestedFoo { x: (1, 2), y: 3 };
 let NestedFoo { x: tuple @ (a, b), .. } = foo; // => a == 1; b == 2; tuple == (1, 2)
 ```
@@ -44,8 +43,8 @@ let Point { y: y2, x: x2} = p; // => y2 == 2, x2 == 1
 and you can also ignore some variables:
 
 ```rust
-  let Point { y: y3, .. } = p; // => y3 == 2
-  let Point { y } = p;         // -> error: pattern does not mention field `x`
+let Point { y: y3, .. } = p; // => y3 == 2
+let Point { y } = p;         // -> error: pattern does not mention field `x`
 ```
 
 
@@ -119,6 +118,7 @@ You can destructure vectors, too:
 
 ```rust
 let v = ~[1, 2, 3, 4, 5];
+
 match v {
     []                       => println!("empty"),
     [elem]                   => println!("{}", elem),   // => 1
@@ -130,6 +130,7 @@ If you only care about the first or last values you can do this:
 
 ```rust
 let v = ~[1, 2, 3];
+
 match v {
   [first, ..] => assert_eq!(first, 1),
   [.., last]  => assert_eq!(last, 3),
