@@ -1,4 +1,8 @@
 
+table.title {
+  width: 100%;
+}
+
 /* Custom container */
 .container-narrow {
   margin: 0 auto;
@@ -27,11 +31,30 @@
   text-align:left;
 }
 
+/* post-summary */
+
+.summary h2 {
+  font-size: 18px;
+}
+
+.summary h3 {
+  font-size: 16px;
+}
+
 /* post-full*/
 .post-full .date {
   margin-bottom:20px;
   font-weight:bold;
 }
+
+.post-full h2 {
+  font-size: 18px;
+}
+
+.post-full h3 {
+  font-size: 16px;
+}
+
 
 /* tag_box */
 .tag_box {

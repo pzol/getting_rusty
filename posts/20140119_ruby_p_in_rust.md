@@ -1,6 +1,8 @@
 ---
-title: Ruby p aka puts driven development in Rust
+title: Ruby p aka puts driven development
+subtitle: stuff
 date: 19.01.2014
+description: A simple macro to output debug
 categories: ["rust"]
 tags: ["rust:macros", "rust:ruby"]
 ---

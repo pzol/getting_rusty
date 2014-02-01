@@ -1,6 +1,7 @@
 ---
-title: Destructuring in Rust
+title: Destructuring and Pattern Matching
 date: 22.01.2014
+description: 
 categories: ["rust"]
 tags: ["rust:enum", "rust:destructuring"]
 ---
@@ -47,6 +48,11 @@ let Point { y: y3, .. } = p; // => y3 == 2
 let Point { y } = p;         // -> error: pattern does not mention field `x`
 ```
 
+you can match on ranges
+
+```rust
+let b = match 5 { 0..5 => true, _ => false}; // => true
+```
 
 ## Struct Variants
 It also can be used to destructure struct variants:
@@ -144,6 +150,15 @@ let v = ~[1, 2, 3, 4, 5];
 match v {
   [first, .. middle, last] => println!("{:?} {:?} {:?}", first, middle, last),
   _                        => unreachable!()
+}
+```
+
+matching on a `~[str]` works just like matching any other vector
+
+```rust
+match ~[~"foo", ~"bar"] {
+  [~"foo"] => 1, 
+  _ => 2, 
 }
 ```
 

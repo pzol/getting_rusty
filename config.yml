@@ -1,6 +1,9 @@
 theme-bootstrap-2:
   use: theme
 
+posts:
+  sort: ["date", "desc"]
+
 widgets:
   comments:
     use: disqus
