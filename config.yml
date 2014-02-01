@@ -14,4 +14,3 @@ widgets:
   google_prettify:
     use: default
     linenums: false
-
