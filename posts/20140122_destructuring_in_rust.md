@@ -28,17 +28,10 @@ let Foo { x: tuple @ (a, b), .. } = foo; // => a == 1; b == 2; tuple == (1, 2)
 You can destructure structs and rename the variables:
 
 ```rust
-<<<<<<< HEAD
 struct Point { x: uint, y: uint }
 
 let  p = Point { x: 1, y: 2 };
 let  Point { x: new_x, y: new_y } = p; // => new_x == 1, new_y == 2
-=======
-let  p = Point { x: 1, y: 2 };
-let  Point { x: new_x, y: new_y } = p; // => new_x == 1, new_y == 2
-assert_eq!(new_x, 1);
-assert_eq!(new_y, 2);
->>>>>>> e71adc5ca7af0e8c5ce50607f42602505182c44c
 ```
 
 The order is not important:
@@ -51,7 +44,6 @@ let Point { y: y2, x: x2} = p; // => y2 == 2, x2 == 1
 and you can also ignore some variables:
 
 ```rust
-<<<<<<< HEAD
 let Point { y: y3, .. } = p; // => y3 == 2
 let Point { y } = p;         // -> error: pattern does not mention field `x`
 ```
@@ -63,13 +55,7 @@ let b = match 5 { 0..5 => true, _ => false}; // => true
 ```
 
 ## Struct Variants
-=======
-  let Point { y: y3, .. } = p; // => y3 == 2
-  let Point { y } = p;         
-```
 
-
->>>>>>> e71adc5ca7af0e8c5ce50607f42602505182c44c
 It also can be used to destructure struct variants:
 
 ```rust
