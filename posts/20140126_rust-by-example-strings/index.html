@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Strings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Converting from, to, mutating">
+    <meta name="author" content="Piotr Zolnierek">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+<link href='/getting_rusty/assets/stylesheets/bootstrap.min-88238289010db19359d2181e634e95cd.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/getting_rusty/assets/stylesheets/style-610af012e1374521168a0e68f158f2ac.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/getting_rusty/assets/stylesheets/google_prettify/tomorrow-82a19da08986f662446781ff21d475f2.css' type='text/css' rel='stylesheet' media='all'>
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-narrow">
+          <a class="brand" href="/getting_rusty/">Rust by Example</a>
+          <ul class="nav">
+              
+                <li><a href="/getting_rusty/archive">Archive</a></li>
+              
+              
+                <li><a href="/getting_rusty/tags">Tags</a></li>
+              
+              
+                <li><a href="/getting_rusty/categories">Categories</a></li>
+              
+              
+                <li><a href="/getting_rusty/pages">Pages</a></li>
+              
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-narrow">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>Strings </h1>
+</div>
+
+<div class="row-fluid post-full">
+  <div class="span12">
+    <div class="date">
+      <span>2014-01-26</strong>
+    </div>
+    <div class="content">
+      <p>Here are some examples of string related functions I find interesting from stdlib.</p>
+
+<h2 id="toc_0">Comparing</h2>
+
+<p>The first thing that struck me when I first started with <a href="http://rust-lang.org">Rust</a>, was that a simple string comparison does not work, at least not the way you&#39;d expect, because I was still oblivious of how pointers and friends work in <a href="http://rust-lang.org">Rust</a>.</p>
+
+<pre><code class="rust">let bilbo = ~&quot;Bilbo Baggins&quot;; // owned
+if bilbo == &quot;Bilbo Baggins&quot; {};
+// -&gt; error: mismatched types: expected `~str` but found `&amp;&#39;static str` (str storage differs: expected `~` but found `&amp;&#39;static `)
+</code></pre>
+
+<p>That is because <code>bilbo</code> is an owned pointer and the literal <code>&quot;Bilbo Baggins&quot;</code> is a static borrowed pointer.</p>
+
+<p>Those examples <em>will work</em>:</p>
+
+<pre><code class="rust">let bilbo = ~&quot;Bilbo Baggins&quot;;
+
+if &quot;Bilbo Baggins&quot; == bilbo {}; // [1] auto-borrow on .eq
+if bilbo == &quot;Bilbo Baggins&quot;.to_owned() {}; // convert &amp;&#39;static str to ~str
+if bilbo.as_slice() == &quot;Bilbo Baggins&quot; {};
+</code></pre>
+
+<p>For some discussion about example <em>[1]</em> see <a href="https://github.com/mozilla/rust/wiki/Meeting-weekly-2013-07-30#wiki--and-autoderef">here</a>.</p>
+
+<p>Personally I would go for the last one, <code>.as_slice()</code>.</p>
+
+<p>[TODO]: compare case insensitive</p>
+
+<h2 id="toc_1">Converting from String</h2>
+
+<p>When converting from string to numbers, you will have to provide the type manually</p>
+
+<pre><code class="rust">let f = from_str(&quot;1.2&quot;);
+// -&gt; error: cannot determine a type for this bounded type parameter: unconstrained type
+
+let f: f32 = from_str(&quot;1.2&quot;).unwrap(); // -&gt; 1.2f32
+</code></pre>
+
+<p>The trait <a href="http://static.rust-lang.org/doc/master/std/from_str/trait.FromStr.html">FromStr</a> is defined as</p>
+
+<pre><code class="rust">pub trait FromStr {
+    fn from_str(s: &amp;str) -&gt; Option&lt;Self&gt;;
+}
+</code></pre>
+
+<p>so it returns a Some<T> if the conversion succeeds or a None if it doesn&#39;t</p>
+
+<pre><code class="rust">// Some&lt;T&gt;
+let oi: Option&lt;uint&gt; = from_str(&quot;1&quot;);
+assert_eq!(oi, Some(1u));
+
+// None, if the provided string cannot be converted
+let oi: Option&lt;uint&gt; = from_str(&quot;x&quot;);
+assert_eq!(oi, None);
+</code></pre>
+
+<p>You can <code>unwrap()</code> the value</p>
+
+<pre><code class="rust">let i: uint = from_str(&quot;1&quot;).unwrap();
+assert_eq!(i, 1);
+
+// runtime error &#39;called `Option::unwrap()` on a `None` value&#39;
+let i: uint = from_str(&quot;x&quot;).unwrap();
+assert_eq!(i, 0);
+</code></pre>
+
+<p>As you can see, you can unwrap the value straight away, but that might give you runtime errors, hence it&#39;d be better to check if the conversion succeeded and provide a meaningful message. Alternatively, you can provide a default value using <code>unwrap_or()</code>.</p>
+
+<pre><code class="rust">let i: uint = match from_str(&quot;1&quot;) {
+  Some&lt;value&gt; =&gt; value,
+  None        =&gt; fail!(&quot;oops, expected a number&quot;)
+}
+
+let i: uint = from_str(&quot;4&quot;).unwrap_or(0u);
+assert_eq!(i, 4);
+</code></pre>
+
+<h2 id="toc_2">Converting to String</h2>
+
+<h2 id="toc_3">String Functions</h2>
+
+<h3 id="toc_4">empty?</h3>
+
+<pre><code class="rust">assert_eq!((~&quot;&quot;).is_empty(), true);
+assert_eq!(&quot;&quot;.is_empty(), true);
+assert_eq!(&quot;Bąk&quot;.is_empty(), false);
+</code></pre>
+
+<p>Defined in the <a href="http://static.rust-lang.org/doc/master/std/container/trait.Container.html#method.is_empty">Container</a> trait.</p>
+
+<h3 id="toc_5">length</h3>
+
+<p>This is difficult. Tried to ask on #rust once and have regretted it since. You can use <code>char_len()</code> at your own peril.</p>
+
+<pre><code class="rust">let s = ~&quot;Bär&quot;;
+assert_eq!(s.char_len(), 3);
+</code></pre>
+
+<h3 id="toc_6">Starts with, Ends with</h3>
+
+<p>Those two do a case-sensitive comparison.</p>
+
+<pre><code class="rust">let bilbo = ~&quot;Bilbo Baggins&quot;;
+assert_eq!(bilbo.starts_with(&quot;Bilbo&quot;), true);
+assert_eq!(bilbo.starts_with(&quot;bilbo&quot;), false);
+assert_eq!(bilbo.ends_with(&quot;Baggins&quot;), true);
+assert_eq!(bilbo.ends_with(&quot;baggins&quot;), false);
+</code></pre>
+
+<h2 id="toc_7">String Mutations</h2>
+
+<h3 id="toc_8">Concat, Prepend, Append</h3>
+
+<p>You can concat two immutable string, this will of course return a new string.</p>
+
+<pre><code class="rust">let x = ~&quot;foo&quot;;
+let y = ~&quot;bar&quot;;
+
+let z = x + y; // -&gt; ~&quot;foobar&quot;
+let v = x.append(y); // -&gt; ~&quot;foobar&quot;
+</code></pre>
+
+<p>If you really want to mutate a string, you have to make it mutable</p>
+
+<pre><code class="rust">let mut foo = ~&quot;foo&quot;;
+foo.push_char(&#39; &#39;);
+foo.push_str(&quot;bar&quot;); // -&gt; ~&quot;foo bar&quot;
+</code></pre>
+
+<p>See also <a href="http://static.rust-lang.org/doc/master/std/str/trait.OwnedStr.html">OwnedStr</a></p>
+
+<h3 id="toc_9">Inserting</h3>
+
+<h3 id="toc_10">Replace</h3>
+
+<pre><code class="rust">let bilbo = ~&quot;Bilbo Baggins&quot;;
+let frodo = bilbo.replace(&quot;Bilbo&quot;, &quot;Frodo&quot;); // -&gt; ~&quot;Frodo Baggins&quot;
+
+// not found, no change
+let samwise = bilbo.replace(&quot;Frodo&quot;, &quot;Samwise&quot;); // -&gt; ~&quot;Bilbo Baggins&quot;
+</code></pre>
+
+<p>see <a href="http://static.rust-lang.org/doc/master/std/str/trait.StrSlice.html#tymethod.replace">StrSlice#replace</a></p>
+
+<h3 id="toc_11">Capitalize, Upcase, Downcase, Swapcase</h3>
+
+<p><code>to_lower()</code> and <code>to_upper()</code> as they are called in <a href="http://rust-lang.org">Rust</a>, are currently only implemented in std only for <a href="http://static.rust-lang.org/doc/master/std/ascii/struct.Ascii.html#method.to_lower">ascii</a> strings.</p>
+
+<h2 id="toc_12">TODO</h2>
+
+<ul>
+<li>chomp</li>
+<li><p>delete</p></li>
+<li><p>include?</p></li>
+<li><p>index</p></li>
+<li><p>rindex</p></li>
+<li><p>insert</p></li>
+<li><p>lines</p></li>
+<li><p>ljust</p></li>
+<li><p>rjust</p></li>
+<li><p>lstrip</p></li>
+<li><p>rstrip</p></li>
+<li><p>strip</p></li>
+<li><p>next</p></li>
+<li><p>partition</p></li>
+<li><p>reverse</p></li>
+<li><p>sub</p></li>
+<li><p>gsub</p></li>
+<li><p>slice</p></li>
+<li><p>split</p></li>
+<li><p>squeeze</p></li>
+<li><p>tr</p></li>
+<li><p>truncate</p></li>
+<li><p>each_char</p></li>
+</ul>
+
+<h2 id="toc_13">Regex</h2>
+
+<ul>
+<li>match </li>
+<li>scan</li>
+</ul>
+
+<h2 id="toc_14">Notes &amp; more</h2>
+
+<p>At time of writing </p>
+
+<pre><code class="bash">$ rustc -v
+rustc 0.10-pre (caabbb8 2014-01-25 06:31:31 -0800)
+</code></pre>
+
+<p>Some links to the stdlib documentation</p>
+
+<ul>
+<li><a href="http://static.rust-lang.org/doc/master/std/str/index.html">std::str</a></li>
+<li><a href="http://static.rust-lang.org/doc/master/std/from_str/trait.FromStr.html">std::from_str</a></li>
+<li><a href="http://static.rust-lang.org/doc/master/std/to_str/trait.ToStr.html">std::to_str</a></li>
+<li><a href="http://static.rust-lang.org/doc/master/std/str/trait.StrSlice.html">std::str::StrSlice</a></li>
+</ul>
+
+    </div>
+    <ul class="tag_box inline">
+      <li><i class="icon-folder-open"></i></li>
+    </ul>
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+    </ul>
+    <ul class="tag_box inline">
+      <li></li>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="pzol" data-hashtags="rustlang">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </ul>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+          <li class="prev"><a href="/getting_rusty/posts/20140122_destructuring_in_rust" title="Destructuring and Pattern Matching">&larr; Previous</a></li>
+
+          <li><a href="/getting_rusty/archive">Archive</a></li>
+
+          <li class="next disabled"><a>Next &rarr;</a>
+      </ul>
+    </div>
+
+    <hr>
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'rust-by-example'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</div>
+
+
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p>&copy; Piotr Zolnierek 2013
+          with help from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+        <a href="https://twitter.com/pzol" class="twitter-follow-button" data-show-count="false">Follow @pzol</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </div>
+
+    </div> <!-- /container -->
+
+    <!-- Google Prettify -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint ";
+  }
+  prettyPrint();
+</script>
+<!-- end Google Prettify -->
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4944917-11']);
+  _gaq.push(['_trackPageview']);
+  
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+    
+  </body>
+</html>

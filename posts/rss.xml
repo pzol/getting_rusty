@@ -4,9 +4,15 @@
     <title>Rust by Example</title>
     <description>Rust by Example</description>
     <link/>
-    <pubDate>2014-01-23</pubDate>
+    <pubDate>2014-02-01</pubDate>
     <item>
-      <title>Destructuring in Rust</title>
+      <title>Strings</title>
+      <link>/getting_rusty/posts/20140126_rust-by-example-strings</link>
+      <pubDate>2014-01-26</pubDate>
+      <description>Converting from, to, mutating</description>
+    </item>
+    <item>
+      <title>Destructuring and Pattern Matching</title>
       <link>/getting_rusty/posts/20140122_destructuring_in_rust</link>
       <pubDate>2014-01-22</pubDate>
       <description>&lt;p&gt;Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.&lt;/p&gt;
@@ -45,6 +51,11 @@ let Point { y: y2, x: x2} = p; // =&amp;gt; y2 == 2, x2 == 1
 
 &lt;pre&gt;&lt;code class="rust"&gt;let Point { y: y3, .. } = p; // =&amp;gt; y3 == 2
 let Point { y } = p;         // -&amp;gt; error: pattern does not mention field `x`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;you can match on ranges&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let b = match 5 { 0..5 =&amp;gt; true, _ =&amp;gt; false}; // =&amp;gt; true
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id="toc_1"&gt;Struct Variants&lt;/h2&gt;
@@ -140,6 +151,14 @@ match v {
 }
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;matching on a &lt;code&gt;~[str]&lt;/code&gt; works just like matching any other vector&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;match ~[~&amp;quot;foo&amp;quot;, ~&amp;quot;bar&amp;quot;] {
+  [~&amp;quot;foo&amp;quot;] =&amp;gt; 1, 
+  _ =&amp;gt; 2, 
+}
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h2 id="toc_3"&gt;Function Arguments&lt;/h2&gt;
 
 &lt;p&gt;It works in a function&amp;#39;s arguments:&lt;/p&gt;
@@ -171,43 +190,10 @@ for &amp;amp;Pair {x, y} in pairs.iter() {
 </description>
     </item>
     <item>
-      <title>Ruby p aka puts driven development in Rust</title>
+      <title>Ruby p aka puts driven development</title>
       <link>/getting_rusty/posts/20140119_ruby_p_in_rust</link>
       <pubDate>2014-01-19</pubDate>
-      <description>&lt;p&gt;Given the lack of a useful debugger in Ruby, we often refer to &lt;code&gt;p obj&lt;/code&gt; to print an object to the console in order to inspect its value.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="ruby"&gt;Foo = Struct.new(:bar)
-foo = Foo.new(7)
-p foo # =&amp;gt; #&amp;lt;struct Foo bar=7&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Actually you can do pretty much the same in Rust, too:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;struct Foo {
-  bar: uint
-}
-
-fn main() {
-  let foo = Foo { bar: 7u };
-  p!(foo); // =&amp;gt; Foo{bar: 7u}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Actually Rust does not come from the factory with a &lt;code&gt;p!&lt;/code&gt; - a syntax extension or a macro, but we can write it ourselves:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;#[feature(macro_rules)];
-
-macro_rules! p(
-    ($ident:ident) =&amp;gt; (
-        println!(&amp;quot;{:?}&amp;quot;, $ident);
-    );
-)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Notable here is the first line in the crate &lt;code&gt;#[feature(macro_rules)];&lt;/code&gt; is required to enable macro rules, as those are as of today considered to be unstable. Do not forget the semicolon at the end, otherwise it won&amp;#39;t work!&lt;/p&gt;
-
-&lt;p&gt;For more on macros see the &lt;a href="http://static.rust-lang.org/doc/master/guide-macros.html"&gt;Macro tutorial&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>A simple macro to output debug</description>
     </item>
     <item>
       <title>ToStr</title>

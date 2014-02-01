@@ -3,17 +3,24 @@ title: Rust by Example
 description: Rust is a curly-brace, block-structured expression language. It visually resembles the C language family, but differs significantly in syntactic and semantic details. Its design is oriented toward concerns of “programming in the large”, that is, of creating and maintaining boundaries – both abstract and operational – that preserve large-system integrity, availability and concurrency.
 ---
 
+<table class="title">
+  <tbody>
 {{# posts.paginator }}
-<div class="post">
-  <h3 class="title"><a href="{{url}}">{{title}}</a> <span class="date">{{ date }}</span></h3>
+    <tr>
+      <td>
+        <a href="{{url}}">{{title}}</a>
+      </td>
+      <td>
+        {{ description }}
+      </td>
+      <td>
+        {{ date }}
+      </td>
+    </tr>
 
-  {{{ summary }}}
-
-  <div class="more">
-    <a href="{{url}}" class="btn btn-small">read more..</a>
-  </div>
-</div>
 {{/ posts.paginator }}
+  </tbody>
+</table>
 
 <div class="pagination">
   <ul>

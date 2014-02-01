@@ -14,7 +14,7 @@
 
     <!-- Le styles -->
 <link href='/getting_rusty/assets/stylesheets/bootstrap.min-88238289010db19359d2181e634e95cd.css' type='text/css' rel='stylesheet' media='all'>
-<link href='/getting_rusty/assets/stylesheets/style-df4a36f05b3f1be478377c9933336dad.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/getting_rusty/assets/stylesheets/style-610af012e1374521168a0e68f158f2ac.css' type='text/css' rel='stylesheet' media='all'>
 <link href='/getting_rusty/assets/stylesheets/google_prettify/tomorrow-82a19da08986f662446781ff21d475f2.css' type='text/css' rel='stylesheet' media='all'>
     <!-- Le fav and touch icons -->
   <!-- Update these with your own images
@@ -52,115 +52,62 @@
     <div class="container-narrow">
 
       <div class="content">
-        <div class="page-header">
-  <h1>Rust by Example </h1>
-</div>
+        <p>Below are hands-on examples how to accomplish every day programming tasks in Rust</p>
 
 <div class="row-fluid">
   <div class="span12">
-    <div class="post">
-  <h3 class="title"><a href="/getting_rusty/posts/20140122_destructuring_in_rust">Destructuring in Rust</a> <span class="date">2014-01-22</span></h3>
+    <table class="title">
+  <tbody>
+    <tr>
+      <td>
+        <a href="/getting_rusty/posts/20140126_rust-by-example-strings">Strings</a>
+      </td>
+      <td>
+        Converting from, to, mutating
+      </td>
+      <td>
+        2014-01-26
+      </td>
+    </tr>
 
-  <div class="summary ellipsis">
-<p>Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in <a href="http://rust-lang.org">Rust</a>.</p>
+    <tr>
+      <td>
+        <a href="/getting_rusty/posts/20140122_destructuring_in_rust">Destructuring and Pattern Matching</a>
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        2014-01-22
+      </td>
+    </tr>
 
-<p>It works in a lot of different scenarios, the most basic is in a local scope using <code>let</code>.</p>
+    <tr>
+      <td>
+        <a href="/getting_rusty/posts/20140119_ruby_p_in_rust">Ruby p aka puts driven development</a>
+      </td>
+      <td>
+        A simple macro to output debug
+      </td>
+      <td>
+        2014-01-19
+      </td>
+    </tr>
 
-<pre><code class="rust">let tuple = (1, 2);
-let (a, b) = tuple; // =&gt; a =  1; b = 2
-</code></pre>
+    <tr>
+      <td>
+        <a href="/getting_rusty/posts/20140108_to_str">ToStr</a>
+      </td>
+      <td>
+        How to get (almost) any type to support `to_str`
+      </td>
+      <td>
+        2014-01-08
+      </td>
+    </tr>
 
-<h2 id="toc_0">Structs</h2>
-
-<p>Should you have the need to capture a nested tuple or something, you can do that with the Haskell @ syntax:</p>
-
-<pre><code class="rust">struct Foo { x: (uint, uint), y: uint }
-
-let foo = Foo { x: (1, 2), y: 3 };
-let Foo { x: tuple @ (a, b), .. } = foo; // =&gt; a == 1; b == 2; tuple == (1, 2)
-</code></pre>
-
-<p>You can destructure structs and rename the variables:</p>
-
-<pre><code class="rust">struct Point { x: uint, y: uint }
-
-let  p = Point { x: 1, y: 2 };
-let  Point { x: new_x, y: new_y } = p; // =&gt; new_x == 1, new_y == 2
-</code></pre>
-</div>
-
-  <div class="more">
-    <a href="/getting_rusty/posts/20140122_destructuring_in_rust" class="btn btn-small">read more..</a>
-  </div>
-</div>
-<div class="post">
-  <h3 class="title"><a href="/getting_rusty/posts/20140119_ruby_p_in_rust">Ruby p aka puts driven development in Rust</a> <span class="date">2014-01-19</span></h3>
-
-  <div class="summary ellipsis">
-<p>Given the lack of a useful debugger in Ruby, we often refer to <code>p obj</code> to print an object to the console in order to inspect its value.</p>
-
-<pre><code class="ruby">Foo = Struct.new(:bar)
-foo = Foo.new(7)
-p foo # =&gt; #&lt;struct Foo bar=7&gt;
-</code></pre>
-
-<p>Actually you can do pretty much the same in Rust, too:</p>
-
-<pre><code class="rust">struct Foo {
-  bar: uint
-}
-
-fn main() {
-  let foo = Foo { bar: 7u };
-  p!(foo); // =&gt; Foo{bar: 7u}
-}
-</code></pre>
-
-<p>Actually Rust does not come from the factory with a <code>p!</code> - a syntax extension or a macro, but we can write it ourselves:</p>
-
-</div>
-
-  <div class="more">
-    <a href="/getting_rusty/posts/20140119_ruby_p_in_rust" class="btn btn-small">read more..</a>
-  </div>
-</div>
-<div class="post">
-  <h3 class="title"><a href="/getting_rusty/posts/20140108_to_str">ToStr</a> <span class="date">2014-01-08</span></h3>
-
-  <div class="summary">
-<p>In order to have a default implementaton of <code>to_str()</code> you need to add <code>#[deriving(ToStr, Rand)]</code></p>
-
-<pre><code class="rust">#[deriving(ToStr, Rand)]
-enum Weapons {
-  Sword,
-  Club,
-  Gaze
-}
-
-println(Club.to_str);
-
-// =&gt; Club
-</code></pre>
-
-<p>The alternative, workin' in most cases, would be using <code>format!</code>. The formatting string <code>{:?}</code> means it will use reflection to display the struct name and values. This is similar to Ruby's <code>#inspect</code>.</p>
-
-<pre><code class="rust">enum Monsters {
-  Goblin,
-  Orc
-}
-
-fn main() {
-  println(format!("{:?}", Orc));
-}
-
-// =&gt; Orc
-</code></pre>
-</div>
-
-  <div class="more">
-    <a href="/getting_rusty/posts/20140108_to_str" class="btn btn-small">read more..</a>
-  </div>
-</div>
+  </tbody>
+</table>
 
 <div class="pagination">
   <ul>
@@ -179,6 +126,8 @@ fn main() {
           with help from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
           and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
         </p>
+        <a href="https://twitter.com/pzol" class="twitter-follow-button" data-show-count="false">Follow @pzol</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       </div>
 
     </div> <!-- /container -->

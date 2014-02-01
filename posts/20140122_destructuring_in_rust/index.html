@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Destructuring in Rust</title>
+    <title>Destructuring and Pattern Matching</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Piotr Zolnierek">
 
@@ -13,7 +13,7 @@
 
     <!-- Le styles -->
 <link href='/getting_rusty/assets/stylesheets/bootstrap.min-88238289010db19359d2181e634e95cd.css' type='text/css' rel='stylesheet' media='all'>
-<link href='/getting_rusty/assets/stylesheets/style-df4a36f05b3f1be478377c9933336dad.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/getting_rusty/assets/stylesheets/style-610af012e1374521168a0e68f158f2ac.css' type='text/css' rel='stylesheet' media='all'>
 <link href='/getting_rusty/assets/stylesheets/google_prettify/tomorrow-82a19da08986f662446781ff21d475f2.css' type='text/css' rel='stylesheet' media='all'>
     <!-- Le fav and touch icons -->
   <!-- Update these with your own images
@@ -53,7 +53,7 @@
       <div class="content">
         
 <div class="page-header">
-  <h1>Destructuring in Rust </h1>
+  <h1>Destructuring and Pattern Matching </h1>
 </div>
 
 <div class="row-fluid post-full">
@@ -98,6 +98,11 @@ let Point { y: y2, x: x2} = p; // =&gt; y2 == 2, x2 == 1
 
 <pre><code class="rust">let Point { y: y3, .. } = p; // =&gt; y3 == 2
 let Point { y } = p;         // -&gt; error: pattern does not mention field `x`
+</code></pre>
+
+<p>you can match on ranges</p>
+
+<pre><code class="rust">let b = match 5 { 0..5 =&gt; true, _ =&gt; false}; // =&gt; true
 </code></pre>
 
 <h2 id="toc_1">Struct Variants</h2>
@@ -193,6 +198,14 @@ match v {
 }
 </code></pre>
 
+<p>matching on a <code>~[str]</code> works just like matching any other vector</p>
+
+<pre><code class="rust">match ~[~&quot;foo&quot;, ~&quot;bar&quot;] {
+  [~&quot;foo&quot;] =&gt; 1, 
+  _ =&gt; 2, 
+}
+</code></pre>
+
 <h2 id="toc_3">Function Arguments</h2>
 
 <p>It works in a function&#39;s arguments:</p>
@@ -238,16 +251,23 @@ for &amp;Pair {x, y} in pairs.iter() {
         <a href="/getting_rusty/tags#rust:destructuring-ref">rust:destructuring <span>1</span></a>
       </li>
     </ul>
+    <ul class="tag_box inline">
+      <li></li>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="pzol" data-hashtags="rustlang">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </ul>
+
     <hr>
     <div class="pagination">
       <ul>
-          <li class="prev"><a href="/getting_rusty/posts/20140119_ruby_p_in_rust" title="Ruby p aka puts driven development in Rust">&larr; Previous</a></li>
+          <li class="prev"><a href="/getting_rusty/posts/20140119_ruby_p_in_rust" title="Ruby p aka puts driven development">&larr; Previous</a></li>
 
           <li><a href="/getting_rusty/archive">Archive</a></li>
 
-          <li class="next disabled"><a>Next &rarr;</a>
+          <li class="next"><a href="/getting_rusty/posts/20140126_rust-by-example-strings" title="Strings">Next &rarr;</a></li>
       </ul>
     </div>
+
     <hr>
     <div id="disqus_thread"></div>
 <script>
@@ -275,6 +295,8 @@ for &amp;Pair {x, y} in pairs.iter() {
           with help from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
           and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
         </p>
+        <a href="https://twitter.com/pzol" class="twitter-follow-button" data-show-count="false">Follow @pzol</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       </div>
 
     </div> <!-- /container -->

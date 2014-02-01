@@ -13,7 +13,7 @@
 
     <!-- Le styles -->
 <link href='/getting_rusty/assets/stylesheets/bootstrap.min-88238289010db19359d2181e634e95cd.css' type='text/css' rel='stylesheet' media='all'>
-<link href='/getting_rusty/assets/stylesheets/style-df4a36f05b3f1be478377c9933336dad.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/getting_rusty/assets/stylesheets/style-610af012e1374521168a0e68f158f2ac.css' type='text/css' rel='stylesheet' media='all'>
 <link href='/getting_rusty/assets/stylesheets/google_prettify/tomorrow-82a19da08986f662446781ff21d475f2.css' type='text/css' rel='stylesheet' media='all'>
     <!-- Le fav and touch icons -->
   <!-- Update these with your own images
@@ -54,7 +54,39 @@
         <div class="row-fluid">
   <div class="span12">
       <div class="posts">
-        <h3 class="title"><a href="/getting_rusty/posts/20140122_destructuring_in_rust">Destructuring in Rust</a> <span class="date">2014-01-22</span></h3>
+        <h3 class="title"><a href="/getting_rusty/posts/20140126_rust-by-example-strings">Strings</a> <span class="date">2014-01-26</span></h3>
+
+        <div class="summary ellipsis">
+<p>Here are some examples of string related functions I find interesting from stdlib.</p>
+
+<h2 id="toc_0">Comparing</h2>
+
+<p>The first thing that struck me when I first started with <a href="http://rust-lang.org">Rust</a>, was that a simple string comparison does not work, at least not the way you'd expect, because I was still oblivious of how pointers and friends work in <a href="http://rust-lang.org">Rust</a>.</p>
+
+<pre><code class="rust">let bilbo = ~"Bilbo Baggins"; // owned
+if bilbo == "Bilbo Baggins" {};
+// -&gt; error: mismatched types: expected `~str` but found `&amp;'static str` (str storage differs: expected `~` but found `&amp;'static `)
+</code></pre>
+
+<p>That is because <code>bilbo</code> is an owned pointer and the literal <code>"Bilbo Baggins"</code> is a static borrowed pointer.</p>
+
+<p>Those examples <em>will work</em>:</p>
+
+<pre><code class="rust">let bilbo = ~"Bilbo Baggins";
+
+if "Bilbo Baggins" == bilbo {}; // [1] auto-borrow on .eq
+if bilbo == "Bilbo Baggins".to_owned() {}; // convert &amp;'static str to ~str
+if bilbo.as_slice() == "Bilbo Baggins" {};
+</code></pre>
+
+</div>
+
+        <div class="more">
+          <a href="/getting_rusty/posts/20140126_rust-by-example-strings" class="btn btn-small">read more..</a>
+        </div>
+      </div>
+      <div class="posts">
+        <h3 class="title"><a href="/getting_rusty/posts/20140122_destructuring_in_rust">Destructuring and Pattern Matching</a> <span class="date">2014-01-22</span></h3>
 
         <div class="summary ellipsis">
 <p>Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in <a href="http://rust-lang.org">Rust</a>.</p>
@@ -89,7 +121,7 @@ let  Point { x: new_x, y: new_y } = p; // =&gt; new_x == 1, new_y == 2
         </div>
       </div>
       <div class="posts">
-        <h3 class="title"><a href="/getting_rusty/posts/20140119_ruby_p_in_rust">Ruby p aka puts driven development in Rust</a> <span class="date">2014-01-19</span></h3>
+        <h3 class="title"><a href="/getting_rusty/posts/20140119_ruby_p_in_rust">Ruby p aka puts driven development</a> <span class="date">2014-01-19</span></h3>
 
         <div class="summary ellipsis">
 <p>Given the lack of a useful debugger in Ruby, we often refer to <code>p obj</code> to print an object to the console in order to inspect its value.</p>
@@ -173,6 +205,8 @@ fn main() {
           with help from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
           and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
         </p>
+        <a href="https://twitter.com/pzol" class="twitter-follow-button" data-show-count="false">Follow @pzol</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       </div>
 
     </div> <!-- /container -->
