@@ -1,6 +1,6 @@
 ---
 title: 'Strings'
-date: '2014-01-26'
+date: 01.02.2014
 description: 'Converting from, to, mutating'
 tags: []
 ---
