@@ -199,7 +199,63 @@ for &amp;amp;Pair {x, y} in pairs.iter() {
       <title>Strings</title>
       <link>/getting_rusty/posts/20140126_rust-by-example-strings</link>
       <pubDate>2014-02-01</pubDate>
-      <description>Converting from, to, mutating</description>
+      <description>Comparing, converting from, to, mutating</description>
+    </item>
+    <item>
+      <title>Converting from ~str</title>
+      <link>/getting_rusty/posts/20140201_converting_from_string</link>
+      <pubDate>2014-02-01</pubDate>
+      <description>&lt;h2 id="toc_0"&gt;Converting from String&lt;/h2&gt;
+
+&lt;p&gt;When converting from string to numbers, you will have to provide the type manually&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let f = from_str(&amp;quot;1.2&amp;quot;);
+// -&amp;gt; error: cannot determine a type for this bounded type parameter: unconstrained type
+
+let f: f32 = from_str(&amp;quot;1.2&amp;quot;).unwrap(); // -&amp;gt; 1.2f32
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The trait &lt;a href="http://static.rust-lang.org/doc/master/std/from_str/trait.FromStr.html"&gt;FromStr&lt;/a&gt; is defined as&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;pub trait FromStr {
+    fn from_str(s: &amp;amp;str) -&amp;gt; Option&amp;lt;Self&amp;gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;so it returns a Some&lt;T&gt; if the conversion succeeds or a None if it doesn&amp;#39;t&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;// Some&amp;lt;T&amp;gt;
+let oi: Option&amp;lt;uint&amp;gt; = from_str(&amp;quot;1&amp;quot;);
+assert_eq!(oi, Some(1u));
+
+// None, if the provided string cannot be converted
+let oi: Option&amp;lt;uint&amp;gt; = from_str(&amp;quot;x&amp;quot;);
+assert_eq!(oi, None);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can &lt;code&gt;unwrap()&lt;/code&gt; the value&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let i: uint = from_str(&amp;quot;1&amp;quot;).unwrap();
+assert_eq!(i, 1);
+
+// runtime error &amp;#39;called `Option::unwrap()` on a `None` value&amp;#39;
+let i: uint = from_str(&amp;quot;x&amp;quot;).unwrap();
+assert_eq!(i, 0);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, you can unwrap the value straight away, but that might give you runtime errors, hence it&amp;#39;d be better to check if the conversion succeeded and provide a meaningful message. Alternatively, you can provide a default value using &lt;code&gt;unwrap_or()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let i: uint = match from_str(&amp;quot;1&amp;quot;) {
+  Some&amp;lt;value&amp;gt; =&amp;gt; value,
+  None        =&amp;gt; fail!(&amp;quot;oops, expected a number&amp;quot;)
+}
+
+let i: uint = from_str(&amp;quot;4&amp;quot;).unwrap_or(0u);
+assert_eq!(i, 4);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;See also &lt;a href="http://static.rust-lang.org/doc/master/std/from_str/trait.FromStr.html"&gt;std::from_str&lt;/a&gt;&lt;/p&gt;
+</description>
     </item>
   </channel>
 </rss>

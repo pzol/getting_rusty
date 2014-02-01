@@ -31,6 +31,7 @@
     &lt;h3&gt;February&lt;/h3&gt;
     &lt;ul&gt;
       &lt;li&gt;&lt;span&gt;2014-02-01&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140126_rust-by-example-strings"&gt;Strings&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;span&gt;2014-02-01&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140201_converting_from_string"&gt;Converting from ~str&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
 </description>
     </item>
@@ -40,15 +41,16 @@
       <description>
 &lt;ul class="tag_box inline"&gt;
   &lt;li&gt;
-    &lt;a href="/getting_rusty/categories#rust-ref"&gt;rust &lt;span&gt;3&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="/getting_rusty/categories#rust-ref"&gt;rust &lt;span&gt;4&lt;/span&gt;&lt;/a&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-  &lt;h3&gt;rust (3)&lt;/h3&gt;
+  &lt;h3&gt;rust (4)&lt;/h3&gt;
   &lt;ul&gt;
       &lt;li&gt;&lt;a href="/getting_rusty/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href="/getting_rusty/posts/20140119_ruby_p_in_rust"&gt;Ruby p aka puts driven development&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href="/getting_rusty/posts/20140122_destructuring_in_rust"&gt;Destructuring and Pattern Matching&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/getting_rusty/posts/20140201_converting_from_string"&gt;Converting from ~str&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 </description>
     </item>
@@ -109,6 +111,9 @@
   &lt;li&gt;
     &lt;a href="/getting_rusty/tags#rust:destructuring-ref"&gt;rust:destructuring &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
   &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/getting_rusty/tags#FromStr-ref"&gt;FromStr &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;h3 id="deriving-ref"&gt;deriving&lt;/h3&gt;
@@ -123,6 +128,8 @@
     &lt;li&gt;&lt;a href="/getting_rusty/posts/20140122_destructuring_in_rust"&gt;Destructuring and Pattern Matching&lt;/a&gt;&lt;/li&gt;
   &lt;h3 id="rust:destructuring-ref"&gt;rust:destructuring&lt;/h3&gt;
     &lt;li&gt;&lt;a href="/getting_rusty/posts/20140122_destructuring_in_rust"&gt;Destructuring and Pattern Matching&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="FromStr-ref"&gt;FromStr&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/getting_rusty/posts/20140201_converting_from_string"&gt;Converting from ~str&lt;/a&gt;&lt;/li&gt;
  
 </description>
     </item>

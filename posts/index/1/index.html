@@ -188,6 +188,43 @@ if bilbo.as_slice() == "Bilbo Baggins" {};
           <a href="/getting_rusty/posts/20140126_rust-by-example-strings" class="btn btn-small">read more..</a>
         </div>
       </div>
+      <div class="posts">
+        <h3 class="title"><a href="/getting_rusty/posts/20140201_converting_from_string">Converting from ~str</a> <span class="date">2014-02-01</span></h3>
+
+        <div class="summary ellipsis">
+<h2 id="toc_0">Converting from String</h2>
+
+<p>When converting from string to numbers, you will have to provide the type manually</p>
+
+<pre><code class="rust">let f = from_str("1.2");
+// -&gt; error: cannot determine a type for this bounded type parameter: unconstrained type
+
+let f: f32 = from_str("1.2").unwrap(); // -&gt; 1.2f32
+</code></pre>
+
+<p>The trait <a href="http://static.rust-lang.org/doc/master/std/from_str/trait.FromStr.html">FromStr</a> is defined as</p>
+
+<pre><code class="rust">pub trait FromStr {
+    fn from_str(s: &amp;str) -&gt; Option&lt;Self&gt;;
+}
+</code></pre>
+
+<p>so it returns a Some<t> if the conversion succeeds or a None if it doesn't</t></p>
+
+<pre><code class="rust">// Some&lt;T&gt;
+let oi: Option&lt;uint&gt; = from_str("1");
+assert_eq!(oi, Some(1u));
+
+// None, if the provided string cannot be converted
+let oi: Option&lt;uint&gt; = from_str("x");
+assert_eq!(oi, None);
+</code></pre>
+</div>
+
+        <div class="more">
+          <a href="/getting_rusty/posts/20140201_converting_from_string" class="btn btn-small">read more..</a>
+        </div>
+      </div>
     
     <div class="pagination">
       <ul>

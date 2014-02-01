@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Strings</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Converting from, to, mutating">
+    <meta name="description" content="Comparing, converting from, to, mutating">
     <meta name="author" content="Piotr Zolnierek">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -91,60 +91,11 @@ if bilbo.as_slice() == &quot;Bilbo Baggins&quot; {};
 
 <p>[TODO]: compare case insensitive</p>
 
-<h2 id="toc_1">Converting from String</h2>
+<h2 id="toc_1">Converting to String</h2>
 
-<p>When converting from string to numbers, you will have to provide the type manually</p>
+<h2 id="toc_2">String Functions</h2>
 
-<pre><code class="rust">let f = from_str(&quot;1.2&quot;);
-// -&gt; error: cannot determine a type for this bounded type parameter: unconstrained type
-
-let f: f32 = from_str(&quot;1.2&quot;).unwrap(); // -&gt; 1.2f32
-</code></pre>
-
-<p>The trait <a href="http://static.rust-lang.org/doc/master/std/from_str/trait.FromStr.html">FromStr</a> is defined as</p>
-
-<pre><code class="rust">pub trait FromStr {
-    fn from_str(s: &amp;str) -&gt; Option&lt;Self&gt;;
-}
-</code></pre>
-
-<p>so it returns a Some<T> if the conversion succeeds or a None if it doesn&#39;t</p>
-
-<pre><code class="rust">// Some&lt;T&gt;
-let oi: Option&lt;uint&gt; = from_str(&quot;1&quot;);
-assert_eq!(oi, Some(1u));
-
-// None, if the provided string cannot be converted
-let oi: Option&lt;uint&gt; = from_str(&quot;x&quot;);
-assert_eq!(oi, None);
-</code></pre>
-
-<p>You can <code>unwrap()</code> the value</p>
-
-<pre><code class="rust">let i: uint = from_str(&quot;1&quot;).unwrap();
-assert_eq!(i, 1);
-
-// runtime error &#39;called `Option::unwrap()` on a `None` value&#39;
-let i: uint = from_str(&quot;x&quot;).unwrap();
-assert_eq!(i, 0);
-</code></pre>
-
-<p>As you can see, you can unwrap the value straight away, but that might give you runtime errors, hence it&#39;d be better to check if the conversion succeeded and provide a meaningful message. Alternatively, you can provide a default value using <code>unwrap_or()</code>.</p>
-
-<pre><code class="rust">let i: uint = match from_str(&quot;1&quot;) {
-  Some&lt;value&gt; =&gt; value,
-  None        =&gt; fail!(&quot;oops, expected a number&quot;)
-}
-
-let i: uint = from_str(&quot;4&quot;).unwrap_or(0u);
-assert_eq!(i, 4);
-</code></pre>
-
-<h2 id="toc_2">Converting to String</h2>
-
-<h2 id="toc_3">String Functions</h2>
-
-<h3 id="toc_4">empty?</h3>
+<h3 id="toc_3">empty?</h3>
 
 <pre><code class="rust">assert_eq!((~&quot;&quot;).is_empty(), true);
 assert_eq!(&quot;&quot;.is_empty(), true);
@@ -153,7 +104,7 @@ assert_eq!(&quot;Bąk&quot;.is_empty(), false);
 
 <p>Defined in the <a href="http://static.rust-lang.org/doc/master/std/container/trait.Container.html#method.is_empty">Container</a> trait.</p>
 
-<h3 id="toc_5">length</h3>
+<h3 id="toc_4">length</h3>
 
 <p>This is difficult. Tried to ask on #rust once and have regretted it since. You can use <code>char_len()</code> at your own peril.</p>
 
@@ -161,7 +112,7 @@ assert_eq!(&quot;Bąk&quot;.is_empty(), false);
 assert_eq!(s.char_len(), 3);
 </code></pre>
 
-<h3 id="toc_6">Starts with, Ends with</h3>
+<h3 id="toc_5">Starts with, Ends with</h3>
 
 <p>Those two do a case-sensitive comparison.</p>
 
@@ -172,9 +123,9 @@ assert_eq!(bilbo.ends_with(&quot;Baggins&quot;), true);
 assert_eq!(bilbo.ends_with(&quot;baggins&quot;), false);
 </code></pre>
 
-<h2 id="toc_7">String Mutations</h2>
+<h2 id="toc_6">String Mutations</h2>
 
-<h3 id="toc_8">Concat, Prepend, Append</h3>
+<h3 id="toc_7">Concat, Prepend, Append</h3>
 
 <p>You can concat two immutable string, this will of course return a new string.</p>
 
@@ -194,9 +145,9 @@ foo.push_str(&quot;bar&quot;); // -&gt; ~&quot;foo bar&quot;
 
 <p>See also <a href="http://static.rust-lang.org/doc/master/std/str/trait.OwnedStr.html">OwnedStr</a></p>
 
-<h3 id="toc_9">Inserting</h3>
+<h3 id="toc_8">Inserting</h3>
 
-<h3 id="toc_10">Replace</h3>
+<h3 id="toc_9">Replace</h3>
 
 <pre><code class="rust">let bilbo = ~&quot;Bilbo Baggins&quot;;
 let frodo = bilbo.replace(&quot;Bilbo&quot;, &quot;Frodo&quot;); // -&gt; ~&quot;Frodo Baggins&quot;
@@ -207,11 +158,11 @@ let samwise = bilbo.replace(&quot;Frodo&quot;, &quot;Samwise&quot;); // -&gt; ~&
 
 <p>see <a href="http://static.rust-lang.org/doc/master/std/str/trait.StrSlice.html#tymethod.replace">StrSlice#replace</a></p>
 
-<h3 id="toc_11">Capitalize, Upcase, Downcase, Swapcase</h3>
+<h3 id="toc_10">Capitalize, Upcase, Downcase, Swapcase</h3>
 
 <p><code>to_lower()</code> and <code>to_upper()</code> as they are called in <a href="http://rust-lang.org">Rust</a>, are currently only implemented in std only for <a href="http://static.rust-lang.org/doc/master/std/ascii/struct.Ascii.html#method.to_lower">ascii</a> strings.</p>
 
-<h2 id="toc_12">TODO</h2>
+<h2 id="toc_11">TODO</h2>
 
 <ul>
 <li>chomp</li>
@@ -239,14 +190,14 @@ let samwise = bilbo.replace(&quot;Frodo&quot;, &quot;Samwise&quot;); // -&gt; ~&
 <li><p>each_char</p></li>
 </ul>
 
-<h2 id="toc_13">Regex</h2>
+<h2 id="toc_12">Regex</h2>
 
 <ul>
 <li>match </li>
 <li>scan</li>
 </ul>
 
-<h2 id="toc_14">Notes &amp; more</h2>
+<h2 id="toc_13">Notes &amp; more</h2>
 
 <p>At time of writing </p>
 
@@ -279,7 +230,7 @@ rustc 0.10-pre (caabbb8 2014-01-25 06:31:31 -0800)
     <hr>
     <div class="pagination">
       <ul>
-          <li class="prev disabled"><a>&larr; Previous</a></li>
+          <li class="prev"><a href="/getting_rusty/posts/20140201_converting_from_string" title="Converting from ~str">&larr; Previous</a></li>
 
           <li><a href="/getting_rusty/archive">Archive</a></li>
 
