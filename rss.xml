@@ -6,16 +6,31 @@
     <link/>
     <pubDate>2014-02-01</pubDate>
     <item>
+      <title/>
+      <link>/getting_rusty/cname</link>
+      <description>rustbyexample.nobacon.it
+</description>
+    </item>
+    <item>
+      <title>Index</title>
+      <link>/getting_rusty</link>
+      <description>&lt;!-- nothing to see here --&gt;
+</description>
+    </item>
+    <item>
       <title>Archive</title>
       <link>/getting_rusty/archive</link>
       <description>
   &lt;h2&gt;2014&lt;/h2&gt;
     &lt;h3&gt;January&lt;/h3&gt;
     &lt;ul&gt;
-      &lt;li&gt;&lt;span&gt;2014-01-26&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140126_rust-by-example-strings"&gt;Strings&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;span&gt;2014-01-22&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140122_destructuring_in_rust"&gt;Destructuring and Pattern Matching&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;span&gt;2014-01-19&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140119_ruby_p_in_rust"&gt;Ruby p aka puts driven development&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;span&gt;2014-01-08&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;span&gt;2014-01-19&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140119_ruby_p_in_rust"&gt;Ruby p aka puts driven development&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;span&gt;2014-01-22&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140122_destructuring_in_rust"&gt;Destructuring and Pattern Matching&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;h3&gt;February&lt;/h3&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;span&gt;2014-02-01&lt;/span&gt; &amp;raquo; &lt;a href="/getting_rusty/posts/20140126_rust-by-example-strings"&gt;Strings&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
 </description>
     </item>
@@ -38,10 +53,9 @@
 </description>
     </item>
     <item>
-      <title>Index</title>
+      <title>Rust by Example</title>
       <link>/getting_rusty</link>
-      <description>&lt;!-- nothing to see here --&gt;
-</description>
+      <description>Rust is a curly-brace, block-structured expression language. It visually resembles the C language family, but differs significantly in syntactic and semantic details. Its design is oriented toward concerns of &#x201C;programming in the large&#x201D;, that is, of creating and maintaining boundaries &#x2013; both abstract and operational &#x2013; that preserve large-system integrity, availability and concurrency.</description>
     </item>
     <item>
       <title>Pages</title>
@@ -49,30 +63,28 @@
       <description>
 &lt;ul&gt;
   
+    &lt;li&gt;&lt;a href="/getting_rusty/cname"&gt;&lt;/a&gt;&lt;/li&gt;
+  
+  
+    &lt;li&gt;&lt;a href="/getting_rusty"&gt;Index&lt;/a&gt;&lt;/li&gt;
+  
+  
     &lt;li&gt;&lt;a href="/getting_rusty/archive"&gt;Archive&lt;/a&gt;&lt;/li&gt;
   
   
     &lt;li&gt;&lt;a href="/getting_rusty/categories"&gt;Categories&lt;/a&gt;&lt;/li&gt;
   
   
-    &lt;li&gt;&lt;a href="/getting_rusty"&gt;Index&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/getting_rusty"&gt;Rust by Example&lt;/a&gt;&lt;/li&gt;
   
     &lt;li class="active"&gt;&lt;a href="/getting_rusty/pages" class="active"&gt;Pages&lt;/a&gt;&lt;/li&gt;
   
-  
-  
-    &lt;li&gt;&lt;a href="/getting_rusty"&gt;Rust by Example&lt;/a&gt;&lt;/li&gt;
   
   
     &lt;li&gt;&lt;a href="/getting_rusty/tags"&gt;Tags&lt;/a&gt;&lt;/li&gt;
   
 &lt;/ul&gt;
 </description>
-    </item>
-    <item>
-      <title>Rust by Example</title>
-      <link>/getting_rusty</link>
-      <description>Rust is a curly-brace, block-structured expression language. It visually resembles the C language family, but differs significantly in syntactic and semantic details. Its design is oriented toward concerns of &#x201C;programming in the large&#x201D;, that is, of creating and maintaining boundaries &#x2013; both abstract and operational &#x2013; that preserve large-system integrity, availability and concurrency.</description>
     </item>
     <item>
       <title>Tags</title>

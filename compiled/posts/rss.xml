@@ -7,19 +7,19 @@
     <pubDate>2014-02-01</pubDate>
     <item>
       <title>ToStr</title>
-      <link>/getting_rusty/posts/20140108_to_str</link>
+      <link>/posts/20140108_to_str</link>
       <pubDate>2014-01-08</pubDate>
       <description>How to get (almost) any type to support `to_str`</description>
     </item>
     <item>
       <title>Ruby p aka puts driven development</title>
-      <link>/getting_rusty/posts/20140119_ruby_p_in_rust</link>
+      <link>/posts/20140119_ruby_p_in_rust</link>
       <pubDate>2014-01-19</pubDate>
       <description>A simple macro to output debug</description>
     </item>
     <item>
       <title>Destructuring and Pattern Matching</title>
-      <link>/getting_rusty/posts/20140122_destructuring_in_rust</link>
+      <link>/posts/20140122_destructuring_in_rust</link>
       <pubDate>2014-01-22</pubDate>
       <description>&lt;p&gt;Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.&lt;/p&gt;
 
@@ -197,7 +197,7 @@ for &amp;amp;Pair {x, y} in pairs.iter() {
     </item>
     <item>
       <title>Strings</title>
-      <link>/getting_rusty/posts/20140126_rust-by-example-strings</link>
+      <link>/posts/20140126_rust-by-example-strings</link>
       <pubDate>2014-02-01</pubDate>
       <description>Converting from, to, mutating</description>
     </item>
