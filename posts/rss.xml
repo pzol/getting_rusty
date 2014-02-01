@@ -196,12 +196,6 @@ for &amp;amp;Pair {x, y} in pairs.iter() {
 </description>
     </item>
     <item>
-      <title>Strings</title>
-      <link>/getting_rusty/posts/20140126_rust-by-example-strings</link>
-      <pubDate>2014-02-01</pubDate>
-      <description>Comparing, converting from, to, mutating</description>
-    </item>
-    <item>
       <title>Converting from ~str</title>
       <link>/getting_rusty/posts/20140201_converting_from_string</link>
       <pubDate>2014-02-01</pubDate>
