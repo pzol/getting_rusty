@@ -1,6 +1,6 @@
 ---
 title: Destructuring and Pattern Matching
-date: 22.01.2014
+date: '2014-01-22'
 description: 
 categories: ["rust"]
 tags: ["rust:enum", "rust:destructuring"]

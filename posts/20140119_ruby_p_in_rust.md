@@ -1,6 +1,6 @@
 ---
 title: Ruby p aka puts driven development
-date: 19.01.2014
+date: '2014-01-19'
 description: A simple macro to output debug
 categories: ["rust"]
 tags: ["rust:macros", "rust:ruby"]
