@@ -59,4 +59,5 @@ let i: uint = match from_str("1") {
 let i: uint = from_str("4").unwrap_or(0u);
 assert_eq!(i, 4);
 ```
-See also [std::from_str](http://static.rust-lang.org/doc/master/std/from_str/trait.FromStr.html)
+
+For comments head over to [Reddit](http://redd.it/1wr1ct)
