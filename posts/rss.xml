@@ -248,7 +248,7 @@ let i: uint = from_str(&amp;quot;4&amp;quot;).unwrap_or(0u);
 assert_eq!(i, 4);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;See also &lt;a href="http://static.rust-lang.org/doc/master/std/from_str/trait.FromStr.html"&gt;std::from_str&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For comments head over to &lt;a href="http://redd.it/1wr1ct"&gt;Reddit&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
   </channel>
