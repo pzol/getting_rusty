@@ -70,6 +70,10 @@
 // -&gt; error: cannot determine a type for this bounded type parameter: unconstrained type
 
 let f: f32 = from_str(&quot;1.2&quot;).unwrap(); // -&gt; 1.2f32
+
+// or like this
+let i = from_str::&lt;uint&gt;(&quot;5&quot;).unwrap();
+assert_eq!(i, 5);
 </code></pre>
 
 <p>The trait <a href="http://static.rust-lang.org/doc/master/std/from_str/trait.FromStr.html">FromStr</a> is defined as</p>
@@ -103,7 +107,7 @@ assert_eq!(i, 0);
 <p>As you can see, you can unwrap the value straight away, but that might give you runtime errors, hence it&#39;d be better to check if the conversion succeeded and provide a meaningful message. Alternatively, you can provide a default value using <code>unwrap_or()</code>.</p>
 
 <pre><code class="rust">let i: uint = match from_str(&quot;1&quot;) {
-  Some&lt;value&gt; =&gt; value,
+  Some(value) =&gt; value,
   None        =&gt; fail!(&quot;oops, expected a number&quot;)
 }
 
