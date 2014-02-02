@@ -15,6 +15,10 @@ let f = from_str("1.2");
 // -> error: cannot determine a type for this bounded type parameter: unconstrained type
 
 let f: f32 = from_str("1.2").unwrap(); // -> 1.2f32
+
+// or like this
+let i = from_str::<uint>("5").unwrap();
+assert_eq!(i, 5);
 ```
 
 The trait [FromStr](http://static.rust-lang.org/doc/master/std/from_str/trait.FromStr.html) is defined as
@@ -52,7 +56,7 @@ As you can see, you can unwrap the value straight away, but that might give you 
 
 ```rust
 let i: uint = match from_str("1") {
-  Some<value> => value,
+  Some(value) => value,
   None        => fail!("oops, expected a number")
 }
 
