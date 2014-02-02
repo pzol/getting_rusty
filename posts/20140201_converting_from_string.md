@@ -1,7 +1,6 @@
 ---
-title: Converting from ~str
+title: Converting from String
 date: '2014-02-01'
-description: 
 tags: ['FromStr']
 categories: ["rust"]
 ---
