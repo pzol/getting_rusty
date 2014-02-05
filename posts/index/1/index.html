@@ -187,6 +187,37 @@ assert_eq!(i, 5);
           <a href="/getting_rusty/posts/20140201_converting_from_string" class="btn btn-small">read more..</a>
         </div>
       </div>
+      <div class="posts">
+        <h3 class="title"><a href="/getting_rusty/posts/20140203_hashmap">HashMap</a> <span class="date">2014-02-01</span></h3>
+
+        <div class="summary ellipsis">
+<p>This is a non-exhaustive non-academic example-driven rather-practical guide on how to use the HashMap in Rust. As a side effect of working on the HashMap some hands-on examples of Rust's unique concepts of ownership and borrowing references will be demonstrated.</p>
+
+<h2 id="toc_0">Prelude</h2>
+
+<p>Before we get to the real stuff, here's is something which is not directly HashMap, but more <a href="http://rust-lang.org">Rust</a> pointer and friends stuff, however got me stuck for some time.</p>
+
+<pre><code class="rust">fn add_map(map: &amp;mut HashMap&lt;~str, uint&gt;, k: &amp;str, v: uint) {
+  map.insert(k.to_owned(), v); 
+}
+</code></pre>
+
+<p>In order to be able to modify, make sure the <code>map</code> is mutable both in the  <code>add_map</code> method as in the declaration of the <code>HashMap</code>. If you don't you will get an error saying <code>error: cannot borrow immutable dereference of &amp; pointer as mutable</code>.</p>
+
+<pre><code class="rust">let mut map: HashMap&lt;~str, uint&gt; = HashMap::new();
+let key = ~"key string";
+let val = 1;
+
+add_map(&amp;map, key, val);
+println!("{:?}", key);
+</code></pre>
+
+</div>
+
+        <div class="more">
+          <a href="/getting_rusty/posts/20140203_hashmap" class="btn btn-small">read more..</a>
+        </div>
+      </div>
     
     <div class="pagination">
       <ul>

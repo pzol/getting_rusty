@@ -255,5 +255,11 @@ assert_eq!(i, 4);
 &lt;p&gt;For comments head over to &lt;a href="http://redd.it/1wr1ct"&gt;Reddit&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
+    <item>
+      <title>HashMap</title>
+      <link>/getting_rusty/posts/20140203_hashmap</link>
+      <pubDate>2014-02-01</pubDate>
+      <description>Inserting, getting, finding, changing</description>
+    </item>
   </channel>
 </rss>

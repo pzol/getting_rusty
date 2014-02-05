@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>HashMap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Inserting, getting, finding, changing">
+    <meta name="author" content="Piotr Zolnierek">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+<link href='/getting_rusty/assets/stylesheets/bootstrap.min-88238289010db19359d2181e634e95cd.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/getting_rusty/assets/stylesheets/style-610af012e1374521168a0e68f158f2ac.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/getting_rusty/assets/stylesheets/google_prettify/tomorrow-82a19da08986f662446781ff21d475f2.css' type='text/css' rel='stylesheet' media='all'>
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-narrow">
+          <a class="brand" href="/getting_rusty/">Getting Rusty</a>
+          <ul class="nav">
+              
+                <li><a href="/getting_rusty/archive">Archive</a></li>
+              
+              
+                <li><a href="/getting_rusty/tags">Tags</a></li>
+              
+              
+                <li><a href="/getting_rusty/categories">Categories</a></li>
+              
+              
+                <li><a href="/getting_rusty/pages">Pages</a></li>
+              
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-narrow">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>HashMap </h1>
+</div>
+
+<div class="row-fluid post-full">
+  <div class="span12">
+    <div class="date">
+      <span>2014-02-01</strong>
+    </div>
+    <div class="content">
+      <p>This is a non-exhaustive non-academic example-driven rather-practical guide on how to use the HashMap in Rust. As a side effect of working on the HashMap some hands-on examples of Rust&#39;s unique concepts of ownership and borrowing references will be demonstrated.</p>
+
+<h2 id="toc_0">Prelude</h2>
+
+<p>Before we get to the real stuff, here&#39;s is something which is not directly HashMap, but more <a href="http://rust-lang.org">Rust</a> pointer and friends stuff, however got me stuck for some time.</p>
+
+<pre><code class="rust">fn add_map(map: &amp;mut HashMap&lt;~str, uint&gt;, k: &amp;str, v: uint) {
+  map.insert(k.to_owned(), v); 
+}
+</code></pre>
+
+<p>In order to be able to modify, make sure the <code>map</code> is mutable both in the  <code>add_map</code> method as in the declaration of the <code>HashMap</code>. If you don&#39;t you will get an error saying <code>error: cannot borrow immutable dereference of &amp; pointer as mutable</code>.</p>
+
+<pre><code class="rust">let mut map: HashMap&lt;~str, uint&gt; = HashMap::new();
+let key = ~&quot;key string&quot;;
+let val = 1;
+
+add_map(&amp;map, key, val);
+println!(&quot;{:?}&quot;, key);
+</code></pre>
+
+<p>Notice that by using <code>&amp;map</code>, we pass a reference to our map to the function <code>add_map</code>, in rust terms we borrow the map, but we remain the owner of it.</p>
+
+<p>The key gets passed to <code>add_map</code> as a reference, too, hence you need <code>to_owned()</code> in order to copy it into the key field of the map. The map now owns its own copy of key.</p>
+
+<p>If you don&#39;t need to access the key after adding to the map, you could move it into the map. This will be more efficient, no memory copying, but trying to access key afterwards will result in a <code>error: use of moved value: key</code>:</p>
+
+<pre><code class="rust">fn add_map_move(map: &amp;mut HashMap&lt;~str, uint&gt;, k: ~str, v: uint) {
+  map.insert(k, v); 
+}
+
+let mut map: HashMap&lt;~str, uint&gt; = HashMap::new();
+let key = ~&quot;key string&quot;;
+let val = 1;
+
+add_map_move(&amp;map, key, val);
+println!(&quot;{:?}&quot;, key);          // -&gt; error: use of moved value: `key`
+</code></pre>
+
+<p>Save yourself some sorrow and do not do this (unless you know exactly what you&#39;re doing)</p>
+
+<pre><code class="rust">// DON&#39;T!
+let mut map: HashMap&lt;&amp;str, uint&gt; = HashMap::new();
+</code></pre>
+
+<h2 id="toc_1">Creating and inserting</h2>
+
+<p>Boring...</p>
+
+<pre><code class="rust">let mut map = HashMap::&lt;~str, uint&gt;::new();
+map.insert(~&quot;foo&quot;, 1);
+// or
+
+let mut map: HashMap&lt;~str, uint&gt; = HashMap::new();
+map.insert(~&quot;bar&quot;, 2);
+</code></pre>
+
+<h3 id="toc_2">An immutable HashMap</h3>
+
+<p>You can create a HashMap as mutable and then freeze it (by assigning without <code>mut</code>), to prevent further modification:</p>
+
+<pre><code class="rust">fn create_immutable() -&gt; HashMap&lt;~str, uint&gt; {
+  let mut map = HashMap::&lt;~str, uint&gt;::new();
+  map.insert(~&quot;foo&quot;, 1);
+  map // insert returns whether the key was already present in the map, hence returns the map
+}
+
+let imap = create_immutable(); // without the mut it is immutable
+imap.insert(~&quot;foo&quot;, 1); // -&gt; error: cannot borrow immutable local variable as mutable
+</code></pre>
+
+<p>Another option to create an immutable HashMap would be to use <code>HashMap::from_iterator</code></p>
+
+<h3 id="toc_3">Inserting and modifying at the same time</h3>
+
+<p>For the definitions of those functions see <a href="http://static.rust-lang.org/doc/master/std/hashmap/struct.HashMap.html">std::hashmap::HashMap</a></p>
+
+<p>Most straightforward insert</p>
+
+<pre><code class="rust">let mut map = HashMap::&lt;~str, uint&gt;::new();
+map.insert(~&quot;foo&quot;, 1);
+</code></pre>
+
+<p>doing a find, and an insert if the searched key does not exist</p>
+
+<pre><code class="rust">let mut map = HashMap::&lt;~str, uint&gt;::new();
+assert!(!map.contains_key(&amp;~&quot;foo&quot;));
+
+map.find_or_insert(~&quot;foo&quot;, 1);
+assert!(map.contains_key(&amp;~&quot;foo&quot;));
+</code></pre>
+
+<p>Doing a find, inserting with a <code>proc()</code>, using the key to construct the value</p>
+
+<pre><code class="rust">let mut map = HashMap::&lt;~str, ~str&gt;::new();
+assert!(!map.contains_key(&amp;~&quot;foo&quot;));
+
+map.find_or_insert_with(~&quot;foo&quot;, |k| *k + ~&quot;bar&quot;);
+assert_eq!(*map.get(&amp;~&quot;foo&quot;), ~&quot;foobar&quot;);
+</code></pre>
+
+<p>Love this one - insert a new one if the current isn&#39;t present, update if it is present</p>
+
+<pre><code class="rust">let mut map = HashMap::&lt;~str, uint&gt;::new();
+assert!(!map.contains_key(&amp;~&quot;foo&quot;));
+
+// running this for the first time, will add &quot;foo&quot; with the value 1
+map.insert_or_update_with(~&quot;foo&quot;, 1, |_k, v| *v += 1);
+assert_eq!(*map.get(&amp;~&quot;foo&quot;), 1);
+
+// running the same for the second time, will add +1 to &quot;foo&quot;
+map.insert_or_update_with(~&quot;foo&quot;, 1, |_k, v| *v += 1);
+assert_eq!(*map.get(&amp;~&quot;foo&quot;), 2);
+</code></pre>
+
+<p>and last but not least the almighty <code>mangle</code>. I had a couple of serious struggles with <code>mangle</code>.</p>
+
+<pre><code class="rust">let mut map = HashMap::&lt;~str, uint&gt;::new();
+assert!(!map.contains_key(&amp;~&quot;foo&quot;));
+
+// for key &quot;foo&quot;, take the initial value 1 and add +10
+map.mangle(~&quot;foo&quot;, 1,         // take this value as a
+           |_k, a| a + 10,    // apply this function on a
+           |_k, v, a| *v -= 2
+          ); 
+assert_eq!(*map.get(&amp;~&quot;foo&quot;), 11);
+
+let x = *map.mangle(~&quot;foo&quot;, 1,
+           |_k, a| a + 10,
+           |_k, v, _a| *v -=  2 // take the current value in ~&quot;foo&quot; and apply the function on it
+          );
+
+assert_eq!(*map.get(&amp;~&quot;foo&quot;), 9);
+</code></pre>
+
+<p>The first mangle does not assign the return value, it just inserts into the map under the key <code>~&quot;foo&quot;</code> the value of <code>a + 10</code>, where a is the seconed parameter of the function.</p>
+
+<p>The second mangle fires the second proc passed, which subtracts 2 from the value stored under <code>~&quot;foo&quot;</code>. Notable here is, that the return value of the mangle function is dereferenced with <code>*</code>, thus a copy of the value is created. The mangle returns a reference into the map, to the value stored under <code>~&quot;foo&quot;</code> and therefor borrows the whole map! Any further operations on map wouldn&#39;t be possible.</p>
+
+<h2 id="toc_4">Getting it back</h2>
+
+<p>The basic <code>get</code> gets the value, but fails if the value isn&#39;t present. To get back a mutable version use <code>get_mut</code> instead.</p>
+
+<pre><code class="rust">fn test_get(){
+  let mut map = HashMap::&lt;~str, uint&gt;::new();
+  map.insert(~&quot;foo&quot;, 1);
+
+  let r = *map.get(&amp;~&quot;foo&quot;);
+
+  map.insert(~&quot;bar&quot;, 2); // works!
+}
+</code></pre>
+
+<p>As in the previous example with <code>mangle</code>, make sure you dereference the returned value to make a copy if you want to be able to access the map afterwards.</p>
+
+<p>Instead of the dereference, you can make your intent more expclicit and use <code>get_copy</code></p>
+
+<pre><code class="rust">let mut map = HashMap::&lt;~str, uint&gt;::new();
+map.insert(~&quot;foo&quot;, 1);
+
+let r = map.get_copy(&amp;~&quot;foo&quot;);
+assert_eq!(r, 1);
+
+map.insert(~&quot;bar&quot;, 2); // works!
+</code></pre>
+
+<p>Fun stuff about <code>get_mut</code> is that once you got the reference to the value, you can modify the value inside the map directly!</p>
+
+<pre><code class="rust">let mut map = HashMap::&lt;~str, uint&gt;::new();
+map.insert(~&quot;foo&quot;, 1);
+
+{
+  let mut r = map.get_mut(&amp;~&quot;foo&quot;);
+  *r += 1;
+}
+assert_eq!(*map.get(&amp;~&quot;foo&quot;), 2);    // Look Ma, I updated the map!
+</code></pre>
+
+<p>The curlies around the mutation operation allow us to introduce a new lifetime, and at the end of it we return the borrow for r (and the map along with it), so we can again access the map to get the value one more time.</p>
+
+<h3 id="toc_5">Failsafe getting</h3>
+
+<p>Now <code>find</code> which returns <code>None</code> if the key could not be found and <code>Some</code> if it was found. Again, substitute for <code>find_mut</code> to get back a mutable version. This should be the preferred way of retrieving data from a hash.</p>
+
+<pre><code class="rust">let mut map = HashMap::&lt;~str, uint&gt;::new();
+map.insert(~&quot;foo&quot;, 1);
+
+let s = match map.find(&amp;~&quot;foo&quot;) {
+  None      =&gt; 0,
+  Some(v)   =&gt; *v
+};
+</code></pre>
+
+<p>As in <code>get_copy</code> you can use <code>find_copy</code> instead of <code>find</code></p>
+
+<pre><code class="rust">let mut map = HashMap::&lt;~str, uint&gt;::new();
+map.insert(~&quot;foo&quot;, 1);
+
+let r = match map.find_copy(&amp;~&quot;foo&quot;) {
+  None      =&gt; 0,
+  Some(v)   =&gt; v    // no derference needed here
+};
+
+assert_eq!(r, 1);
+</code></pre>
+
+<h3 id="toc_6">Pop</h3>
+
+<p>This comes in handy sometimes - getting a value from the hash and at the same time removing it from the hash</p>
+
+<pre><code class="rust">let mut map = HashMap::&lt;~str, uint&gt;::new();
+map.insert(~&quot;foo&quot;, 1);
+
+let r = match map.pop(&amp;~&quot;foo&quot;) {
+  None      =&gt; 0,
+  Some(v)   =&gt; v
+};
+
+assert_eq!(r, 1);
+assert!(!map.contains_key(&amp;~&quot;foo&quot;)); // ~&quot;foo&quot; is gone
+</code></pre>
+
+<h3 id="toc_7">Iterating</h3>
+
+<p>You can also walk over the key - value pairs in a hash</p>
+
+<pre><code class="rust">let mut map = HashMap::&lt;~str, uint&gt;::new();
+map.insert(~&quot;foo&quot;, 1);
+map.insert(~&quot;bar&quot;, 2);
+
+let mut numbers = ~[];
+for (_k,v) in map.iter() {
+  numbers.push(*v);         // copying the values
+}
+
+assert!(numbers.contains(&amp;2));
+assert!(numbers.contains(&amp;1));
+
+//assert_eq!(numbers, ~[2, 1]); // beware, order might change, so this would fail randomly
+</code></pre>
+
+<p>To simultaneously iterate over the hash and remove the values at the same time, use <code>iter_move</code>.</p>
+
+<p>As an aside, a more functional way - instead of pushing to the numbers vector, to get the values would be</p>
+
+<pre><code class="rust">let v = map.values().map(|v| v.clone()).to_owned_vec();
+</code></pre>
+
+<h3 id="toc_8">Preserving Order</h3>
+
+<p>Be cautious, you cannot rely on the order in which the pairs are coming to your iterator!
+If you need a specific order use a <code>std::treemap::TreeMap</code> instead:</p>
+
+<pre><code class="rust">extern mod extra;
+use extra::treemap::TreeMap;
+
+#[test]
+fn test_treemap() {
+  let mut map = TreeMap::&lt;~str, uint&gt;::new();
+  map.insert(~&quot;foo&quot;, 1);
+  map.insert(~&quot;boo&quot;, 2);
+
+  let mut numbers = ~[];
+  for (_k,v) in map.iter() {
+    numbers.push(v.clone());
+  }
+  assert_eq!(numbers, ~[2, 1]);
+}
+</code></pre>
+
+    </div>
+    <ul class="tag_box inline">
+      <li><i class="icon-folder-open"></i></li>
+      <li>
+        <a href="/getting_rusty/categories#rust-ref">rust <span>6</span></a>
+      </li>
+    </ul>
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      <li>
+        <a href="/getting_rusty/tags#hashmap-ref">hashmap <span>1</span></a>
+      </li>
+    </ul>
+    <ul class="tag_box inline">
+      <li></li>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="pzol" data-hashtags="rustlang">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </ul>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+          <li class="prev disabled"><a>&larr; Previous</a></li>
+
+          <li><a href="/getting_rusty/archive">Archive</a></li>
+
+          <li class="next"><a href="/getting_rusty/posts/20140201_converting_from_string" title="Converting from String">Next &rarr;</a></li>
+      </ul>
+    </div>
+
+    <hr>
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'rust-by-example'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</div>
+
+
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p>&copy; Piotr Zolnierek 2013
+          with help from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+        <a href="https://twitter.com/pzol" class="twitter-follow-button" data-show-count="false">Follow @pzol</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </div>
+
+    </div> <!-- /container -->
+
+    <!-- Google Prettify -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint ";
+  }
+  prettyPrint();
+</script>
+<!-- end Google Prettify -->
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4944917-11']);
+  _gaq.push(['_trackPageview']);
+  
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+    
+  </body>
+</html>
