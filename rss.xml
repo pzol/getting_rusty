@@ -4,7 +4,7 @@
     <title>Getting Rusty</title>
     <description>Getting Rusty</description>
     <link/>
-    <pubDate>2014-02-02</pubDate>
+    <pubDate>2014-02-05</pubDate>
     <item>
       <title/>
       <link>/getting_rusty/cname</link>
@@ -40,16 +40,18 @@
       <description>
 &lt;ul class="tag_box inline"&gt;
   &lt;li&gt;
-    &lt;a href="/getting_rusty/categories#rust-ref"&gt;rust &lt;span&gt;4&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="/getting_rusty/categories#rust-ref"&gt;rust &lt;span&gt;6&lt;/span&gt;&lt;/a&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-  &lt;h3&gt;rust (4)&lt;/h3&gt;
+  &lt;h3&gt;rust (6)&lt;/h3&gt;
   &lt;ul&gt;
       &lt;li&gt;&lt;a href="/getting_rusty/posts/20140108_to_str"&gt;ToStr&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href="/getting_rusty/posts/20140119_ruby_p_in_rust"&gt;Ruby p aka puts driven development&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href="/getting_rusty/posts/20140122_destructuring_in_rust"&gt;Destructuring and Pattern Matching&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href="/getting_rusty/posts/20140201_converting_from_string"&gt;Converting from String&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/getting_rusty/posts/drafts/20140126_strings"&gt;Strings&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/getting_rusty/posts/drafts/20140203_hashmap"&gt;HashMap&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 </description>
     </item>
@@ -113,6 +115,12 @@
   &lt;li&gt;
     &lt;a href="/getting_rusty/tags#FromStr-ref"&gt;FromStr &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
   &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/getting_rusty/tags#string-ref"&gt;string &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/getting_rusty/tags#hashmap-ref"&gt;hashmap &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;h3 id="deriving-ref"&gt;deriving&lt;/h3&gt;
@@ -129,6 +137,10 @@
     &lt;li&gt;&lt;a href="/getting_rusty/posts/20140122_destructuring_in_rust"&gt;Destructuring and Pattern Matching&lt;/a&gt;&lt;/li&gt;
   &lt;h3 id="FromStr-ref"&gt;FromStr&lt;/h3&gt;
     &lt;li&gt;&lt;a href="/getting_rusty/posts/20140201_converting_from_string"&gt;Converting from String&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="string-ref"&gt;string&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/getting_rusty/posts/drafts/20140126_strings"&gt;Strings&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="hashmap-ref"&gt;hashmap&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/getting_rusty/posts/drafts/20140203_hashmap"&gt;HashMap&lt;/a&gt;&lt;/li&gt;
  
 </description>
     </item>
