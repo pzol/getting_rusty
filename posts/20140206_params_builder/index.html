@@ -2,8 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Converting from String</title>
+    <title>ParamsBuilder</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Default arguments, named params, random order">
     <meta name="author" content="Piotr Zolnierek">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -53,69 +54,63 @@
       <div class="content">
         
 <div class="page-header">
-  <h1>Converting from String </h1>
+  <h1>ParamsBuilder </h1>
 </div>
 
 <div class="row-fluid post-full">
   <div class="span12">
     <div class="date">
-      <span>2014-02-01</strong>
+      <span>2014-02-06</strong>
     </div>
     <div class="content">
-      <h2 id="toc_0">Converting from String</h2>
+      <p>Here is something modeled losely after <a href="http://static.rust-lang.org/doc/master/std/task/struct.TaskBuilder.html">std::task::Task</a>. The goal is to provide default parameters, named parameters and a random order of providing paramaters before doing something with it. </p>
 
-<p>When converting from string to numbers, you will have to provide the type manually</p>
+<pre><code class="rust">
+#[deriving(Eq)]
+struct ParamsBuilder {
+    foo: uint,
+    bar: ~str,
+    baz: uint,
+    run: bool
+}
 
-<pre><code class="rust">let f = from_str(&quot;1.2&quot;);
-// -&gt; error: cannot determine a type for this bounded type parameter: unconstrained type
+impl ParamsBuilder {
+  fn default() -&gt; ParamsBuilder{
+    ParamsBuilder { foo: 0, bar: ~&quot;&quot;, baz: 0, run: false }
+  }
 
-let f: f32 = from_str(&quot;1.2&quot;).unwrap(); // -&gt; 1.2f32
+  fn foo(mut self, foo: uint) -&gt; ParamsBuilder {
+    self.foo = foo;
+    self
+  }
 
-// or like this
-let i = from_str::&lt;uint&gt;(&quot;5&quot;).unwrap();
-assert_eq!(i, 5);
-</code></pre>
+  fn bar(mut self, bar: ~str) -&gt; ParamsBuilder {
+    self.bar = bar;
+    self
+  }
 
-<p>The trait <a href="http://static.rust-lang.org/doc/master/std/from_str/trait.FromStr.html">FromStr</a> is defined as</p>
+  fn baz(mut self, baz: uint) -&gt; ParamsBuilder {
+    self.baz = baz;
+    self
+  }
 
-<pre><code class="rust">pub trait FromStr {
-    fn from_str(s: &amp;str) -&gt; Option&lt;Self&gt;;
+  fn run(mut self) -&gt; ParamsBuilder {
+    self.run = true;
+    println!(&quot;{:?}&quot;, self);
+    self
+  }
+}
+
+
+#[test]
+fn test_chain(){
+  let params = ParamsBuilder::default().foo(1).bar(~&quot;bar&quot;).baz(2).run();
+
+  assert_eq!(ParamsBuilder { foo: 1, bar: ~&quot;bar&quot;, baz: 2, run: true }, params);
 }
 </code></pre>
 
-<p>so it returns a Some<T> if the conversion succeeds or a None if it doesn&#39;t</p>
-
-<pre><code class="rust">// Some&lt;T&gt;
-let oi: Option&lt;uint&gt; = from_str(&quot;1&quot;);
-assert_eq!(oi, Some(1u));
-
-// None, if the provided string cannot be converted
-let oi: Option&lt;uint&gt; = from_str(&quot;x&quot;);
-assert_eq!(oi, None);
-</code></pre>
-
-<p>You can <code>unwrap()</code> the value</p>
-
-<pre><code class="rust">let i: uint = from_str(&quot;1&quot;).unwrap();
-assert_eq!(i, 1);
-
-// runtime error &#39;called `Option::unwrap()` on a `None` value&#39;
-let i: uint = from_str(&quot;x&quot;).unwrap();
-assert_eq!(i, 0);
-</code></pre>
-
-<p>As you can see, you can unwrap the value straight away, but that might give you runtime errors, hence it&#39;d be better to check if the conversion succeeded and provide a meaningful message. Alternatively, you can provide a default value using <code>unwrap_or()</code>.</p>
-
-<pre><code class="rust">let i: uint = match from_str(&quot;1&quot;) {
-  Some(value) =&gt; value,
-  None        =&gt; fail!(&quot;oops, expected a number&quot;)
-}
-
-let i: uint = from_str(&quot;4&quot;).unwrap_or(0u);
-assert_eq!(i, 4);
-</code></pre>
-
-<p>For comments head over to <a href="http://redd.it/1wr1ct">Reddit</a></p>
+<p>Thanks to Yurume for the help on this.</p>
 
     </div>
     <ul class="tag_box inline">
@@ -126,9 +121,6 @@ assert_eq!(i, 4);
     </ul>
     <ul class="tag_box inline">
       <li><i class="icon-tags"></i></li>
-      <li>
-        <a href="/getting_rusty/tags#FromStr-ref">FromStr <span>1</span></a>
-      </li>
     </ul>
     <ul class="tag_box inline">
       <li></li>
@@ -139,11 +131,11 @@ assert_eq!(i, 4);
     <hr>
     <div class="pagination">
       <ul>
-          <li class="prev"><a href="/getting_rusty/posts/20140203_hashmap" title="HashMap">&larr; Previous</a></li>
+          <li class="prev disabled"><a>&larr; Previous</a></li>
 
           <li><a href="/getting_rusty/archive">Archive</a></li>
 
-          <li class="next"><a href="/getting_rusty/posts/20140122_destructuring_in_rust" title="Destructuring and Pattern Matching">Next &rarr;</a></li>
+          <li class="next"><a href="/getting_rusty/posts/20140203_hashmap" title="HashMap">Next &rarr;</a></li>
       </ul>
     </div>
 

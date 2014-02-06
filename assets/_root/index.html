@@ -5,7 +5,7 @@ description: Rust is a curly-brace, block-structured expression language. It vis
 
 <table class="title">
   <tbody>
-{{# posts.paginator }}
+{{# posts.all }}
     <tr>
       <td>
         <a href="{{url}}">{{title}}</a>
@@ -18,19 +18,6 @@ description: Rust is a curly-brace, block-structured expression language. It vis
       </td>
     </tr>
 
-{{/ posts.paginator }}
+{{/ posts.all }}
   </tbody>
 </table>
-
-<div class="pagination">
-  <ul>
-  {{#posts.paginator_navigation}}
-    {{#is_active_page}}
-      <li class="active"><a href="{{url}}">{{name}}</a></li>
-    {{/is_active_page}}
-    {{^is_active_page}}
-      <li><a href="{{url}}">{{name}}</a></li>
-    {{/is_active_page}}
-  {{/posts.paginator_navigation}}
-  </ul>
-</div>

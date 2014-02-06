@@ -4,7 +4,7 @@
     <title>Getting Rusty</title>
     <description>Getting Rusty</description>
     <link/>
-    <pubDate>2014-02-05</pubDate>
+    <pubDate>2014-02-06</pubDate>
     <item>
       <title>ToStr</title>
       <link>/getting_rusty/posts/20140108_to_str</link>
@@ -260,6 +260,12 @@ assert_eq!(i, 4);
       <link>/getting_rusty/posts/20140203_hashmap</link>
       <pubDate>2014-02-01</pubDate>
       <description>Inserting, getting, finding, changing</description>
+    </item>
+    <item>
+      <title>ParamsBuilder</title>
+      <link>/getting_rusty/posts/20140206_params_builder</link>
+      <pubDate>2014-02-06</pubDate>
+      <description>Default arguments, named params, random order</description>
     </item>
   </channel>
 </rss>
