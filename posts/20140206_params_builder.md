@@ -55,3 +55,6 @@ fn test_chain(){
 ```
 
 Thanks to Yurume for the help on this.
+
+
+For comments head over to [Reddit](http://www.reddit.com/r/rust/comments/1x67wq/rust_by_example_default_arguments_named_params/)
