@@ -3,6 +3,8 @@ theme-bootstrap-2:
 
 posts:
   sort: ["date", "desc"]
+  rss:
+    enable: true
 
 widgets:
   comments:
