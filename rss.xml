@@ -6,12 +6,6 @@
     <link/>
     <pubDate>2014-02-06</pubDate>
     <item>
-      <title/>
-      <link>/getting_rusty/cname</link>
-      <description>rustbyexample.nobacon.it
-</description>
-    </item>
-    <item>
       <title>Index</title>
       <link>/getting_rusty</link>
       <description>&lt;!-- nothing to see here --&gt;
@@ -68,9 +62,6 @@
       <link>/getting_rusty/pages</link>
       <description>
 &lt;ul&gt;
-  
-    &lt;li&gt;&lt;a href="/getting_rusty/cname"&gt;&lt;/a&gt;&lt;/li&gt;
-  
   
     &lt;li&gt;&lt;a href="/getting_rusty"&gt;Index&lt;/a&gt;&lt;/li&gt;
   
