@@ -61,10 +61,10 @@
 <div class="row-fluid post-full">
   <div class="span12">
     <div class="date">
-      <span>2014-02-01</strong>
+      <span>2014-02-11</strong>
     </div>
     <div class="content">
-      <p>This is a non-exhaustive non-academic example-driven rather-practical guide on how to use the HashMap in Rust. As a side effect of working on the HashMap some hands-on examples of Rust&#39;s unique concepts of ownership and borrowing references will be demonstrated.</p>
+      <p>This is a non-exhaustive non-academic, example-driven, rather-practical guide on how to use the HashMap in Rust. As a side effect of working on the HashMap some hands-on examples of Rust&#39;s unique concepts of ownership and borrowing references will be demonstrated.</p>
 
 <h2 id="toc_0">Prelude</h2>
 
@@ -315,10 +315,10 @@ assert!(numbers.contains(&amp;1));
 <h3 id="toc_8">Preserving Order</h3>
 
 <p>Be cautious, you cannot rely on the order in which the pairs are coming to your iterator!
-If you need a specific order use a <code>std::treemap::TreeMap</code> instead:</p>
+If you need a specific order use a <code>collections::TreeMap</code> instead:</p>
 
 <pre><code class="rust">extern mod extra;
-use extra::treemap::TreeMap;
+use collections::TreeMap;
 
 #[test]
 fn test_treemap() {
@@ -333,6 +333,16 @@ fn test_treemap() {
   assert_eq!(numbers, ~[2, 1]);
 }
 </code></pre>
+
+<h2 id="toc_9">Version</h2>
+
+<p>The examples run on rustc head</p>
+
+<pre><code class="shell">% rustc -v
+rustc 0.10-pre (47e1445 2014-02-09 20:41:27 -0800)
+</code></pre>
+
+<p>For more discussion head over to <a href="http://www.reddit.com/r/rust/comments/1xm1gd/rust_by_example_working_with_hashmaps/">Reddit</a></p>
 
     </div>
     <ul class="tag_box inline">

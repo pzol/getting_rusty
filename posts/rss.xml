@@ -4,7 +4,7 @@
     <title>Getting Rusty</title>
     <description>Getting Rusty</description>
     <link/>
-    <pubDate>2014-02-06</pubDate>
+    <pubDate>2014-02-11</pubDate>
     <item>
       <title>ToStr</title>
       <link>/getting_rusty/posts/20140108_to_str</link>
@@ -258,7 +258,7 @@ assert_eq!(i, 4);
     <item>
       <title>HashMap</title>
       <link>/getting_rusty/posts/20140203_hashmap</link>
-      <pubDate>2014-02-01</pubDate>
+      <pubDate>2014-02-11</pubDate>
       <description>Inserting, getting, finding, changing</description>
     </item>
     <item>
