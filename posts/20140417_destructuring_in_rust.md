@@ -73,7 +73,7 @@ assert_eq!(pax, ~"child (10 yrs)");
 It also can be used to destructure struct variants:
 
 ```rust
-#[feature(struct_variant)];
+#![feature(struct_variant)]
 
 enum Fagazi {
   Fob { a: int },
