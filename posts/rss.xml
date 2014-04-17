@@ -4,7 +4,7 @@
     <title>Getting Rusty</title>
     <description>Getting Rusty</description>
     <link/>
-    <pubDate>2014-02-11</pubDate>
+    <pubDate>2014-04-17</pubDate>
     <item>
       <title>ToStr</title>
       <link>/getting_rusty/posts/20140108_to_str</link>
@@ -16,184 +16,6 @@
       <link>/getting_rusty/posts/20140119_ruby_p_in_rust</link>
       <pubDate>2014-01-19</pubDate>
       <description>A simple macro to output debug</description>
-    </item>
-    <item>
-      <title>Destructuring and Pattern Matching</title>
-      <link>/getting_rusty/posts/20140122_destructuring_in_rust</link>
-      <pubDate>2014-01-22</pubDate>
-      <description>&lt;p&gt;Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;It works in a lot of different scenarios, the most basic is in a local scope using &lt;code&gt;let&lt;/code&gt;.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;let tuple = (1, 2);
-let (a, b) = tuple; // =&amp;gt; a =  1; b = 2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id="toc_0"&gt;Structs&lt;/h2&gt;
-
-&lt;p&gt;Should you have the need to capture a nested tuple or something, you can do that with the Haskell @ syntax:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;struct Foo { x: (uint, uint), y: uint }
-
-let foo = Foo { x: (1, 2), y: 3 };
-let Foo { x: tuple @ (a, b), .. } = foo; // =&amp;gt; a == 1; b == 2; tuple == (1, 2)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You can destructure structs and rename the variables:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;struct Point { x: uint, y: uint }
-
-let  p = Point { x: 1, y: 2 };
-let  Point { x: new_x, y: new_y } = p; // =&amp;gt; new_x == 1, new_y == 2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The order is not important:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;let Point { y, x } = p;        // =&amp;gt; y  == 2, x  == 1
-let Point { y: y2, x: x2} = p; // =&amp;gt; y2 == 2, x2 == 1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and you can also ignore some variables:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;let Point { y: y3, .. } = p; // =&amp;gt; y3 == 2
-let Point { y } = p;         // -&amp;gt; error: pattern does not mention field `x`
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;you can match on ranges&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;let b = match 5 { 0..5 =&amp;gt; true, _ =&amp;gt; false}; // =&amp;gt; true
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id="toc_1"&gt;Struct Variants&lt;/h2&gt;
-
-&lt;p&gt;It also can be used to destructure struct variants:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;#[feature(struct_variant)];
-
-enum Fagazi {
-  Fob { a: int },
-  Foo { b: int, c: int }
-}
-
-#[test]
-fn test_enum() {
-  let foo = Foo { b: 1, c: 2 };
-
-  match foo {
-    Foo { b, c } if b &amp;gt; 2 =&amp;gt; assert!((b,c) == (1, 2)),
-    Foo { b, c } =&amp;gt; assert!((b,c) == (1, 2)),
-    _            =&amp;gt; fail!(&amp;quot;This will never happen, but the compiler doesn&amp;#39;t know&amp;quot;)
-  };
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You &lt;strong&gt;cannot&lt;/strong&gt; just destructure an enum with multiple variants using &lt;code&gt;let&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;let Foo { b, c } = foo; // -&amp;gt; error: refutable pattern in local binding
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You need to use a match instead of a simple let, because let can never fail using the second condition in match, the compiler knows, all possible paths have been exhausted.&lt;/p&gt;
-
-&lt;p&gt;One more cool feature of &lt;code&gt;match&lt;/code&gt; are guard clauses:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;let foo = Foo { b: 3, c: 2 };
-
-match foo {
-  Foo { b, c } if b &amp;lt;= 2 =&amp;gt; assert!(b &amp;lt;= 2 &amp;amp;&amp;amp; c == 2),
-  Foo { b, c }           =&amp;gt; assert!((b, c) == (3, 2)),
-  _                      =&amp;gt; unreachable!()
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;See the &lt;code&gt;if b &amp;lt;= 2&lt;/code&gt; in the first line? This is called a guard, it will match only if the pattern matches and the guard clause is true.&lt;/p&gt;
-
-&lt;p&gt;Take also notice of the &lt;code&gt;unreachable!()&lt;/code&gt; expression. As mentioned before all &lt;code&gt;match&lt;/code&gt; clauses need to be exhaustive. &lt;code&gt;unreachable!()&lt;/code&gt; expands to &lt;code&gt;fail!(&amp;quot;internal error: entered unreachable code&amp;quot;)&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;match&lt;/code&gt; allows to match on concrete values:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;let foo = Some(1);
-
-match foo {
-  Some(3) =&amp;gt; println!(&amp;quot;three&amp;quot;),
-  Some(2) =&amp;gt; println!(&amp;quot;two&amp;quot;),
-  Some(v) =&amp;gt; println!(&amp;quot;not two, {}&amp;quot;, v),
-  None    =&amp;gt; unreachable!()
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Remember, that a &lt;code&gt;match&lt;/code&gt; must contain all possibilities, otherwise you&amp;#39;ll get an error, saying that you haven&amp;#39;t covered all patterns. In this case if you&amp;#39;d leave out the last &lt;code&gt;None&lt;/code&gt;, the compiler would tell you:  &lt;code&gt;non-exhaustive patterns: None not covered&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id="toc_2"&gt;Vectors&lt;/h2&gt;
-
-&lt;p&gt;You can destructure vectors, too:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;let v = ~[1, 2, 3, 4, 5];
-
-match v {
-    []                       =&amp;gt; println!(&amp;quot;empty&amp;quot;),
-    [elem]                   =&amp;gt; println!(&amp;quot;{}&amp;quot;, elem),   // =&amp;gt; 1
-    [first, second, ..rest]  =&amp;gt; println!(&amp;quot;{:?}&amp;quot;, rest)  // =&amp;gt; &amp;amp;[3, 4, 5]
-  }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you only care about the first or last values you can do this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;let v = ~[1, 2, 3];
-
-match v {
-  [first, ..] =&amp;gt; assert_eq!(first, 1),
-  [.., last]  =&amp;gt; assert_eq!(last, 3),
-  _           =&amp;gt; unreachable!()
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;or if you want the first, last, but also the middle:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;let v = ~[1, 2, 3, 4, 5];
-
-match v {
-  [first, .. middle, last] =&amp;gt; println!(&amp;quot;{:?} {:?} {:?}&amp;quot;, first, middle, last),
-  _                        =&amp;gt; unreachable!()
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;matching on a &lt;code&gt;~[str]&lt;/code&gt; works just like matching any other vector&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;match ~[~&amp;quot;foo&amp;quot;, ~&amp;quot;bar&amp;quot;] {
-  [~&amp;quot;foo&amp;quot;] =&amp;gt; 1, 
-  _ =&amp;gt; 2, 
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id="toc_3"&gt;Function Arguments&lt;/h2&gt;
-
-&lt;p&gt;It works in a function&amp;#39;s arguments:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;fn my_function((a, b) : (uint, uint)) -&amp;gt; uint {
-  a + b
-}
-
-fn main() {
-  let pair = (1, 2);
-  my_function(pair); // =&amp;gt; 3
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id="toc_4"&gt;Loops&lt;/h2&gt;
-
-&lt;p&gt;You can also use destructuring in &lt;code&gt;for&lt;/code&gt; loops:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="rust"&gt;struct Pair { x: int, y: int }
-
-let pairs = ~[Pair {x: 10, y: 20}, Pair {x: 30, y: 0}]; 
-
-for &amp;amp;Pair {x, y} in pairs.iter() {
-  assert_eq!(x + y, 30);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;For comments head over to &lt;a href="http://www.reddit.com/r/rust/comments/1vu6v5/examples_of_destructuring_in_rust/"&gt;Reddit&lt;/a&gt;&lt;/p&gt;
-</description>
     </item>
     <item>
       <title>Converting from String</title>
@@ -266,6 +88,198 @@ assert_eq!(i, 4);
       <link>/getting_rusty/posts/20140206_params_builder</link>
       <pubDate>2014-02-06</pubDate>
       <description>Default arguments, named params, random order</description>
+    </item>
+    <item>
+      <title>Destructuring and Pattern Matching</title>
+      <link>/getting_rusty/posts/20140417_destructuring_in_rust</link>
+      <pubDate>2014-04-17</pubDate>
+      <description>&lt;p&gt;&lt;strong&gt;2014-04-17&lt;/strong&gt;: Updated for Rust v0.11-pre&lt;/p&gt;
+
+&lt;p&gt;Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in &lt;a href="http://rust-lang.org"&gt;Rust&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It works in a lot of different scenarios, the most basic is in a local scope using &lt;code&gt;let&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let tuple = (1, 2);
+let (a, b) = tuple; // =&amp;gt; a =  1; b = 2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="toc_0"&gt;Structs&lt;/h2&gt;
+
+&lt;p&gt;Should you have the need to capture a nested tuple or something, you can do that with the Haskell @ syntax:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;struct Foo { x: (uint, uint), y: uint }
+
+let foo = Foo { x: (1, 2), y: 3 };
+let Foo { x: tuple @ (a, b), .. } = foo; // =&amp;gt; a == 1; b == 2; tuple == (1, 2)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can destructure structs and rename the variables:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;struct Point { x: uint, y: uint }
+
+let  p = Point { x: 1, y: 2 };
+let  Point { x: new_x, y: new_y } = p; // =&amp;gt; new_x == 1, new_y == 2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The order is not important:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let Point { y, x } = p;        // =&amp;gt; y  == 2, x  == 1
+let Point { y: y2, x: x2} = p; // =&amp;gt; y2 == 2, x2 == 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and you can also ignore some variables:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let Point { y: y3, .. } = p; // =&amp;gt; y3 == 2
+let Point { y } = p;         // -&amp;gt; error: pattern does not mention field `x`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;you can match on ranges&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let b = match 5 { 0..5 =&amp;gt; true, _ =&amp;gt; false}; // =&amp;gt; true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;match range and capture the value:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let age = 10;
+let pax = match age {
+  0..2  =&amp;gt; ~&amp;quot;infant&amp;quot;,
+  a @ 2..12 =&amp;gt; format!(&amp;quot;child ({} yrs)&amp;quot;, a),
+  _         =&amp;gt; ~&amp;quot;adult&amp;quot;
+};
+
+assert_eq!(pax, ~&amp;quot;child (10 yrs)&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="toc_1"&gt;Struct Variants&lt;/h2&gt;
+
+&lt;p&gt;It also can be used to destructure struct variants:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;#[feature(struct_variant)];
+
+enum Fagazi {
+  Fob { a: int },
+  Foo { b: int, c: int }
+}
+
+#[test]
+fn test_enum() {
+  let foo = Foo { b: 1, c: 2 };
+
+  match foo {
+    Foo { b, c } if b &amp;gt; 2 =&amp;gt; assert!((b,c) == (1, 2)),
+    Foo { b, c } =&amp;gt; assert!((b,c) == (1, 2)),
+    _            =&amp;gt; fail!(&amp;quot;This will never happen, but the compiler doesn&amp;#39;t know&amp;quot;)
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You &lt;strong&gt;cannot&lt;/strong&gt; just destructure an enum with multiple variants using &lt;code&gt;let&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let Foo { b, c } = foo; // -&amp;gt; error: refutable pattern in local binding
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You need to use a match instead of a simple let, because let can never fail using the second condition in match, the compiler knows, all possible paths have been exhausted.&lt;/p&gt;
+
+&lt;p&gt;One more cool feature of &lt;code&gt;match&lt;/code&gt; are guard clauses:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let foo = Foo { b: 3, c: 2 };
+
+match foo {
+  Foo { b, c } if b &amp;lt;= 2 =&amp;gt; assert!(b &amp;lt;= 2 &amp;amp;&amp;amp; c == 2),
+  Foo { b, c }           =&amp;gt; assert!((b, c) == (3, 2)),
+  _                      =&amp;gt; unreachable!()
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;See the &lt;code&gt;if b &amp;lt;= 2&lt;/code&gt; in the first line? This is called a guard, it will match only if the pattern matches and the guard clause is true.&lt;/p&gt;
+
+&lt;p&gt;Take also notice of the &lt;code&gt;unreachable!()&lt;/code&gt; expression. As mentioned before all &lt;code&gt;match&lt;/code&gt; clauses need to be exhaustive. &lt;code&gt;unreachable!()&lt;/code&gt; expands to &lt;code&gt;fail!(&amp;quot;internal error: entered unreachable code&amp;quot;)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;match&lt;/code&gt; allows to match on concrete values:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let foo = Some(1);
+
+match foo {
+  Some(3) =&amp;gt; println!(&amp;quot;three&amp;quot;),
+  Some(2) =&amp;gt; println!(&amp;quot;two&amp;quot;),
+  Some(v) =&amp;gt; println!(&amp;quot;not two, {}&amp;quot;, v),
+  None    =&amp;gt; unreachable!()
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Remember, that a &lt;code&gt;match&lt;/code&gt; must contain all possibilities, otherwise you&amp;#39;ll get an error, saying that you haven&amp;#39;t covered all patterns. In this case if you&amp;#39;d leave out the last &lt;code&gt;None&lt;/code&gt;, the compiler would tell you:  &lt;code&gt;non-exhaustive patterns: None not covered&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id="toc_2"&gt;Vectors&lt;/h2&gt;
+
+&lt;p&gt;You can destructure vectors, too:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let v = vec!(1, 2, 3, 4, 5);
+
+match v.as_slice() {
+    []                       =&amp;gt; println!(&amp;quot;empty&amp;quot;),
+    [elem]                   =&amp;gt; println!(&amp;quot;{}&amp;quot;, elem),   // =&amp;gt; 1
+    [first, second, ..rest]  =&amp;gt; println!(&amp;quot;{:?}&amp;quot;, rest)  // =&amp;gt; &amp;amp;[3, 4, 5]
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you only care about the first or last values you can do this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let v = vec!(1, 2, 3);
+
+match v.as_slice() {
+  [first, ..] =&amp;gt; assert_eq!(first, 1),
+  [.., last]  =&amp;gt; assert_eq!(last, 3),
+  _           =&amp;gt; unreachable!()
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or if you want the first, last, but also the middle:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;let v = vec!(1, 2, 3, 4, 5);
+
+match v.as_slice() {
+  [first, .. middle, last] =&amp;gt; println!(&amp;quot;{:?} {:?} {:?}&amp;quot;, first, middle, last),
+  _                        =&amp;gt; unreachable!()
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;matching on a &lt;code&gt;~[str]&lt;/code&gt; works just like matching any other vector&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;match [&amp;quot;foo&amp;quot;, &amp;quot;bar&amp;quot;] {
+  [&amp;quot;foo&amp;quot;] =&amp;gt; 1,
+  _ =&amp;gt; 2,
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="toc_3"&gt;Function Arguments&lt;/h2&gt;
+
+&lt;p&gt;It works in a function&amp;#39;s arguments:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;fn my_function((a, b) : (uint, uint)) -&amp;gt; uint {
+  a + b
+}
+
+fn main() {
+  let pair = (1, 2);
+  my_function(pair); // =&amp;gt; 3
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="toc_4"&gt;Loops&lt;/h2&gt;
+
+&lt;p&gt;You can also use destructuring in &lt;code&gt;for&lt;/code&gt; loops:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="rust"&gt;struct Pair { x: int, y: int }
+
+let pairs = ~[Pair {x: 10, y: 20}, Pair {x: 30, y: 0}];
+
+for &amp;amp;Pair {x, y} in pairs.iter() {
+  assert_eq!(x + y, 30);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For comments head over to &lt;a href="http://www.reddit.com/r/rust/comments/1vu6v5/examples_of_destructuring_in_rust/"&gt;Reddit&lt;/a&gt;&lt;/p&gt;
+</description>
     </item>
   </channel>
 </rss>

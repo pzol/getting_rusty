@@ -123,41 +123,6 @@ fn main() {
         </div>
       </div>
       <div class="posts">
-        <h3 class="title"><a href="/getting_rusty/posts/20140122_destructuring_in_rust">Destructuring and Pattern Matching</a> <span class="date">2014-01-22</span></h3>
-
-        <div class="summary ellipsis">
-<p>Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in <a href="http://rust-lang.org">Rust</a>.</p>
-
-<p>It works in a lot of different scenarios, the most basic is in a local scope using <code>let</code>.</p>
-
-<pre><code class="rust">let tuple = (1, 2);
-let (a, b) = tuple; // =&gt; a =  1; b = 2
-</code></pre>
-
-<h2 id="toc_0">Structs</h2>
-
-<p>Should you have the need to capture a nested tuple or something, you can do that with the Haskell @ syntax:</p>
-
-<pre><code class="rust">struct Foo { x: (uint, uint), y: uint }
-
-let foo = Foo { x: (1, 2), y: 3 };
-let Foo { x: tuple @ (a, b), .. } = foo; // =&gt; a == 1; b == 2; tuple == (1, 2)
-</code></pre>
-
-<p>You can destructure structs and rename the variables:</p>
-
-<pre><code class="rust">struct Point { x: uint, y: uint }
-
-let  p = Point { x: 1, y: 2 };
-let  Point { x: new_x, y: new_y } = p; // =&gt; new_x == 1, new_y == 2
-</code></pre>
-</div>
-
-        <div class="more">
-          <a href="/getting_rusty/posts/20140122_destructuring_in_rust" class="btn btn-small">read more..</a>
-        </div>
-      </div>
-      <div class="posts">
         <h3 class="title"><a href="/getting_rusty/posts/20140201_converting_from_string">Converting from String</a> <span class="date">2014-02-01</span></h3>
 
         <div class="summary ellipsis">
@@ -217,6 +182,62 @@ println!("{:?}", key);
 
         <div class="more">
           <a href="/getting_rusty/posts/20140203_hashmap" class="btn btn-small">read more..</a>
+        </div>
+      </div>
+      <div class="posts">
+        <h3 class="title"><a href="/getting_rusty/posts/20140206_params_builder">ParamsBuilder</a> <span class="date">2014-02-06</span></h3>
+
+        <div class="summary ellipsis">
+<p>Here is something modeled losely after <a href="http://static.rust-lang.org/doc/master/std/task/struct.TaskBuilder.html">std::task::Task</a>. The goal is to provide default parameters, named parameters and a random order of providing paramaters before doing something with it. </p>
+
+<pre><code class="rust">
+#[deriving(Eq)]
+struct ParamsBuilder {
+    foo: uint,
+    bar: ~str,
+    baz: uint,
+    run: bool
+}
+
+impl ParamsBuilder {
+  fn default() -&gt; ParamsBuilder{
+    ParamsBuilder { foo: 0, bar: ~"", baz: 0, run: false }
+  }
+
+  fn foo(mut self, foo: uint) -&gt; ParamsBuilder {
+    self.foo = foo;
+    self
+  }
+
+  fn bar(mut self, bar: ~str) -&gt; ParamsBuilder {
+    self.bar = bar;
+    self
+  }
+
+  fn baz(mut self, baz: uint) -&gt; ParamsBuilder {
+    self.baz = baz;
+    self
+  }
+
+  fn run(mut self) -&gt; ParamsBuilder {
+    self.run = true;
+    println!("{:?}", self);
+    self
+  }
+}
+
+
+#[test]
+fn test_chain(){
+  let params = ParamsBuilder::default().foo(1).bar(~"bar").baz(2).run();
+
+  assert_eq!(ParamsBuilder { foo: 1, bar: ~"bar", baz: 2, run: true }, params);
+}
+</code></pre>
+</div>
+
+        <div class="more">
+          <a href="/getting_rusty/posts/20140206_params_builder" class="btn btn-small">read more..</a>
         </div>
       </div>
     

@@ -60,10 +60,12 @@
 <div class="row-fluid post-full">
   <div class="span12">
     <div class="date">
-      <span>2014-01-22</strong>
+      <span>2014-04-17</strong>
     </div>
     <div class="content">
-      <p>Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in <a href="http://rust-lang.org">Rust</a>.</p>
+      <p><strong>2014-04-17</strong>: Updated for Rust v0.11-pre</p>
+
+<p>Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in <a href="http://rust-lang.org">Rust</a>.</p>
 
 <p>It works in a lot of different scenarios, the most basic is in a local scope using <code>let</code>.</p>
 
@@ -104,6 +106,18 @@ let Point { y } = p;         // -&gt; error: pattern does not mention field `x`
 <p>you can match on ranges</p>
 
 <pre><code class="rust">let b = match 5 { 0..5 =&gt; true, _ =&gt; false}; // =&gt; true
+</code></pre>
+
+<p>match range and capture the value:</p>
+
+<pre><code class="rust">let age = 10;
+let pax = match age {
+  0..2  =&gt; ~&quot;infant&quot;,
+  a @ 2..12 =&gt; format!(&quot;child ({} yrs)&quot;, a),
+  _         =&gt; ~&quot;adult&quot;
+};
+
+assert_eq!(pax, ~&quot;child (10 yrs)&quot;);
 </code></pre>
 
 <h2 id="toc_1">Struct Variants</h2>
@@ -169,9 +183,9 @@ match foo {
 
 <p>You can destructure vectors, too:</p>
 
-<pre><code class="rust">let v = ~[1, 2, 3, 4, 5];
+<pre><code class="rust">let v = vec!(1, 2, 3, 4, 5);
 
-match v {
+match v.as_slice() {
     []                       =&gt; println!(&quot;empty&quot;),
     [elem]                   =&gt; println!(&quot;{}&quot;, elem),   // =&gt; 1
     [first, second, ..rest]  =&gt; println!(&quot;{:?}&quot;, rest)  // =&gt; &amp;[3, 4, 5]
@@ -180,9 +194,9 @@ match v {
 
 <p>If you only care about the first or last values you can do this:</p>
 
-<pre><code class="rust">let v = ~[1, 2, 3];
+<pre><code class="rust">let v = vec!(1, 2, 3);
 
-match v {
+match v.as_slice() {
   [first, ..] =&gt; assert_eq!(first, 1),
   [.., last]  =&gt; assert_eq!(last, 3),
   _           =&gt; unreachable!()
@@ -191,9 +205,9 @@ match v {
 
 <p>or if you want the first, last, but also the middle:</p>
 
-<pre><code class="rust">let v = ~[1, 2, 3, 4, 5];
+<pre><code class="rust">let v = vec!(1, 2, 3, 4, 5);
 
-match v {
+match v.as_slice() {
   [first, .. middle, last] =&gt; println!(&quot;{:?} {:?} {:?}&quot;, first, middle, last),
   _                        =&gt; unreachable!()
 }
@@ -201,9 +215,9 @@ match v {
 
 <p>matching on a <code>~[str]</code> works just like matching any other vector</p>
 
-<pre><code class="rust">match ~[~&quot;foo&quot;, ~&quot;bar&quot;] {
-  [~&quot;foo&quot;] =&gt; 1, 
-  _ =&gt; 2, 
+<pre><code class="rust">match [&quot;foo&quot;, &quot;bar&quot;] {
+  [&quot;foo&quot;] =&gt; 1,
+  _ =&gt; 2,
 }
 </code></pre>
 
@@ -227,7 +241,7 @@ fn main() {
 
 <pre><code class="rust">struct Pair { x: int, y: int }
 
-let pairs = ~[Pair {x: 10, y: 20}, Pair {x: 30, y: 0}]; 
+let pairs = ~[Pair {x: 10, y: 20}, Pair {x: 30, y: 0}];
 
 for &amp;Pair {x, y} in pairs.iter() {
   assert_eq!(x + y, 30);
@@ -261,11 +275,11 @@ for &amp;Pair {x, y} in pairs.iter() {
     <hr>
     <div class="pagination">
       <ul>
-          <li class="prev"><a href="/getting_rusty/posts/20140201_converting_from_string" title="Converting from String">&larr; Previous</a></li>
+          <li class="prev disabled"><a>&larr; Previous</a></li>
 
           <li><a href="/getting_rusty/archive">Archive</a></li>
 
-          <li class="next"><a href="/getting_rusty/posts/20140119_ruby_p_in_rust" title="Ruby p aka puts driven development">Next &rarr;</a></li>
+          <li class="next"><a href="/getting_rusty/posts/20140206_params_builder" title="ParamsBuilder">Next &rarr;</a></li>
       </ul>
     </div>
 

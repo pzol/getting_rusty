@@ -54,50 +54,58 @@
       <div class="content">
         <div class="row-fluid">
   <div class="span12">
-      <div class="_root">
-        <h3 class="title"><a href="/getting_rusty/tags">Tags</a> <span class="date"></span></h3>
+      <div class="src">
+        <h3 class="title"><a href="/getting_rusty/src/strings.rs">Strings</a> <span class="date"></span></h3>
 
-        <div class="summary ellipsis">
-<ul class="tag_box inline">
-<li>
-    <a href="/getting_rusty/tags#deriving-ref">deriving <span>1</span></a>
-  </li>
-  <li>
-    <a href="/getting_rusty/tags#ToStr-ref">ToStr <span>1</span></a>
-  </li>
-  <li>
-    <a href="/getting_rusty/tags#rust:macros-ref">rust:macros <span>1</span></a>
-  </li>
-  <li>
-    <a href="/getting_rusty/tags#rust:ruby-ref">rust:ruby <span>1</span></a>
-  </li>
-  <li>
-    <a href="/getting_rusty/tags#FromStr-ref">FromStr <span>1</span></a>
-  </li>
-  <li>
-    <a href="/getting_rusty/tags#hashmap-ref">hashmap <span>1</span></a>
-  </li>
-  <li>
-    <a href="/getting_rusty/tags#rust:enum-ref">rust:enum <span>1</span></a>
-  </li>
-  <li>
-    <a href="/getting_rusty/tags#rust:destructuring-ref">rust:destructuring <span>1</span></a>
-  </li>
-  <li>
-    <a href="/getting_rusty/tags#string-ref">string <span>1</span></a>
-  </li>
-</ul>
-</div>
+        <div class="summary ellipsis">#[test]
+fn test_compare_fails(){
+  let hobbit_name = ~"Bilbo Baggins";
+  // if hobbit_name == "Bilbo Baggins" {}; // -&gt; error
+
+  if "Bilbo Baggins" == hobbit_name {};
+  if hobbit_name == "Bilbo Baggins".to_owned() {};
+  if hobbit_name.as_slice() == "Bilbo Baggins" {};
+}
+
+fn compare_ci(x: &amp;str, y: &amp;str) -&gt; bool {
+  let mut it = x.chars().zip(y.chars());
+  it.all(|(x,y)|
+    unsafe {
+      x.to_ascii_nocheck().to_lower() == y.to_ascii_nocheck().to_lower()
+    }
+  )
+}
+
+#[test]
+fn test_compare_case_insensitive(){
+  let x = ~"Bilbo Bäggins";
+  let y = ~"bILbo bäGgins";
+
+  assert_eq!(compare_ci(x, y), true);
+}
+
+#[test]
+fn test_ci(){
+  let x = "Bilbo";
+  let y = "bIlbo";
+  // assert_eq!(x.to_lower(), y.to_lower());
+}
+
+#[test]
+fn test_from_str(){
+  let f: f32 = from_str("1.2").unwrap(); // 1.2f32
+  assert_eq!(f, 1.2f32);
+
+  let oi: Option</div>
 
         <div class="more">
-          <a href="/getting_rusty/tags" class="btn btn-small">read more..</a>
+          <a href="/getting_rusty/src/strings.rs" class="btn btn-small">read more..</a>
         </div>
       </div>
     
     <div class="pagination">
       <ul>
-          <li><a href="/getting_rusty/index/1">1</a></li>
-          <li class="active"><a href="/getting_rusty/index/2">2</a></li>
+          <li class="active"><a href="/getting_rusty/src/index/1">1</a></li>
       </ul>
     </div>
   </div>
