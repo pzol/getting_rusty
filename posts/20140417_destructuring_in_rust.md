@@ -1,10 +1,11 @@
 ---
 title: Destructuring and Pattern Matching
-date: '2014-01-22'
+date: '2014-04-17'
 description: 
 categories: ["rust"]
 tags: ["rust:enum", "rust:destructuring"]
 ---
+__2014-04-17__: Updated for Rust v0.11-pre
 
 Pattern matching is one of the features I like most about modern / functional style languages, also one I sincerely enjoy in [Rust](http://rust-lang.org).
 
@@ -52,6 +53,19 @@ you can match on ranges
 
 ```rust
 let b = match 5 { 0..5 => true, _ => false}; // => true
+```
+
+match range and capture the value:
+
+```rust
+let age = 10;
+let pax = match age {
+  0..2  => ~"infant",
+  a @ 2..12 => format!("child ({} yrs)", a),
+  _         => ~"adult"
+};
+
+assert_eq!(pax, ~"child (10 yrs)");
 ```
 
 ## Struct Variants
@@ -122,9 +136,9 @@ Remember, that a `match` must contain all possibilities, otherwise you'll get an
 You can destructure vectors, too:
 
 ```rust
-let v = ~[1, 2, 3, 4, 5];
+let v = vec!(1, 2, 3, 4, 5);
 
-match v {
+match v.as_slice() {
     []                       => println!("empty"),
     [elem]                   => println!("{}", elem),   // => 1
     [first, second, ..rest]  => println!("{:?}", rest)  // => &[3, 4, 5]
@@ -134,9 +148,9 @@ match v {
 If you only care about the first or last values you can do this:
 
 ```rust
-let v = ~[1, 2, 3];
+let v = vec!(1, 2, 3);
 
-match v {
+match v.as_slice() {
   [first, ..] => assert_eq!(first, 1),
   [.., last]  => assert_eq!(last, 3),
   _           => unreachable!()
@@ -146,9 +160,9 @@ match v {
 or if you want the first, last, but also the middle:
 
 ```rust
-let v = ~[1, 2, 3, 4, 5];
+let v = vec!(1, 2, 3, 4, 5);
 
-match v {
+match v.as_slice() {
   [first, .. middle, last] => println!("{:?} {:?} {:?}", first, middle, last),
   _                        => unreachable!()
 }
@@ -157,9 +171,9 @@ match v {
 matching on a `~[str]` works just like matching any other vector
 
 ```rust
-match ~[~"foo", ~"bar"] {
-  [~"foo"] => 1, 
-  _ => 2, 
+match ["foo", "bar"] {
+  ["foo"] => 1,
+  _ => 2,
 }
 ```
 
@@ -183,8 +197,8 @@ You can also use destructuring in `for` loops:
 ```rust
 struct Pair { x: int, y: int }
 
-let pairs = ~[Pair {x: 10, y: 20}, Pair {x: 30, y: 0}]; 
-  
+let pairs = ~[Pair {x: 10, y: 20}, Pair {x: 30, y: 0}];
+
 for &Pair {x, y} in pairs.iter() {
   assert_eq!(x + y, 30);
 }
